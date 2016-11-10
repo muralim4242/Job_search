@@ -1,0 +1,33 @@
+﻿<div class="ps-title-bar" style="
+    position: fixed;
+    width: 100%;
+    z-index: 5;">
+    <div class="row">
+        <div class="ps-log-area col-sm-6">
+            <!-- <img class="ps-icon" ng-src="{{iconFile}}" /> -->
+            <div class="ps-title-area">
+                <div class="ps-logo-title">{{title}}</div>
+                <div class="ps-logo-subtitle">{{subtitle}}</div>
+            </div>
+            <div ng-if="isMenuButtonVisible" ng-click="menuButtonClicked()" class="ps-collapsed-menu pull-right">
+                <button type="button" class="btn ps-nav-button">
+                    <i class="fa fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <!-- <div class="ps-right-side-controls col-sm-6">
+            <ps-user-profile-small></ps-user-profile-small>
+        </div> -->
+    </div>
+</div>
+<!-- <div class="ps-menu-area"
+     ng-show="isMenuVisible"
+     ng-class="{'ps-menu-area-horizontal':!isMenuVertical,'ps-menu-area-vertical':isMenuVertical}" style="top:68px">
+    <ps-user-profile></ps-user-profile>
+
+    <ng-transclude></ng-transclude>
+
+</div> -->
+
+<div style="padding-top:88px" ui-view class="ps-view" ng-class="{'ps-view-full-width':!isMenuVertical || !isMenuVisible}">
+</div>

@@ -1,0 +1,95 @@
+<div class="ps-dashboard-header">
+  {{title}}
+</div>
+<div class="row" cg-busy="myPromise">
+  <div class="col-lg-12">
+
+
+    <section class="panel">
+      <header class="panel-heading">
+        Profile
+
+      </header>
+      <div class="panel-body">
+
+        <form id="register-form" class="form-horizontal" name="userForm" ng-submit="submitForm(userForm.$valid)" novalidate>
+          <div class="form-group" ng-class="{ 'has-error' : userForm.contactName.$invalid && (userForm.contactName.$dirty || submitted)}">
+            <label class="col-lg-4 col-sm-2 control-label">Contact Name</label>
+            <div class="col-lg-8">
+              <input type="text" class="form-control" name="contactName" ng-model="userData.contactName" placeholder="Contact Name" ng-required="true">
+              <p ng-show="userForm.contactName.$error.required &&  (userForm.contactName.$dirty || submitted)" class="help-block">Contact Name is required.</p>
+            </div>
+          </div>
+          <div class="form-group" ng-class="{ 'has-error' : userForm.restaurantName.$invalid && (userForm.restaurantName.$dirty || submitted)}">
+            <label class="col-lg-4 col-sm-2 control-label">Restaurant Name</label>
+            <div class="col-lg-8">
+              <input type="text" class="form-control" name="restaurantName" ng-model="userData.restaurantName" placeholder="Restaurant Name" ng-required="true" readonly="true">
+              <p ng-show="userForm.restaurantName.$error.required &&  (userForm.restaurantName.$dirty || submitted)" class="help-block">Restaurant Name is required.</p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-4 col-sm-2 control-label">Restaurant Type</label>
+            <div class="radios col-lg-8">
+              <label class="label_radio col-lg-6 col-sm-6 control-label" for="radio-01">
+                <input type="radio" ng-model="userData.isChain" value="false"> Single Restaurant
+              </label>
+              <label class="label_radio col-lg-6 col-sm-6 control-label" for="radio-02">
+                <input type="radio" ng-model="userData.isChain" value="true"> Chain Restaurant
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group" ng-class="{ 'has-error' : userForm.telephone.$invalid && (userForm.telephone.$dirty || submitted)}">
+            <label class="col-lg-4 col-sm-2 control-label">Telephone</label>
+            <div class="col-lg-8">
+              <input type="text" class="form-control" name="telephone" ng-model="userData.telephone" ng-model-options="{ debounce: 1000 }" ng-required="true" placeholder="Telephone" pattern="^(?:(?:\(?(?:0(?:0|11)\)?[\s-]?\(?|\+)44\)?[\s-]?(?:\(?0\)?[\s-]?)?)|(?:\(?0))(?:(?:\d{5}\)?[\s-]?\d{4,5})|(?:\d{4}\)?[\s-]?(?:\d{5}|\d{3}[\s-]?\d{3}))|(?:\d{3}\)?[\s-]?\d{3}[\s-]?\d{3,4})|(?:\d{2}\)?[\s-]?\d{4}[\s-]?\d{4}))(?:[\s-]?(?:x|ext\.?|\#)\d{3,4})?$">
+              <p ng-show="userForm.telephone.$error.required && (userForm.telephone.$dirty || submitted)" class="help-block">Telephone Number is required.</p>
+              <p ng-show="userForm.telephone.$error.pattern && (userForm.telephone.$dirty || submitted)" class="help-block">Invalid Telephone number.</p>
+            </div>
+          </div>
+
+          <div class="form-group" ng-class="{ 'has-error' : userForm.website.$invalid && (userForm.website.$dirty || submitted)}">
+            <label class="col-lg-4 col-sm-2 control-label">Website</label>
+            <div class="col-lg-8">
+              <input type="text" class="form-control" name="website" ng-model="userData.website" ng-model-options="{ debounce: 1000 }" ng-required="true" placeholder="Website" pattern="^(http(s?):\/\/)?(www\.)+[a-zA-Z0-9\.\-\_]+(\.[a-zA-Z]{2,3})+(\/[a-zA-Z0-9\_\-\s\.\/\?\%\#\&\=]*)?$">
+              <p ng-show="userForm.website.$error.required && (userForm.website.$dirty || submitted)" class="help-block">Please enter your restaurant website.  If you do not have one, please type www.google.co.uk.</p>
+              <p ng-show="userForm.website.$error.pattern && (userForm.website.$dirty || submitted)" class="help-block">Invalid Website address.</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-4 col-sm-2 control-label">Logo</label>
+            <div class="col-lg-8" style="position:relative">
+              <button class="btn btn-info pull-right" type="button" ng-click="abc=!abc">Add / Update logo</button>
+              <div ng-show="userData.file">
+                <img width="100px" ng-src="{{userData.file}}"></img>
+              </div>
+              <div ng-show="abc">
+                <div>Select an image file:
+                  <input type="file" custom-on-change="handleFileSelect" />
+                </div>
+                <div class="cropArea">
+                  <img-crop image="myImage" area-type="rectangle" aspect-ratio="1.0" result-image="myCroppedImage" result-image-size='{w: 200,h: 200}'></img-crop>
+                </div>
+                <div>Cropped Image:</div>
+                <div>
+                  <img ng-src="{{myCroppedImage}}" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-success">Update</button>
+
+
+
+
+
+
+        </form>
+
+      </div>
+
+    </section>
+  </div>
+</div>

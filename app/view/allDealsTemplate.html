@@ -1,0 +1,103 @@
+<div class="ps-dashboard-header">
+  {{title}}
+</div>
+<!-- <div ng-if="isLoading" style=" position: fixed;
+    left: 50%;
+    top: 50%;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+   ">
+  <i class="fa fa-spinner fa-5x fa-spin"></i>
+</div> -->
+
+<div cg-busy="myPromise" class="row">
+  <div class="col-lg-12">
+
+
+    <section class="panel">
+      <header class="panel-heading">
+        {{dealTitle}}
+      </header>
+
+
+      <button type="button" class="btn btn-danger" ng-click="expireDeal()" ng-show="title=='Active Deal Management'?true:false" style="margin-left:10px; margin-top:10px">Expire This Deal</button>
+      <button type="button" class="btn btn-success" ng-click="reActiveDeal()" ng-show="title=='Active Deal Management'?false:true" style="margin-left:10px; margin-top:10px">Re Active This Deal</button>
+      <table st-table="rowCollection" class="table table-striped table-advance table-hover">
+        <thead>
+          <tr>
+
+            <!-- <th colspan="3">
+            <div class="input-group input-group-sm">
+              <input st-search="" placeholder="global search ..." class="input-sm form-control" type="text" />
+              <span class="input-group-addon"><i class="fa fa-search"></i></span>
+            </div>
+          </th> -->
+          </tr>
+          <tr>
+            <th colspan="3">
+              <strong>Total Number of restaurant locations included in this deal : {{rowCollection.length}}</strong>
+            </th>
+          </tr>
+          <tr>
+            <th ng-repeat="header in headerCollection" st-sort={{header.name}}>{{header.displayName}}</th>
+            <th>Manage</th>
+          </tr>
+
+          <!--  <tr>
+                    <th ng-repeat="header in headerCollection">
+                        <div class="input-group input-group-sm">
+                            <input st-search={{header.name}} class="input-sm form-control" type="search" />
+                            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                        </div>
+                    </th>
+                </tr> -->
+        </thead>
+        <tbody ng-show="!isLoading">
+          <tr st-select-row="row" st-select-mode="multiple" ng-repeat="row in rowCollection">
+            <td>{{row.addresses |nospace}}</td>
+            <td>{{row.claims}}</td>
+            <td>{{row.objectId |filterNumber}}</td>
+            <!--   <td>
+            <a ui-sref="incident_view({id: row.Id})" class="btn btn-sm btn-primary"><i class="fa fa-file"></i></a>
+          </td>
+          <td>
+             <a ui-sref="incident_edit({id: row.Id})" class="btn btn-sm btn-success">
+              <i class="fa fa-edit">
+                            </i>
+            </a>
+          </td> -->
+            <!--  <td>
+            <button type="button" ng-click="removeRow(row)" class="btn btn-sm btn-info">
+              <i class="fa fa-copy">
+                            </i>
+            </button>
+          </td> -->
+            <td>
+              <!--  <a ui-sref="deals({id: row.objectId})" class="btn btn-sm btn-danger">
+              <!-- <i class="fa fa-remove">
+                            </i> Delete
+            </a> -->
+
+              <a ng-click="delete_deal(row)" class="btn btn-sm btn-danger">
+               Remove Restaurant
+            </a>
+            </td>
+          </tr>
+        </tbody>
+        <tbody ng-show="isLoading">
+          <tr>
+            <td colspan="3" class="text-center">Loading ... </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="3" class="text-center">
+              <div st-items-by-page="5" st-pagination="" st-template="app/commonTempates/pagination.custom.html"></div>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </section>
+  </div>
+</div>

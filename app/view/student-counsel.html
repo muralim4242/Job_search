@@ -1,0 +1,29 @@
+<div class="ps-dashboard-header">
+    {{title}}
+</div>
+
+<div class="container">
+    <div class="row">
+        <form class="form-inline" name="studentForm" ng-submit="start()" novalidate>
+            <div class="col-lg-offset-3 col-lg-6">
+                <form>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Select student</h3>
+                        </div>
+                        <div class="panel-body text-center">
+                            <div class="form-group ">
+                                <select name="name" ng-disabled="!students" class="form-control" ng-model="selectedStdId" ng-options="student.id as student.name for student in students" ng-require="true">
+                                  <option value=''>Select name</option>
+                              </select>
+                                <button type="submit" class="btn btn-success pull-right">start</button>
+                            </div>
+                            <h2>{{selectedStdId + !students}}</h2>
+                            <p ng-show="studentForm.name.$error.required  && (studentForm.name.$dirty || submitted)" class="help-block">Please select name of students you would like to counsel ?</p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </form>
+    </div>
+</div>

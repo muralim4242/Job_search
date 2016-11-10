@@ -1,0 +1,174 @@
+<div class="ps-dashboard-header">
+  {{title}}
+</div>
+
+<!-- <div ng-if="isLoading" style=" position: fixed;
+    left: 50%;
+    top: 50%;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+   ">
+  <i class="fa fa-spinner fa-5x fa-spin"></i>
+</div> -->
+<div class="row" cg-busy="myPromise">
+  <div class="col-lg-12">
+    <section class="panel">
+      <header class="panel-heading">
+        Add new deal
+        <label style="float:right">{{dealSlidingValue}}/3</label>
+      </header>
+      <div class="panel-body">
+        <div class="stepy-tab">
+          <ul id="default-titles" class="stepy-titles clearfix">
+            <li id="default-title-0" ng-class="{'current-step':dealSlidingValue==1}">
+              <div>Step1</div>
+              <span> </span>
+            </li>
+            <li id="default-title-1" ng-class="{'current-step':dealSlidingValue==2}">
+              <div>Step 2</div>
+              <span> </span>
+            </li>
+            <li id="default-title-2" ng-class="{'current-step':dealSlidingValue==3}">
+              <div>Step 3</div>
+              <span> </span>
+            </li>
+          </ul>
+        </div>
+        <form class="form-horizontal" name="dealForm" ng-submit="dealSlidingNext()" novalidate>
+
+          <div class="animate-switch-container" ng-switch on="dealSlidingValue">
+            <div class="animate-switch" ng-switch-when="1">
+              <div class="form-group" ng-class="{ 'has-error' : dealForm.dealTitle.$invalid && (dealForm.dealTitle.$dirty || submitted)}">
+                <label class="col-lg-2 col-sm-2 control-label">Deal Title</label>
+                <div class="col-lg-10">
+                  <input type="text" class="form-control" name="dealTitle" ng-model="deal.dealTitle" placeholder="eg. 25% off total bill (Mon-Thurs)   -   (maximum 18 characters)" ng-required="true" pattern="^(?=.*[\w\d]).+" />
+
+                  <p ng-show="dealForm.dealTitle.$error.required && (dealForm.dealTitle.$dirty || submitted)" class="help-block">Oops! Don't forget to enter the title for your deal. Keep it short and sweet. </p>
+                  <p ng-show="dealForm.dealTitle.$error.pattern && (dealForm.dealTitle.$dirty || submitted)" class="help-block">Please enter real information.</p>
+                </div>
+              </div>
+
+              <div class="form-group" ng-class="{ 'has-error' : dealForm.dealDescription.$invalid && (dealForm.dealDescription.$dirty || submitted)}">
+                <label class="col-lg-2 col-sm-2 control-label">Deal Description</label>
+                <div class="col-lg-10">
+                  <input type="text" class="form-control" name="dealDescription" ng-model="deal.dealDescription" placeholder="eg.  25% off your total bill when spending &pound;20. Monday-Thursday   -   (max 60 characters)" ng-required="true" pattern="^(?=.*[\w\d]).+"/>
+
+
+                  <p ng-show="dealForm.dealDescription.$error.required && (dealForm.dealDescription.$dirty || submitted)" class="help-block">Oops! Don't forget to enter a short description of your deal</p>
+                  	<p ng-show="dealForm.dealDescription.$error.pattern && (dealForm.dealDescription.$dirty || submitted)" class="help-block">Please enter a bit more information.</p>
+                </div>
+              </div>
+
+              <div class="form-group" ng-class="{ 'has-error' : dealForm.dealTerms.$invalid && (dealForm.dealTerms.$dirty || submitted)}">
+                <label class="col-lg-2 col-sm-2 control-label">Terms and conditions:</label>
+                <div class="col-lg-10">
+                  <textarea class="form-control" name="dealTerms" ng-model="deal.dealTerms" placeholder="Remember to be as clear as possible.   When is it valid?  For how many people is it valid?  Is it off the food bill, or the total bill?  Is there a minimum spend? " ng-required="true" pattern="^(?=.*[\w\d]).+"/>
+
+                  <p ng-show="dealForm.dealTerms.$error.required && (dealForm.dealTerms.$dirty || submitted)" class="help-block">You must enter your deal terms</p>
+                  <p ng-show="dealForm.dealTerms.$error.pattern && (dealForm.dealTerms.$dirty || submitted)" class="help-block">Please enter a bit more information</p>
+                </div>
+              </div>
+
+
+              <!-- <div class="col-lg-10">
+                <div>Select an image file:
+                  <input type="file" id="fileInput1" />
+                </div>
+                <div class="cropArea">
+                  <img-crop image="myImage" result-image="myCroppedImage"></img-crop>
+                </div>
+                <div>Cropped Image:</div>
+                <div>
+                  <img ng-src="{{myCroppedImage}}" />
+                </div>
+
+
+
+              </div> -->
+            </div>
+
+            <div class="animate-switch" ng-switch-when="2">
+              <label class="col-lg-2 col-sm-2 control-label">Upload your feature image (an attractive looking dish that you serve at your restaurant)</label>
+              <div class="col-lg-10" style="position:relative">
+                <div>Select an image file: (JPEG, PNG, GIF)
+                  <input type="file" custom-on-change="handleFileSelect"/>
+                </div>
+                <div class="cropArea">
+                  <img-crop image="myImage" area-type="rectangle" aspect-ratio="1.7" result-image="cropped.myCroppedImage" result-image-size='{w: 500,h: 280}'></img-crop>
+                </div>
+                <div>Preview:</div>
+                <div>
+                  <img  ng-src="{{cropped.myCroppedImage}}" />
+                </div>
+              </div>
+            </div>
+
+            <div class="animate-switch" ng-switch-when="3">
+
+
+              <div class="form-group" ng-class="{ 'has-error' : dealForm.noOfRestaurant.$invalid  && (dealForm.noOfRestaurant.$dirty || submitted)}">
+                <label class="col-lg-2 col-sm-2 control-label">How many restaurants would you like to include in this deal?</label>
+                <div class="col-lg-10">
+                  <select name="noOfRestaurant" class="form-control" ng-model="deal.noOfRestaurant" ng-options="noOfRestaurant.id as noOfRestaurant.id for noOfRestaurant in noOfRestaurant_array" ng-require="true">
+                    <option value=''>Select the number of restaurants you would you like to setup ?</option>
+                  </select>
+                  <p ng-show="dealForm.noOfRestaurant.$error.required  && (dealForm.noOfRestaurant.$dirty || submitted)" class="help-block">Please select the number of restaurants you would like to setup ?</p>
+                </div>
+              </div>
+
+              <div ng-show="manualRestaurantSelectionButtonEnable" class="form-group" ng-class="{ 'has-error' : dealForm.manualRestaurantSelected.$invalid  && (dealForm.manualRestaurantSelected.$dirty || submitted)}">
+                <label class="col-lg-2 col-sm-2 control-label">Type the number of restaurants you'd like to setup</label>
+                <div class="col-lg-10">
+                  <input type="number" class="form-control" name="manualRestaurantSelected" ng-model="deal.manualRestaurantSelected" placeholder="How many restaurants? Eg. 60" />
+
+                </div>
+              </div>
+
+              <div ng-show="propertyEntryEnabled" class="form-group" ng-class="{ 'has-error' : dealForm.noOfRestaurant.$invalid  && (dealForm.noOfRestaurant.$dirty || submitted)}">
+                <label class="col-lg-2 col-sm-2 control-label">Enter postcode of restaurant</label>
+                <div class="col-lg-10">
+                  <div class="row" ng-repeat="restaurant in restaurants">
+                    <!-- <div class="col-lg-3">
+                      <input type="text" class="form-control" name="propertyNo" ng-model="restaurant.propertyNo" placeholder="Property no" ng-required="true" />
+                    </div> -->
+                    <div class="col-lg-3">
+                      <input type="text" class="form-control" name="postalCode" ng-model="restaurant.postalCode" placeholder="Postal code" ng-required="true" />
+                    </div>
+                    <div class="col-lg-2">
+                      <button type="button" ng-click="getLocation(restaurant)" class="btn btn-sm btn-info">Confirm</button>&nbsp;
+                      <span ng-show="restaurant.geoAvailable" class="btn btn-sm btn-info"><i class=" fa fa-check"></i></span>
+                      <span ng-show="restaurant.geoNotAvailable" class="btn btn-sm btn-danger"><i class=" fa fa-times"></i></span>
+                    </div>
+                    <div class="col-lg-4">
+                      <select name="address{{$index}}" ng-disabled="!restaurant.geoAvailable" class="form-control" ng-model="restaurant.address" ng-options="address for address in restaurant.addresses" ng-require="true">
+                        <option value=''>Select the property and address</option>
+                      </select>
+                      <p ng-show="dealForm.address{{$index}}.$error.required  && (dealForm.address{{$index}}.$dirty || submitted)" class="help-block">Please select the number of restaurants you would like to setup ?</p>
+                    </div>
+                    <div class="col-lg-3 form-group" ng-class="{ 'has-error' : dealForm.telephone{{$index}}.$invalid && (dealForm.telephone{{$index}}.$dirty || submitted)}">
+                      <input type="text" class="form-control" name="telephone{{$index}}" ng-model="restaurant.telephone" ng-model-options="{ debounce: 1000 }" ng-required="true" placeholder="Telephone" pattern="^((\(?0\d{4}\)?\s?\d{3}\s?\d{3})|(\(?0\d{3}\)?\s?\d{3}\s?\d{4})|(\(?0\d{2}\)?\s?\d{4}\s?\d{4}))(\s?\#(\d{4}|\d{3}))?$">
+                      <p ng-show="dealForm.telephone{{$index}}.$error.required && (dealForm.telephone{{$index}}.$dirty || submitted)" class="help-block">Telephone Number is required.</p>
+                      <p ng-show="dealForm.telephone{{$index}}.$error.pattern && (dealForm.telephone{{$index}}.$dirty || submitted)" class="help-block">Invalid Telephone number.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="animate-switch" ng-switch-default>default</div>
+          </div>
+          <button type="button" ng-show="(dealSlidingValue==1?false:true)" ng-click="dealSlidingPrev()" class="btn btn-info">Previous</button>
+          <button ng-show="(dealSlidingValue==3?false:true)" type="submit" class="btn  btn-info" style="float:right"> Next</button>
+          <input type="button" ng-click="submitForm()" ng-show="(dealSlidingValue==3?true:false)" class="finish btn btn-success" value="Submit">
+
+
+        </form>
+      </div>
+
+
+  </div>
+  </section>
+</div>
+</div>

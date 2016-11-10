@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html ng-app="app" xmlns="https://www.w3.org/1999/xhtml">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>New Project</title>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+  <link href="css/toastr/toastr.min.css" rel="stylesheet" />
+  <!-- <link href="css/angular-gridster.min.css" rel="stylesheet" /> -->
+  <link href="css/angular-busy.css" rel="stylesheet" />
+  <link href="app/app.css" rel="stylesheet" />
+  <link href="ext-modules/psFramework/psFramework.css" rel="stylesheet" />
+  <link href="ext-modules/psMenu/psMenu.css" rel="stylesheet" />
+  <link href="ext-modules/psDashboard/psDashboard.css" rel="stylesheet" />
+
+  <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/bootstrap-reset.css" rel="stylesheet">
+  <!--external css-->
+  <link href="css/font-awesome/css/font-awesome.css" rel="stylesheet" />
+
+
+  <!-- Custom styles for this template -->
+
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/style-responsive.css" rel="stylesheet" />
+  <link href="css/ng-img-crop.css" rel="stylesheet" />
+
+
+  <script src="js/jquery.js"></script>
+  <script src="css/toastr/toastr.min.js"></script>
+  <script src="js/angular.min.js"></script>
+  <script src="js/angular-animate.min.js"></script>
+  <script src="js/angular-aria.min.js"></script>
+  <script src="js/angular-busy.js"></script>
+  <script src="js/angular-ui-router.min.js"></script>
+  <!-- <script src="js/angular-gridster.min.js"></script> -->
+  <!-- <script src="js/angular-ui/ui-bootstrap-tpls.min.js"></script> -->
+  <script src="js/ngStorage.min.js"></script>
+  <script src="js/angular-resource.min.js"></script>
+  <script src="js/smart-table.min.js"></script>
+  <script src="js/angular-cookies.min.js"></script>
+  <script src="js/angucomplete-alt.min.js"></script>
+  <!-- <script src="https://www.google.com/recaptcha/api.js?onload=vcRecaptchaApiLoaded&render=explicit" async defer></script>
+  <script src="js/angular-recaptcha.min.js"></script> -->
+
+  <!-- <script src="js/angular-material/angular-material.min.js"></script> -->
+  <script src="js/lodash/lodash.js"></script>
+  <script src="app/app.js"></script>
+
+
+  <!--service Javascript Files-->
+  <script src="app/services/common.services.js"></script>
+  <script src="app/services/currentUser.js"></script>
+  <script src="app/services/userAccount.js"></script>
+  <script src="app/services/dealResource.js"></script>
+
+  <script src="ext-modules/psMenu/psMenuModule.js"></script>
+  <script src="ext-modules/psMenu/psMenuController.js"></script>
+  <script src="ext-modules/psMenu/psMenuDirective.js"></script>
+  <script src="ext-modules/psMenu/psMenuItemDirective.js"></script>
+  <script src="ext-modules/psMenu/psMenuGroupDirective.js"></script>
+
+
+  <script src="ext-modules/psDashboard/psDashboardModule.js"></script>
+  <script src="ext-modules/psDashboard/psDashboardDirective.js"></script>
+
+  <script src="ext-modules/psFramework/psFrameworkModule.js"></script>
+  <script src="ext-modules/psFramework/psFrameworkController.js"></script>
+  <script src="ext-modules/psFramework/psFrameworkDirective.js"></script>
+  <script src="ext-modules/psFramework/psUserProfile/psUserProfileDirective.js"></script>
+  <script src="ext-modules/psFramework/psUserProfile/psUserProfileSmallDirective .js"></script>
+
+
+
+  <script src="app/appModule.js"></script>
+  <script src="app/services/notifier.js"></script>
+  <script src="app/appConfig.js"></script>
+  <script src="app/appRouteConfig.js"></script>
+  <script src="app/appController.js"></script>
+  <script src="js/pageSelect.directive.js"></script>
+
+  <!--other menus javascript files-->
+  <script src="app/controllers/addDealController.js"></script>
+  <script src="app/controllers/allDealsController.js"></script>
+  <script src="app/controllers/dashboard.js"></script>
+  <!-- <script src="app/controllers/profile.js"></script>
+  <script src="app/controllers/faq.js"></script>
+  <script src="app/controllers/customerSupport.js"></script> -->
+    <script src="app/controllers/student.js"></script>
+      <script src="app/controllers/student-counsel.js"></script>
+
+  <!--close-->
+  <style>
+    [ng\:cloak],
+    [ng-cloak],
+    [data-ng-cloak],
+    [x-ng-cloak],
+    .ng-cloak,
+    .x-ng-cloak {
+      display: none !important;
+    }
+
+    .cropArea {
+      background: #E4E4E4;
+      overflow: hidden;
+      width: 350px;
+      height: 200px;
+    }
+  </style>
+
+
+
+
+  <!-- js placed at the end of the document so the pages load faster -->
+
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/ng-img-crop.js"></script>
+
+
+
+
+  <script src="https://www.google.com/recaptcha/api.js?onload=vcRecaptchaApiLoaded&render=explicit" async defer></script>
+  <script type="text/javascript" src="js/angular-recaptcha.js"></script>
+
+
+
+</head>
+
+<body class="container-fluid" ng-controller="appController" ng-cloak>
+<h1>Start your code</h1>
+
+</body>
+
+</html>
+
+
+
+
+
+<!-- <div ng-if="menuSateChangeSpinner" style=" position: fixed;
+    left: 50%;
+    top: 50%;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+   ">
+  <i class="fa fa-spinner fa-5x fa-spin"></i>
+</div>
+<div ng-hide="isLoggedIn()" class="sign-in-form" style="margin-top:90px">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-login">
+          <div class="panel-heading">
+            <div class="row">
+              <div class="col-xs-12">
+                <a href="#" class="active" id="login-form-link" ng-click="clearMessage()">Login</a>
+              </div>
+            </div>
+
+            <hr>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <form cg-busy="myPromise" id="login-form" name="loginForm" ng-submit="login(loginForm.$valid)" novalidate style="display: block;">
+
+                  <div class="login-wrap">
+                    <div class="form-group" ng-class="{ 'has-error' : loginForm.email.$invalid && (loginForm.email.$dirty || submitted)}">
+                      <input type="email" class="form-control" name="email" ng-model="userData.email" placeholder="Email" ng-required="true">
+                      <p ng-show="loginForm.email.$error.required &&  (loginForm.email.$dirty || submitted)" class="help-block">Email is required.</p>
+                      <p ng-show="loginForm.email.$error.email &&  (loginForm.email.$dirty || submitted)" class="help-block">This not a valid email address.</p>
+                    </div>
+
+                    <div class="form-group" ng-class="{ 'has-error' : loginForm.password.$invalid && (loginForm.password.$dirty || submitted)}">
+                      <input type="password" id="password" class="form-control" name="password" ng-model="userData.password" placeholder="Password" ng-model-options="{ debounce: 1000 }" ng-required="true" pattern="^((?=.*[A-Za-z])(?=.*\d)).{8,15}$">
+                      <p ng-show="loginForm.password.$error.required &&  (loginForm.password.$dirty || submitted)" class="help-block">This field is required</p>
+                      <p ng-show="loginForm.password.$error.pattern &&  (loginForm.password.$dirty || submitted)" class="help-block">Minimum 8 and Maximum 15 characters, must include at least 1 number</p>
+                    </div>
+                    <div vc-recaptcha key="'6LcpzxkTAAAAAKSicVvoN2gtlAgr-_BHIO5oQeoV'"></div>
+
+                    <br>
+                    <br>
+                    <button class="btn btn-lg btn-login btn-block">Sign in</button>
+
+                  </div>
+                </form>
+
+                <div class="alert alert-info " ng-show="message ">{{message}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div ng-hide="!isLoggedIn() ">
+  <ps-framework cg-busy- "myPromise" title="TMS" subtitle="Counsel Management">
+   icon-file="../restauranteur/images/Fill-500px.png "> -->
+    <!-- <ps-menu>
+      <ps-menu-item label="Customer Support" icon="fa-ticket " route="/" param=" "></ps-menu-item>
+    </ps-menu>
+  </ps-framework>
+</div>
+
+<div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="gridSystemModalLabel">Notification</h4>
+      </div>
+      <div class="modal-body">
+        <p>
+          <strong>{{notificationText}}</strong>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+-->
