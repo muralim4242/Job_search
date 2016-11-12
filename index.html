@@ -87,8 +87,8 @@
   <!-- <script src="app/controllers/profile.js"></script>
   <script src="app/controllers/faq.js"></script>
   <script src="app/controllers/customerSupport.js"></script> -->
-    <script src="app/controllers/student.js"></script>
-      <script src="app/controllers/student-counsel.js"></script>
+  <script src="app/controllers/student.js"></script>
+  <script src="app/controllers/student-counsel.js"></script>
 
   <!--close-->
   <style>
@@ -100,7 +100,7 @@
     .x-ng-cloak {
       display: none !important;
     }
-
+    
     .cropArea {
       background: #E4E4E4;
       overflow: hidden;
@@ -128,7 +128,117 @@
 </head>
 
 <body class="container-fluid" ng-controller="appController" ng-cloak>
-<h1>Start your code</h1>
+  <header>
+    <div class="row">
+      <div class="container">
+        <div class="col-md-8 hidden-sm hidden-xs"></div>
+        <div class="col-md-4">
+          <ul class="nav navbar-nav pull-right">
+            <li class="active">
+              <a href="#"><i class="fa fa-facebook"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-twitter"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-youtube"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-envelope"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="container">
+        <div class="col-md-4">
+          <div class="logo">
+            <img src="images/logo.png" />
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="navbar pull-right">
+            <ul class="nav navbar-nav">
+              <li class="active">
+                <a href="#">Home</a>
+              </li>
+              <li>
+                <a href="#">About Us</a>
+              </li>
+              <li>
+                <a href="#">Services</a>
+              </li>
+              <li>
+                <a href="#">Employer</a>
+              </li>
+              <li>
+                <a href="#">Candidates</a>
+              </li>
+              <li>
+                <a href="#">Contact Us</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <section>
+    <section class="custom-carousel">
+      <div class="row">
+        <div class="container-fluid">
+         
+            <div id="carousel-id" class="carousel slide" data-ride="carousel">
+              <!--<ol class="carousel-indicators">
+                <li data-target="#carousel-id" data-slide-to="0" class=""></li>
+                <li data-target="#carousel-id" data-slide-to="1" class=""></li>
+                <li data-target="#carousel-id" data-slide-to="2" class="active"></li>
+              </ol>-->
+              <div class="carousel-inner">
+                <div class="item">
+                   <img alt="Second slide" src="images/bg1.jpg">
+                  <div class="container">
+                    <div class="carousel-caption">
+                      <h1>Example headline.</h1>
+                      <p>Note: If you're viewing this page via a <code>file://</code> URL, the "next" and "previous" Glyphicon
+                        buttons on the left and right might not load/display properly due to web browser security rules.</p>
+                      <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
+                    </div>
+                  </div>
+                </div>
+                <div class="item">
+                  <img alt="Second slide" src="images/bg2.jpg">
+                  <div class="container">
+                    <div class="carousel-caption">
+                      <h1>Another example headline.</h1>
+                      <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at
+                        eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                      <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
+                    </div>
+                  </div>
+                </div>
+                <div class="item active">
+                    <img alt="Second slide" src="images/bg3.jpg">
+                  <div class="container">
+                    <div class="carousel-caption">
+                      <h1>One more for good measure.</h1>
+                      <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at
+                        eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                      <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <a class="left carousel-control" href="#carousel-id" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+              <a class="right carousel-control" href="#carousel-id" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+            </div>
+          </div>
+      </div>
+    </section>
+  </section>
+  <footer>
+  </footer>
 
 </body>
 
@@ -200,7 +310,7 @@
 <div ng-hide="!isLoggedIn() ">
   <ps-framework cg-busy- "myPromise" title="TMS" subtitle="Counsel Management">
    icon-file="../restauranteur/images/Fill-500px.png "> -->
-    <!-- <ps-menu>
+<!-- <ps-menu>
       <ps-menu-item label="Customer Support" icon="fa-ticket " route="/" param=" "></ps-menu-item>
     </ps-menu>
   </ps-framework>
