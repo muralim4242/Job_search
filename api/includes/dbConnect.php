@@ -1,6 +1,6 @@
 <?php
-// require_once '../../../api/libs/Medoo-Master/medoo.php';
- require_once '../../api/libs/Medoo-Master/medoo.php';
+ require_once '../../../api/libs/Medoo-Master/medoo.php';
+// require_once '../../api/libs/Medoo-Master/medoo.php';
 /**
 * Handling database connection
 *

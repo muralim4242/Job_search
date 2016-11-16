@@ -58,7 +58,7 @@ class loginHandler
 	
 	/**     * Creating new user     * @param String $name User full name     * @param String $email User login email id     * @param String $password User login password     */
 	
-	public function createUser($email, $password ,$view)
+	public function createUser($user)
 	{
 		
 		require_once '../../../api/includes/passHash.php';
@@ -66,36 +66,47 @@ class loginHandler
 		$response = array();
 		
 		// 		First check if user already existed in db
-		if (!$this->isUserExists($email))
+		if (!$this->isUserExists($user["EMAIL"]))
 		{
 			
 			// 			Generating password hash
-			$password_hash = PassHash::hash($password);
+			$password_hash = PassHash::hash($user["PASSWORD"]);
 			
 			// 			Generating API key
 			$api_key = $this->generateApiKey();
 			
 			// 			insert query
-			if($view=="Employer")
+			if($user["VIEW"]=="Employer")
 			{
-				
-				$isQueryExecuted=$this->conn->insert("users",["EMAIL"=>$email,"PASSWORD_HASH"=>$password_hash,"API_KEY"=>$api_key,"ROLE_ID"=>"2"]);
+				echo "hai";
+				$user["API_KEY"]=$api_key;
+				$user["ROLE_ID"]=2;
+				$user["PASSWORD_HASH"]=$password_hash;
+				unset($user["PASSWORD"]);
+				unset($user["VIEW"]);
+			//	print_r($user);
+				$isQueryExecuted=$this->conn->insert("users",$user);
 				
 			}
 			
 			
 			else
-			{
-				
-				$isQueryExecuted=$this->conn->insert("users",["EMAIL"=>$email,"PASSWORD_HASH"=>$password_hash,"API-KEY"=>$api_key,"ROLE_ID"=>"1"]);
-				
+			{	
+				echo "hai2";
+				$user["API_KEY"]=$api_key;
+				$user["ROLE_ID"]=1;
+				$user["PASSWORD_HASH"]=$password_hash;
+				unset($user["PASSWORD"]);
+				unset($user["VIEW"]);
+				//print_r($user);
+				$isQueryExecuted=$this->conn->insert("users",$user);
 			}
 			
 			
 			// 			Check for successful insertion
 			if($isQueryExecuted)
 			{
-				
+				echo "hai3";
 				$response['status']=USER_CREATED_SUCCESSFULLY;
 				
 				$response['apiKey'] = $api_key;
@@ -103,6 +114,8 @@ class loginHandler
 			}
 			
 			else {
+
+					echo "hai4";
 				
 				$response['status']=USER_CREATE_FAILED;
 				
@@ -405,111 +418,148 @@ class loginHandler
 	
 	
 	
-	// public function getStudentAll()
-	// {
 		
-		
-		
-	// 	$query1="SELECT id,name FROM tms_students";
-		
-		
-		
-	// 	$result1=mysqli_query($this->conn,$query1) or die("cud not run first query1".mysql_error());
-		
-		
-		
-	// 	if($result1)
-	// 	{
-			
-			
-			
-	// 		// 			$user=mysqli_fetch_assoc($result1);
-			
-			
-			
-	// 		mysqli_close($this->conn);
-			
-			
-			
-	// 		return $result1;
-			
-			
-			
-	// 	}
-		
-		
-		
-	// 	else
-	// 	{
-			
-			
-			
-	// 		return NULL;
-			
-			
-			
-	// 	}
-		
-		
-		
-	// }
 	
 	
 	
 	
 	
 	
+	public function getAllJobPost()
+	{
+		
+		
+		
+		
+		
+		$result1=$this->conn->select("employers_post","*");
+		
+		
+		
+		if($result1)
+		{
+			
+			
+		
+			
+			return $result1;
+			
+			
+			
+		}
+		
+		
+		
+		else
+		{
+			
+			
+			
+			return NULL;
+			
+			
+			
+		}
+		
+		
+		
+	}
+
+
+	public function getIndJobPost($postId)
+	{
+		
+		
+		
+		
+		
+		$result1=$this->conn->select("employers_post","*",["ID"=>$postId]);
+		
+		
+		
+		if($result1)
+		{
+			
+			
+		
+			
+			return $result1;
+			
+			
+			
+		}
+		
+		
+		
+		else
+		{
+			
+			
+			
+			return NULL;
+			
+			
+			
+		}
+		
+		
+		
+	}
+
+
+		public function getEmployerId($userId)
+	{
+		
+		
+		
+		
+		
+		$result1=$this->conn->select("employers","ID",["U_ID"=>$userId]);
+		
+		
+		
+		if($result1)
+		{
+			
+			
+		
+			
+			return $result1[0];
+			
+			
+			
+		}
+		
+		
+		
+		else
+		{
+			
+			
+			
+			return NULL;
+			
+			
+			
+		}
+		
+		
+		
+	}
 	
-	// public function getAllQuestion()
-	// {
-		
-		
-		
-	// 	$query1="SELECT `id`,CONCAT(`id`, '. ', `question`) as question FROM `tms_questions` WHERE 1";
-		
-		
-		
-	// 	$result1=mysqli_query($this->conn,$query1) or die("cud not run first query1".mysql_error());
-		
-		
-		
-	// 	if($result1)
-	// 	{
-			
-			
-			
-	// 		// 			$user=mysqli_fetch_assoc($result1);
-			
-			
-			
-	// 		// 			mysqli_close($this->conn);
-			
-			
-			
-	// 		return $result1;
-			
-			
-			
-	// 	}
-		
-		
-		
-	// 	else
-	// 	{
-			
-			
-			
-	// 		return NULL;
-			
-			
-			
-	// 	}
-		
-		
-		
-	// }
+
+
+	public function job_post($employerId,$post)
+	{
+		 $post["E_ID"]=$employerId;
+		return $this->conn->insert("employers_post",$post);
+
+	}
 	
-	
+	public function job_post_update($postId,$updatedPost)
+	{
+		return $this->conn->update("employers_post",$updatedPost,["ID"=>$postId]);
+	}
 	
 	
 	
@@ -643,9 +693,56 @@ class loginHandler
         }
     }
 	
+
+	public function update_employer($user_id,$employer_name,$telephone)
+    {
+         if($this->conn->update("employers",["NAME"=>$employer_name,"TELEPHONE"=>$telephone],["U_ID"=>$user_id]))
+        {
+                return true;
+        }
+        else {
+            return false;
+        }
+    }
 	
 	
+	//job seekers
+	public function getAllJobSeekers($jSId)
+	{
+		if($jSId)
+		{
+			echo $jSId;
+			$response=$this->conn->select("job_seekers","*",["ID"=>$jSId]);
+			if($response)
+			{
+				return $response;
+			}
+			else {
+				return false;
+			}
+		}
+		else {
+			$response=$this->conn->select("job_seekers","*");
+			if($response)
+			{
+				return $response;
+			}
+			else {
+				return false;
+			}
+		}	
+	}
+
+	public function job_seeker_post($jobSeeker)
+	{
+		return $this->conn->insert("job_seekers",$jobSeeker);
+	}
 	
+	
+	public function job_seeker_post_update($jSId,$jobSeeker)
+	{
+		return $this->conn->update("job_seekers",$jobSeeker,["ID"=>$jSId]);
+	}
 	
 	
 	

@@ -118,10 +118,6 @@ function authenticate(\Slim\Route $route) {
 
 /** * Verifying required params posted or not */
 
-
-
-
-
 /** * User Registration * url - /register * method - POST * params - name, email, password */
 
 
@@ -132,7 +128,7 @@ $app->post('/register', function() use ($app)
 	
 	
 	// 	check for required params
-	verifyRequiredParams(array('email', 'password','view'));
+	verifyRequiredParams(array('EMAIL', 'PASSWORD','VIEW'));
 	
 	
 	
@@ -142,20 +138,10 @@ $app->post('/register', function() use ($app)
 	
 	$request_params = json_decode($app->request()->getBody(), true);
 	
-	
-	$email = $request_params['email'];
-	
-	
-	$password = $request_params['password'];
+
 	
 	
-	$view = $request_params['view'];
-	
-	
-	
-	
-	
-	validateEmail($email);
+	validateEmail($request_params['EMAIL']);
 	
 	
 	$db = new loginHandler();
@@ -164,7 +150,8 @@ $app->post('/register', function() use ($app)
 	$res=array();
 	
 	
-	$res = $db->createUser($email, $password ,$view);
+
+	$res = $db->createUser($request_params);
 	
 	
 	if ($res['status'] == USER_CREATED_SUCCESSFULLY)
@@ -174,7 +161,7 @@ $app->post('/register', function() use ($app)
 		$response["error"] = false;
 		
 		
-		//			$response['id']=$res['id'];
+		
 		
 		
 		$response["message"] = "You are successfully registered";
@@ -220,9 +207,6 @@ $app->post('/register', function() use ($app)
 }
 
 );
-
-
-
 
 
 
@@ -321,6 +305,7 @@ $app->post('/login', function() use ($app)
 
 
 
+//employer
 
 
 $app->post('/add_employer','authenticate',function() use ($app)
@@ -381,678 +366,529 @@ $app->post('/add_employer','authenticate',function() use ($app)
 	
 });
 
-// $app->get('/getStudentAll', 'authenticate', function() use ($app)
-// {
-	
-	
-// 	// 	check for required params
-	
-// 	// 	verifyRequiredParams(array('name','age','relationship','sex'));
-	
-	
-	
-// 	$response = array();
-	
-	
-	
-// 	global $user_id;
-	
-	
-// 	$db = new loginHandler();
-	
-	
-	
-// 	// 	creating new Family Member
-// 	$students = $db->getStudentAll();
-	
-	
-// 	//p	rint_r $result;
-	
-	
-// 	if ($students)
-// 	{
-		
-		
-// 		$response["error"] = false;
-		
-		
-		
-// 		$response["students"]=array();
-		
-		
-// 		while ($student = $students->fetch_assoc())
-// 		{
-			
-			
-// 			array_push($response["students"], $student);
-			
-			
-// 		}
-		
-		
-		
-// 	}
-	
-	
-// 	else
-// 	{
-		
-		
-// 		// 		unknown error occurred
-// 		$response['error'] = true;
-		
-		
-// 		$response['message'] = "An error occurred. Please try again";
-		
-		
-// 	}
-	
-	
-	
-// 	echoRespnse(200, $response);
-	
-	
-	
-// }
 
-// );
+$app->post('/update_employer','authenticate',function() use ($app)
+{
+    	$response = array();
+	
+	
+	$request_params = json_decode($app->request()->getBody(), true);
+	
+	
+	$employer_name = $request_params['employer_name'];
+	
+	
+	$telephone = $request_params['telephone'];
+    
+    global $user_id;
+	
+	$db = new loginHandler();
 
-
-
-// $app->get('/getIndConDet/:stdId', 'authenticate', function($stdId) use ($app)
-// {
+    	$res= $db->update_employer($user_id,$employer_name,$telephone);
 	
 	
-// 	// 	check for required params
 	
-// 	// 	verifyRequiredParams(array('name','age','relationship','sex'));
-	
-	
-	
-// 	$response = array();
-	
-	
-	
-// 	global $user_id;
-	
-	
-// 	$db = new loginHandler();
-	
-	
-	
-// 	// 	creating new Family Member
-// 	$getAllQuestion = $db->getAllQuestion();
-	
-	
-	
-// 	//p	rint_r $result;
-	
-	
-// 	if ($getAllQuestion)
-// 	{
-		
-		
-// 		$response["error"] = false;
-		
-		
-// 		$response["stdName"]=$db->getStdNameById($stdId);
-		
-		
-		
-// 		$response["questions"]=array();
-		
-		
-// 		// 		$response["indStdDets"]=array();
-		
-		
-// 		while ($question = $getAllQuestion->fetch_assoc())
-// 		{
-			
-			
-// 			$indConDets=$db->getIndConDet($stdId,$question["id"]);
-			
-			
-// 			$question["indStdDets"]=array();
-			
-			
-// 			while ($indStdDet = $indConDets->fetch_assoc())
-// 			{
-				
-				
-// 				array_push($question["indStdDets"], $indStdDet);
-				
-				
-// 			}
-			
-			
-// 			array_push($response["questions"], $question);
-			
-			
-// 		}
-		
-		
-// 		// 		while ($indStdDet = $getIndConDet->fetch_assoc())
-// 		// 		{
-			
-			
-// 			// 			array_push($response["indStdDets"], $indStdDet);
-			
-			
-// 			//			
-// 		}
-		
-		
-		
-// 	}
-	
-	
-// 	else
-// 	{
-		
-		
-// 		// 		unknown error occurred
-// 		$response['error'] = true;
-		
-		
-// 		$response['message'] = "An error occurred. Please try again";
-		
-		
-// 	}
-	
-	
-	
-// 	echoRespnse(200, $response);
-	
-	
-	
-// }
-
-// );
-
-
-
-// $app->post('/feedback', function() use ($app)
-// {
-	
-	
-// 	// 	check for required params
-// 	// 	verifyRequiredParams(array('id', 'password'));
-	
-	
-	
-// 	// 	reading post params
-	
-	
-// 	/*   $email = $app->request()->post('email');            $password = $app->request()->post('password'); */
-	
-	
-	
-// 	$response = array();
-	
-	
-// 	$request_params = json_decode($app->request()->getBody(), true);
-	
-	
-	
-// 	$name = $request_params['name'];
-	
-	
-// 	$email = $request_params['email'];
-	
-	
-// 	$feedback = $request_params['feedback'];
-	
-	
-	
-// 	$db = new loginHandler();
-	
-	
-// 	//		echo $id." ".$password;
-	
-	
-// 	// 	check for correct id and password
-	
-// 	$user = $db->feedback($name,$email,$feedback);
-	
-	
-	
-// 	if ($user)
-// 	{
-		
-		
-// 		$response["error"] = false;
-		
-		
-		
-		
-// 		/*  $response['id'] = $user['id'];                    $response['apiKey'] = $user['api_Key'];                    $response['created_at'] = $user['created_at'];*/
-		
-		
-// 	}
-	
-	
-// 	else
-// 	{
-		
-		
-// 		// 		unknown error occurred
-// 		$response['error'] = true;
-		
-		
-// 		$response['message'] = "An error occurred. Please try again";
-		
-		
-// 	}
-	
-	
-	
-// 	echoRespnse(200, $response);
-	
-	
-// }
-
-// );
-
-
-
-// $app->put('/counselUpdate/:conId','authenticate',  function($conId) use ($app)
-// {
-	
-	
-	
-// 	global $user_id;
-	
-	
-// 	$response = array();
-	
-	
-// 	$request_params = json_decode($app->request()->getBody(), true);
-	
-	
-	
-// 	$stdId = $request_params['stdId'];
-	
-	
-// 	$qId = $request_params['qId'];
-	
-	
-// 	$assigned_date = $request_params['assigned_date'];
-	
-	
-// 	$assignmentTypeId = $request_params['assignmentTypeId'];
-	
-	
-// 	$isCompleted = $request_params['isCompleted']?1:0;
-	
-	
-// 	$completed_date = $request_params['completed_date'];
-	
-	
-// 	$comment = $request_params['comment'];
-	
-	
-	
-// 	// 	echo "hai";
-	
-	
-// 	// 	echo $user_id .$request_params['stdId'].$request_params['qId'].  $request_params['assigned_date'].$request_params['assignmentTypeId'];
-	
-	
-// 	// 	echo $isCompleted = $request_params['isCompleted']. $request_params['completed_date'].$request_params['comment'];
-	
-	
-// 	$db = new loginHandler();
-	
-	
-// 	//		echo $id." ".$password;
-	
-	
-// 	// 	check for correct id and password
-	
-// 	$res= $db->counselUpdate($conId,$user_id,$assigned_date,$assignmentTypeId,$isCompleted,$completed_date,$comment);
-	
-	
-	
-// 	if ($res)
-// 	{
-		
-		
-// 		$response["error"] = false;
-		
-		
-		
-		
-// 		/*  $response['id'] = $user['id'];                            $response['apiKey'] = $user['api_Key'];                            $response['created_at'] = $user['created_at'];*/
-		
-		
-// 		$response['message'] = "Counsel updated successfully";
-		
-		
-// 	}
-	
-	
-// 	else
-// 	{
-		
+	if ($res)
+	{
 		
-// 		// 		unknown error occurred
-// 		$response['error'] = true;
 		
+		$response["error"] = false;
 		
-// 		$response['message'] = "An error occurred. Please try again";
 		
 		
-// 	}
-	
-	
-	
-// 	echoRespnse(200, $response);
-	
-	
-// }
-
-// );
-
-
-
-// $app->post('/counselAdd','authenticate',  function() use ($app)
-// {
-	
-	
-	
-// 	global $user_id;
-	
-	
-// 	$response = array();
-	
-	
-// 	$request_params = json_decode($app->request()->getBody(), true);
-	
-	
-	
-// 	$stdId = $request_params['stdId'];
-	
-	
-// 	$qId = $request_params['qId'];
-	
-	
-// 	$assigned_date = $request_params['assigned_date'];
-	
-	
-// 	$assignmentTypeId = $request_params['assignmentTypeId'];
-	
-	
-// 	$isCompleted = $request_params['isCompleted']?1:0;
-	
-	
-// 	$completed_date = $request_params['completed_date'];
-	
-	
-// 	$comment = $request_params['comment'];
-	
-	
-	
-// 	// 	echo "hai";
-	
-	
-// 	// 	echo $user_id .$request_params['stdId'].$request_params['qId'].  $request_params['assigned_date'].$request_params['assignmentTypeId'];
-	
-	
-// 	// 	echo $isCompleted = $request_params['isCompleted']. $request_params['completed_date'].$request_params['comment'];
-	
-	
-// 	$db = new loginHandler();
-	
-	
-// 	//		echo $id." ".$password;
-	
-	
-// 	// 	check for correct id and password
-	
-// 	$res= $db->counselAdd($user_id,$stdId,$qId,$assigned_date,$assignmentTypeId,$isCompleted,$completed_date,$comment);
-	
-	
-	
-// 	if ($res)
-// 	{
-		
-		
-// 		$response["error"] = false;
 		
+		/*  $response['id'] = $user['id'];                            $response['apiKey'] = $user['api_Key'];                            $response['created_at'] = $user['created_at'];*/
 		
 		
+		$response['message'] = "Employer record updated successfully";
 		
-// 		/*  $response['id'] = $user['id'];                                    $response['apiKey'] = $user['api_Key'];                                    $response['created_at'] = $user['created_at'];*/
 		
-		
-// 		$response['message'] = "Counsel added successfully";
-		
-		
-// 	}
+	}
 	
 	
-// 	else
-// 	{
+	else
+	{
 		
 		
-// 		// 		unknown error occurred
-// 		$response['error'] = true;
+		// 		unknown error occurred
+		$response['error'] = true;
 		
 		
-// 		$response['message'] = "An error occurred. Please try again";
+		$response['message'] = "An error occurred. Please try again";
 		
 		
-// 	}
-	
+	}
 	
 	
-// 	echoRespnse(200, $response);
 	
+	echoRespnse(200, $response);
 	
-// }
-
-// );
+});
 
 
 
 
+// job post
 
-// $app->get('/viewProfile', 'authenticate', function() use ($app)
-// {
-	
-	
-// 	// 	check for required params
-	
-// 	// 	verifyRequiredParams(array('name','age','relationship','sex'));
-	
-	
-	
-// 	$response = array();
-	
-	
-	
-// 	global $user_id;
-	
-	
-// 	$db = new loginHandler();
-	
-	
-	
-// 	// 	creating new Family Member
-// 	$user = $db->viewProfile($user_id);
-	
-	
-// 	//p	rint_r $result;
-	
-	
-// 	if ($user)
-// 	{
-		
-		
-// 		$response["error"] = false;
-		
-		
-// 		$response["id"]=$user['id'];
-		
-		
-// 		$response['name'] = $user['name'];
-		
-		
-// 		$response['email'] = $user['email'];
-		
-		
-// 		$response['sexSelected'] = $user['sexSelected'];
-		
-		
-// 		$response['dob'] = $user['dob'];
-		
-		
-// 		$response['mobileno'] = $user['mobileno'];
-		
-		
-// 		$response['address'] = $user['address'];
-		
-		
-// 		$response['city'] = $user['city'];
-		
-		
-// 		$response['pincode'] = $user['pincode'];
-		
-		
-// 		$response['district'] = $user['district'];
-		
-		
-// 		$response['state'] = $user['state'];
-		
-		
-		
-// 	}
-	
-	
-// 	else
-// 	{
-		
-		
-// 		// 		unknown error occurred
-// 		$response['error'] = true;
-		
-		
-// 		$response['message'] = "An error occurred. Please try again";
-		
-		
-// 	}
-	
-	
-	
-// 	echoRespnse(200, $response);
-	
-	
-	
-// }
+//get all post
 
-// );
+$app->get('/getAllPost', 'authenticate', function() use ($app)
+{
+	
+	
+	
+	$response = array();
+	
+	
+	
+	global $user_id;
+	
+	
+	$db = new loginHandler();
+	
+	
+	
+	// 	creating new Family Member
+	$getAllJobPost = $db->getAllJobPost();
+	
+	
+	
+	//p	rint_r $result;
+	
+	
+	if ($getAllJobPost)
+	{
+		
+		
+		$response["error"] = false;
+		
+		
+	
+		
+		$response["jobPosts"]=array();
+		
+		
+		// 		$response["indStdDets"]=array();
+	//	print_r($getAllJobPost);
+		foreach ($getAllJobPost as $key => $value) {
+				array_push($response["jobPosts"], $value);
+		}
+		
+		
+		}
+		
+	
+	
+	
+	else
+	{
+		
+		
+		// 		unknown error occurred
+		$response['error'] = true;
+		
+		
+		$response['message'] = "An error occurred. Please try again";
+		
+		
+	}
+	
+	
+	
+	echoRespnse(200, $response);
+	
+	
+	
+}
+
+);
 
 
+$app->get('/getIndPost/:postId', 'authenticate', function($postId) use ($app)
+{
+	
+	
+	
+	$response = array();
+	
+	
+	
+	global $user_id;
+	
+	
+	$db = new loginHandler();
+	
+	
+	
+	// 	creating new Family Member
+	$getIndJobPost = $db->getIndJobPost($postId);
+	
+	
+	
+	//p	rint_r $result;
+	
+	
+	if ($getIndJobPost)
+	{
+		
+		
+		$response["error"] = false;
+		
+		
+	
+		
+		$response["getIndJobPost"]=$getIndJobPost[0];
+		
+	
+		
+		}
+		
+	
+	
+	
+	else
+	{
+		
+		
+		// 		unknown error occurred
+		$response['error'] = true;
+		
+		
+		$response['message'] = "An error occurred. Please try again";
+		
+		
+	}
+	
+	
+	
+	echoRespnse(200, $response);
+	
+	
+	
+}
 
-// $app->post('/editProfile', 'authenticate', function() use ($app)
-// {
-	
-	
-// 	// 	check for required params
-// 	// 	verifyRequiredParams(array('name','age','relationship','sex'));
-	
-	
-// 	$response = array();
-	
-	
-// 	$request_params = json_decode($app->request()->getBody(), true);
-	
-	
-// 	$name = $request_params['name'];
-	
-	
-// 	$email = $request_params['email'];
-	
-	
-// 	$sexSelected = $request_params['sexSelected'];
-	
-	
-// 	$dob = $request_params['dob'];
-	
-	
-// 	$mobileno = $request_params['mobileno'];
-	
-	
-// 	$address = $request_params['address'];
-	
-	
-// 	$city = $request_params['city'];
-	
-	
-// 	$pincode = $request_params['pincode'];
-	
-	
-// 	$district = $request_params['district'];
-	
-	
-// 	$state = $request_params['state'];
-	
-	
-	
-// 	//		echo $name.$email.$sexSelected.$dob.$mobileno.$address.$city.$pincode.$district.$state;
-	
-	
-	
-// 	global $user_id;
-	
-	
-// 	$db = new loginHandler();
-	
-	
-	
-// 	// 	creating new Family Member
-// 	$user = $db->editProfile($user_id,$name,$email,$sexSelected,$dob,$mobileno,$address,$city,$pincode,$district,$state);
-	
-	
-// 	//p	rint_r $result;
-	
-	
-// 	if ($user)
-// 	{
-		
-		
-// 		$response["error"] = false;
-		
-		
-		
-// 	}
-	
-	
-// 	else
-// 	{
-		
-		
-// 		// 		unknown error occurred
-// 		$response['error'] = true;
-		
-		
-// 		$response['message'] = "An error occurred. Please try again";
-		
-		
-// 	}
-	
-	
-	
-// 	echoRespnse(200, $response);
-	
-	
-	
-// }
-
-// );
+);
 
 
 
+
+$app->post('/job_post','authenticate',function() use ($app)
+{
+    	$response = array();
+	
+	
+	$db = new loginHandler();
+
+
+	$request_params = json_decode($app->request()->getBody(), true);
+	
+	
+	// $employer_name = $request_params['employer_name'];
+	
+	
+	// $telephone = $request_params['telephone'];
+    
+    global $user_id;
+
+	$employerId=$db->getEmployerId($user_id);
+	
+	
+
+    	$res= $db->job_post($employerId,$request_params);
+	
+	
+	
+	if ($res)
+	{
+		
+		
+		$response["error"] = false;
+		
+		
+		
+	
+		
+		$response['message'] = "New Job Post Created successfully";
+		
+		
+	}
+	
+	
+	else
+	{
+		
+		
+		// 		unknown error occurred
+		$response['error'] = true;
+		
+		
+		$response['message'] = "An error occurred. Please try again";
+		
+		
+	}
+	
+	
+	
+	echoRespnse(200, $response);
+	
+});
+
+
+$app->put('/job_post_update/:jId','authenticate',function($jId) use ($app)
+{
+    	$response = array();
+	
+	
+	$db = new loginHandler();
+
+
+	$request_params = json_decode($app->request()->getBody(), true);
+	
+	
+
+    
+    global $user_id;
+
+	
+	
+
+    	$res= $db->job_post_update($jId,$request_params);
+	
+	
+	
+	if ($res)
+	{
+		
+		
+		$response["error"] = false;
+		
+		
+		
+	
+		
+		$response['message'] = "New Job Post Updated successfully";
+		
+		
+	}
+	
+	
+	else
+	{
+		
+		
+		// 		unknown error occurred
+		$response['error'] = true;
+		
+		
+		$response['message'] = "An error occurred. Please try again";
+		
+		
+	}
+	
+	
+	
+	echoRespnse(200, $response);
+	
+});
+
+//job_seeks
+
+$app->get("/getJobSeek(/:jSId)",'authenticate',function($jSId=null) use ($app)
+{
+		echo $jSId;
+		$response=array();
+		$db=new loginHandler();
+		if($jSId)
+		{
+				$jobSeekers=$db->getAllJobSeekers($jSId);
+			if ($jobSeekers)
+	{
+		
+		
+		$response["error"] = false;
+		
+		
+	
+		
+		$response["jobSeeker"]=$jobSeekers[0];
+		
+		
+		
+		
+		}
+		
+	
+	
+	
+	else
+	{
+		
+		
+		// 		unknown error occurred
+		$response['error'] = true;
+		
+		
+		$response['message'] = "An error occurred. Please try again";
+		
+		
+	}
+
+		}
+		else
+		{
+			$jobSeekers=$db->getAllJobSeekers(null);
+			if ($jobSeekers)
+	{
+		
+		
+		$response["error"] = false;
+		
+		
+	
+		
+		$response["jobSeekers"]=array();
+		
+		
+		// 		$response["indStdDets"]=array();
+	//	print_r($getAllJobPost);
+		foreach ($jobSeekers as $key => $value) {
+				array_push($response["jobSeekers"], $value);
+		}
+		
+		
+		}
+		
+	
+	
+	
+	else
+	{
+		
+		
+		// 		unknown error occurred
+		$response['error'] = true;
+		
+		
+		$response['message'] = "An error occurred. Please try again";
+		
+		
+	}
+
+		}
+
+		echoRespnse(200,$response);
+});
+
+$app->post('/job_seeker_post',function() use ($app)
+{
+    	$response = array();
+	
+	
+	$db = new loginHandler();
+
+
+	$request_params = json_decode($app->request()->getBody(), true);
+	
+	
+  
+	
+	
+
+    	$res= $db->job_seeker_post($request_params);
+	
+	
+	
+	if ($res)
+	{
+		
+		
+		$response["error"] = false;
+		
+		
+		
+	
+		
+		$response['message'] = "New Job Seeker Post Created successfully";
+		
+		
+	}
+	
+	
+	else
+	{
+		
+		
+		// 		unknown error occurred
+		$response['error'] = true;
+		
+		
+		$response['message'] = "An error occurred. Please try again";
+		
+		
+	}
+	
+	
+	
+	echoRespnse(200, $response);
+	
+});
+
+
+$app->put('/job_seeker_post_update/:jSId',function($jSId) use ($app)
+{
+    	$response = array();
+	
+	
+	$db = new loginHandler();
+
+
+	$request_params = json_decode($app->request()->getBody(), true);
+	
+	
+  
+	
+	
+
+    	$res= $db->job_seeker_post_update($jSId,$request_params);
+	
+	
+	
+	if ($res)
+	{
+		
+		
+		$response["error"] = false;
+		
+		
+		
+	
+		
+		$response['message'] = "New Job Seeker Post Updated successfully";
+		
+		
+	}
+	
+	
+	else
+	{
+		
+		
+		// 		unknown error occurred
+		$response['error'] = true;
+		
+		
+		$response['message'] = "An error occurred. Please try again";
+		
+		
+	}
+	
+	
+	
+	echoRespnse(200, $response);
+	
+});
+
+//internal helper functions
 
 function verifyRequiredParams($required_fields)
 {
