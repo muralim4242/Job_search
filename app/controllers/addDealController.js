@@ -1,5 +1,5 @@
 "use strict";
-angular.module("app").controller("addDeal", ["$scope", "$log", "dealResource", "$timeout", "$location", "title", "$state", "$rootScope","notifier", function($scope, $log, dealResource, $timeout, $location, title, $state, $rootScope,notifier) {
+angular.module("app").controller("addDeal", ["$scope", "$log", "apiResource", "$timeout", "$location", "title", "$state", "$rootScope","notifier", function($scope, $log, apiResource, $timeout, $location, title, $state, $rootScope,notifier) {
 
   $scope.isLoading = true;
   $scope.title = title;
@@ -212,7 +212,7 @@ angular.module("app").controller("addDeal", ["$scope", "$log", "dealResource", "
 
   $scope.getLocation = function(restaurant) {
     $scope.isLoading = true;
-    $scope.myPromise = dealResource.getLocation({
+    $scope.myPromise = apiResource.getLocation({
       postalCode: restaurant.postalCode
     }, function(data) {
 //      $scope.deal.geoLocation.push(data);
@@ -248,7 +248,7 @@ angular.module("app").controller("addDeal", ["$scope", "$log", "dealResource", "
         $scope.deal.fileExtention = $scope.myImage.split("/", 2)[1].split(";", 1)[0];
         $scope.deal.file = $scope.cropped.myCroppedImage;
         $scope.deal.fileName = $scope.deal.dealTitle.replace(/[^A-Z0-9]+/ig, "_");
-        $scope.myPromise = dealResource.save($scope.deal, function(response) {
+        $scope.myPromise = apiResource.save($scope.deal, function(response) {
 
           $rootScope.$broadcast('notification', {
             notification: "Congrats! Your deal has been posted!"

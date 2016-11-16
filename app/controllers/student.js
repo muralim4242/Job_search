@@ -1,5 +1,5 @@
 "use strict";
-angular.module("app").controller("student", ["$scope", "$log", "dealResource", "$timeout", "$location", "title", "$state", "$rootScope", "notifier", function($scope, $log, dealResource, $timeout, $location, title, $state, $rootScope, notifier) {
+angular.module("app").controller("student", ["$scope", "$log", "apiResource", "$timeout", "$location", "title", "$state", "$rootScope", "notifier", function($scope, $log, apiResource, $timeout, $location, title, $state, $rootScope, notifier) {
 
     $scope.isLoading = true;
     $scope.title = title;

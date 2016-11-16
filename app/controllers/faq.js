@@ -1,5 +1,5 @@
 "use strict";
-angular.module("app").controller("faq", ["$scope", "$log", "dealResource", "$timeout", "$location", "title", "$state", "$rootScope",  function($scope, $log, dealResource, $timeout, $location, title, $state, $rootScope) {
+angular.module("app").controller("faq", ["$scope", "$log", "apiResource", "$timeout", "$location", "title", "$state", "$rootScope",  function($scope, $log, apiResource, $timeout, $location, title, $state, $rootScope) {
 
 
   $scope.title = title;

@@ -1,5 +1,5 @@
 "use strict";
-angular.module("app").controller("dashboard", ["$scope",  "$log", "dealResource","title", "$timeout", "$location","$stateParams","$state","$rootScope","currentUser","notifier",function ($scope, $log,dealResource, title, $timeout,$location,$stateParams,$state,$rootScope,currentUser,notifier)
+angular.module("app").controller("dashboard", ["$scope",  "$log", "apiResource","title", "$timeout", "$location","$stateParams","$state","$rootScope","currentUser","notifier",function ($scope, $log,apiResource, title, $timeout,$location,$stateParams,$state,$rootScope,currentUser,notifier)
 {
 	initialLoad();
 	$scope.isLoading = true;
@@ -19,7 +19,7 @@ angular.module("app").controller("dashboard", ["$scope",  "$log", "dealResource"
 		else {
 			$scope.logoUndefined=false;
 		}
-		$scope.myPromise=dealResource.get({isActive:true},function(response)
+		$scope.myPromise=apiResource.get({isActive:true},function(response)
 		{
 			var key = [];
 			$scope.rowCollection=[];

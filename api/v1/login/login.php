@@ -888,6 +888,65 @@ $app->put('/job_seeker_post_update/:jSId',function($jSId) use ($app)
 	
 });
 
+
+//logout
+$app->put('/logout',function() use ($app)
+{
+    	$response = array();
+	
+	
+	$db = new loginHandler();
+
+
+	
+	global $user_id;
+	
+	
+  
+	
+	
+
+    	$res= $db->logout($user_id);
+	
+	
+	
+	if ($res)
+	{
+		
+		
+		$response["error"] = false;
+		
+		
+		
+	
+		
+		$response['message'] = "Successfully logged out";
+		
+		
+	}
+	
+	
+	else
+	{
+		
+		
+		// 		unknown error occurred
+		$response['error'] = true;
+		
+		
+		$response['message'] = "An error occurred. Please try again";
+		
+		
+	}
+	
+	
+	
+	echoRespnse(200, $response);
+	
+});
+
+
+
 //internal helper functions
 
 function verifyRequiredParams($required_fields)

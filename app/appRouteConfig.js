@@ -49,8 +49,8 @@ angular.module('app').config(['$logProvider', '$stateProvider', '$urlRouterProvi
                     return "Active Deal Management";
                 },
 
-                deals: function($stateParams, dealResource) {
-                    return dealResource.get({
+                deals: function($stateParams, apiResource) {
+                    return apiResource.get({
                         isActive: true,
                         dealTitle: $stateParams.dealTitle
                     }).$promise;
@@ -66,8 +66,8 @@ angular.module('app').config(['$logProvider', '$stateProvider', '$urlRouterProvi
                 title: function() {
                     return "Inactive Deal Management";
                 },
-                deals: function($stateParams, dealResource) {
-                    return dealResource.get({
+                deals: function($stateParams, apiResource) {
+                    return apiResource.get({
                         isActive: false,
                         dealTitle: $stateParams.dealTitle
                     }).$promise;
@@ -83,8 +83,8 @@ angular.module('app').config(['$logProvider', '$stateProvider', '$urlRouterProvi
                 title: function() {
                     return "Profile Management";
                 },
-                profile: function(dealResource) {
-                    return dealResource.getUserProfile().$promise;
+                profile: function(apiResource) {
+                    return apiResource.getUserProfile().$promise;
                 }
 
             }

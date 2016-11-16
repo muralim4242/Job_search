@@ -1,5 +1,5 @@
 "use strict";
-angular.module("app").controller("profile", ["$scope", "$log", "dealResource", "$timeout", "$location", "title", "$state", "$rootScope", "profile", "notifier", function($scope, $log, dealResource, $timeout, $location, title, $state, $rootScope, profile, notifier) {
+angular.module("app").controller("profile", ["$scope", "$log", "apiResource", "$timeout", "$location", "title", "$state", "$rootScope", "profile", "notifier", function($scope, $log, apiResource, $timeout, $location, title, $state, $rootScope, profile, notifier) {
 
   $scope.isLoading = true;
   $scope.userData = profile.user;
@@ -49,7 +49,7 @@ angular.module("app").controller("profile", ["$scope", "$log", "dealResource", "
       }
 
       //    $scope.userData.fileExtention=$scope.myImage.split("/",2)[1].split(";",1)[0];
-      $scope.myPromise = dealResource.updateUserProfile({}, $scope.userData, function(data) {
+      $scope.myPromise = apiResource.updateUserProfile({}, $scope.userData, function(data) {
 
         $rootScope.$broadcast('notification', {
           notification: data.message

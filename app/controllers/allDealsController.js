@@ -1,5 +1,5 @@
 "use strict";
-angular.module("app").controller("allDeals", ["$scope",  "$log", "dealResource","deals","title", "$timeout", "$location","$stateParams","$state","$rootScope",function ($scope, $log,dealResource, deals,title, $timeout,$location,$stateParams,$state,$rootScope)
+angular.module("app").controller("allDeals", ["$scope",  "$log", "apiResource","deals","title", "$timeout", "$location","$stateParams","$state","$rootScope",function ($scope, $log,apiResource, deals,title, $timeout,$location,$stateParams,$state,$rootScope)
 {
 //	$scope.isLoading = true;
  $scope.rowCollection = deals.deals;
@@ -21,7 +21,7 @@ angular.module("app").controller("allDeals", ["$scope",  "$log", "dealResource",
 	$scope.expireDeal=function()
 	{
 		$scope.isLoading = true;
-		$scope.myPromise=dealResource.update({isActive:true,dealTitle:$stateParams.dealTitle},{},function(response)
+		$scope.myPromise=apiResource.update({isActive:true,dealTitle:$stateParams.dealTitle},{},function(response)
 			{
         $rootScope.$broadcast('notification', {
           notification: response.message
@@ -35,7 +35,7 @@ angular.module("app").controller("allDeals", ["$scope",  "$log", "dealResource",
 	$scope.reActiveDeal=function()
 	{
 		$scope.isLoading = true;
-		$scope.myPromise=dealResource.update({isActive:false,dealTitle:$stateParams.dealTitle},{},function(response)
+		$scope.myPromise=apiResource.update({isActive:false,dealTitle:$stateParams.dealTitle},{},function(response)
 			{
 
 
@@ -51,12 +51,12 @@ angular.module("app").controller("allDeals", ["$scope",  "$log", "dealResource",
 	$scope.delete_deal=function(row)
 	{
 		$scope.isLoading = true;
-		$scope.myPromise=dealResource.delete({isActive:true,dealTitle:$stateParams.dealTitle,id:row.objectId},function(response)
+		$scope.myPromise=apiResource.delete({isActive:true,dealTitle:$stateParams.dealTitle,id:row.objectId},function(response)
 			{
         $rootScope.$broadcast('notification', {
           notification: response.message
         });
-				dealResource.get({isActive:true,dealTitle:$stateParams.dealTitle},function(response)
+				apiResource.get({isActive:true,dealTitle:$stateParams.dealTitle},function(response)
 					{
 						$scope.rowCollection=response.deals;
 							$scope.isLoading = false;

@@ -888,51 +888,12 @@ class loginHandler
 	
 	
 	
-	
+	public function logout($user_id)
+	{
+		return $this->conn->update("users",["API_KEY"=>null],["ID"=>$user_id]);
+	}
 
 	
-	
-	
-
-	
-	
-	
-	
-	
-	
-	/**     * Fetching user by email     * @param String $email User email id     */
-	
-	
-	
-	// public function feedback($name,$email,$feedback)
-	// {
-		
-		
-		
-	// 	$result1=$this->conn->prepare("INSERT INTO `feedback`(`Name`, `Email`, `Message`) VALUES (?,?,?)");
-		
-		
-		
-	// 	$result1->bind_param('sss',$name,$email,$feedback);
-		
-		
-		
-	// 	$result1->execute();
-		
-		
-		
-	// 	$this->send_mail1($name,$email,$feedback);
-		
-		
-		
-	// 	return true;
-		
-		
-		
-	// }
-	
-	
-
 	/**     * Generating random Unique MD5 String for user Api key     */
 	
 	

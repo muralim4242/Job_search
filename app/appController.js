@@ -1,9 +1,9 @@
 ﻿
 "use strict";
 
-angular.module("app").controller("appController", ["$scope", "userAccount", "dealResource", "currentUser", "$state", "$stateParams", "$rootScope", "notifier", MainCtrl]);
+angular.module("app").controller("appController", ["$scope", "userAccount", "apiResource", "currentUser", "$state", "$stateParams", "$rootScope", "notifier", MainCtrl]);
 
-function MainCtrl($scope, userAccount, dealResource, currentUser, $state, $stateParams, $rootScope, notifier) {
+function MainCtrl($scope, userAccount, apiResource, currentUser, $state, $stateParams, $rootScope, notifier) {
     $scope.isLoggedIn = function() {
         return currentUser.getProfile().isLoggedIn;
     };
@@ -72,7 +72,7 @@ function MainCtrl($scope, userAccount, dealResource, currentUser, $state, $state
     function initialLoad() {
         if ($scope.isLoggedIn()) {
 
-            dealResource.get({
+            apiResource.get({
                 isActive: true
             }, function(response) {
                 $scope.activeDeals = [];
@@ -95,7 +95,7 @@ function MainCtrl($scope, userAccount, dealResource, currentUser, $state, $state
                 $scope.activeDeals = [];
             });
 
-            dealResource.get({
+            apiResource.get({
                 isActive: false
             }, function(response) {
                 $scope.inactiveDeals = [];

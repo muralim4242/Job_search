@@ -7,28 +7,17 @@ factory("userAccount", ["$resource", "appSetting", "currentUser", userAccount]);
 
 function userAccount($resource, $appSetting, currentUser) {
   return {
-    registration: $resource($appSetting.serverPath + "Api/v1/login/register", null, {
+    registration: $resource($appSetting.serverPath + "login/register", null, {
       'registerUser': {
         method: 'POST'
       }
     }),
-    login: $resource($appSetting.serverPath + "Api/v1/login/login", null, {
+    login: $resource($appSetting.serverPath + "login/login", null, {
       'loginUser': {
         method: 'POST'
-          /* ,
-                            headers: { 'content-type': 'application/x-www-form-urlencoded' },
-                            transformRequest:function(data,headersGetter)
-                            {
-                                var str = [];
-                                for(var d in data)
-                                {
-                                    str.push(encodeURIComponent(d) + "=" + encodeURIComponent(data[d]));
-                                }
-                                return str.join("&");
-                            } */
       }
     }),
-    logout: $resource($appSetting.serverPath + "Api/v1/login/logout", null, {
+    logout: $resource($appSetting.serverPath + "login/logout", null, {
       'logout': {
         method: 'GET',
         headers: {
@@ -36,7 +25,7 @@ function userAccount($resource, $appSetting, currentUser) {
         }
       }
     }),
-    changePassword: $resource($appSetting.serverPath + "Api/v1/login/changePassword", null, {
+    changePassword: $resource($appSetting.serverPath + "login/changePassword", null, {
       'changePassword': {
         method: 'GET',
         headers: {
@@ -44,12 +33,12 @@ function userAccount($resource, $appSetting, currentUser) {
         }
       }
     }),
-    changePasswordFromLogin: $resource($appSetting.serverPath + "Api/v1/login/changePasswordFromLogin/:email", null, {
+    changePasswordFromLogin: $resource($appSetting.serverPath + "login/changePasswordFromLogin/:email", null, {
       'changePassword': {
         method: 'GET'
       }
     }),
-    feedback: $resource($appSetting.serverPath + "Api/v1/login/feedback/", null, {
+    feedback: $resource($appSetting.serverPath + "login/feedback/", null, {
       'feedback': {
         method: 'POST',
         headers: {
