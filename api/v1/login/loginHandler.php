@@ -60,7 +60,7 @@ class loginHandler
 	
 	public function createUser($user)
 	{
-		
+		//print_r($user);	
 		require_once '../../../api/includes/passHash.php';
 		
 		$response = array();
@@ -74,11 +74,11 @@ class loginHandler
 			
 			// 			Generating API key
 			$api_key = $this->generateApiKey();
-			
+			$view=$user["VIEW"];
 			// 			insert query
 			if($user["VIEW"]=="Employer")
 			{
-				echo "hai";
+		//		echo "hai";
 				$user["API_KEY"]=$api_key;
 				$user["ROLE_ID"]=2;
 				$user["PASSWORD_HASH"]=$password_hash;
@@ -92,7 +92,7 @@ class loginHandler
 			
 			else
 			{	
-				echo "hai2";
+	//			echo "hai2";
 				$user["API_KEY"]=$api_key;
 				$user["ROLE_ID"]=1;
 				$user["PASSWORD_HASH"]=$password_hash;
@@ -106,16 +106,17 @@ class loginHandler
 			// 			Check for successful insertion
 			if($isQueryExecuted)
 			{
-				echo "hai3";
+			//	echo "hai3";
 				$response['status']=USER_CREATED_SUCCESSFULLY;
 				
 				$response['apiKey'] = $api_key;
+				$response['view']=$view;
 				
 			}
 			
 			else {
 
-					echo "hai4";
+					//echo "hai4";
 				
 				$response['status']=USER_CREATE_FAILED;
 				
@@ -138,79 +139,6 @@ class loginHandler
 	
 	
 	
-	
-	public function editProfile($user_id,$name,$email,$sexSelected,$dob,$mobileno,$address,$city,$pincode,$district,$state)
-	{
-		
-		
-		
-		//$		userName=$this->getNameById($user_id);
-		
-		
-		
-		echo "\n".$name.$email.$sexSelected.$dob.$mobileno.$address.$city.$pincode.$district.$state;
-		
-		
-		
-		
-		$stmt = $this->conn->prepare("UPDATE `tms_users` SET `name`=?,`email`=?,`modified_by`=?,`modified_at`=now() WHERE id=?");
-		
-		
-		
-		$stmt->bind_param("ssii",$name,$email,$user_id,$user_id);
-		
-		
-		
-		$stmt->execute();
-		
-		
-		
-		$num_affected_rows = $stmt->affected_rows;
-		
-		
-		
-		echo $num_affected_rows;
-		
-		
-		
-		if($num_affected_rows)
-		{
-			
-			
-			
-			$stmt = $this->conn->prepare("UPDATE `tms_user_personal_info` SET `gender`=?,`mobileno`=?,`address`=?,`city`=?,`district`=?,`pincode`=?,`state`=?,`dob`=?,`modifiedby`=?,`modifieddate`=now() WHERE userid=?");
-			
-			
-			
-			$stmt->bind_param("ssssssssii",$sexSelected,$mobileno,$address,$city,$district,$pincode,$state,$dob,$user_id,$user_id);
-			
-			
-			
-			$stmt->execute();
-			
-			
-			
-			$num_affected_rows = $stmt->affected_rows;
-			
-			
-			
-			echo "\n".$num_affected_rows;
-			
-			
-			
-		}
-		
-		
-		
-		$stmt->close();
-		
-		
-		
-		return $num_affected_rows > 0;
-		
-		
-		
-	}
 	
 	
 	
@@ -465,6 +393,46 @@ class loginHandler
 		
 	}
 
+	public function getAllJobPostRelToEmp($employerId)
+	{
+		
+		
+		
+		
+		
+		$result1=$this->conn->select("employers_post","*",["E_ID"=>$employerId]);
+		
+		
+		
+		if($result1)
+		{
+			
+			
+		
+			
+			return $result1;
+			
+			
+			
+		}
+		
+		
+		
+		else
+		{
+			
+			
+			
+			return NULL;
+			
+			
+			
+		}
+		
+		
+		
+	}
+
 
 	public function getIndJobPost($postId)
 	{
@@ -564,57 +532,6 @@ class loginHandler
 	
 	
 	
-	// public function getIndConDet($stdId,$qId)
-	// {
-		
-		
-		
-	// 	$query1="SELECT tms_c.id,tms_c.con_q_id, tms_c.assigned_date, tms_c.isCompleted, tms_c.completed_date, tms_c.assignmentTypeId, tms_c.comment, tms_u1.name as assigned_by, tms_c.created_at FROM tms_counsel as tms_c,tms_users as tms_u1 WHERE tms_c.created_by=tms_u1.id and tms_c.std_id=".$stdId." and tms_c.con_q_id= ".$qId;
-		
-		
-		
-	// 	$result1=mysqli_query($this->conn,$query1) or die("cud not run first query2".mysql_error());
-		
-		
-		
-	// 	if($result1)
-	// 	{
-			
-			
-			
-	// 		// 			$user=mysqli_fetch_assoc($result1);
-			
-			
-			
-	// 		// 			mysqli_close($this->conn);
-			
-			
-			
-	// 		return $result1;
-			
-			
-			
-	// 	}
-		
-		
-		
-	// 	else
-	// 	{
-			
-			
-			
-	// 		return NULL;
-			
-			
-			
-	// 	}
-		
-		
-		
-	// }
-	
-	
-	
 	
 	
 	
@@ -645,7 +562,7 @@ class loginHandler
 	{
 		
 		
-		$data=$this->conn->select("users","API_KEY", [
+		$data=$this->conn->select("users","API_KEY","ROLE_ID", [
 		"EMAIL" => $email
 		]);
 		
@@ -657,7 +574,14 @@ class loginHandler
 		{
 			
 			
-			
+			if($data[1]==1)
+		{
+			$data[2]="Admin";
+		}
+		else
+		{
+			$data[2]="Employer";
+		}
 			
 			return $data;
 			
@@ -887,11 +811,22 @@ class loginHandler
 	}
 	
 	
+	//dashboard
+	public function total_job_posts()
+	{
+		return $this->conn->count("employers_post");
+	}
+
+	public function total_job_seekers()
+	{
+		return $this->conn->count("job_seekers");
+	}
 	
 	public function logout($user_id)
 	{
 		return $this->conn->update("users",["API_KEY"=>null],["ID"=>$user_id]);
 	}
+
 
 	
 	/**     * Generating random Unique MD5 String for user Api key     */

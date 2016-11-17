@@ -1,16 +1,16 @@
-﻿
-"use strict";
+﻿"use strict";
 
 angular.module("app").controller("appController", ["$scope", "userAccount", "apiResource", "currentUser", "$state", "$stateParams", "$rootScope", "notifier", MainCtrl]);
 
 function MainCtrl($scope, userAccount, apiResource, currentUser, $state, $stateParams, $rootScope, notifier) {
-    $scope.isLoggedIn = function() {
+    $scope.isLoggedIn = function () {
         return currentUser.getProfile().isLoggedIn;
     };
 
+
     $scope.menuSateChangeSpinner = false;
 
-    $scope.$on('menuSateChangeSpinner', function(evt, data) {
+    $scope.$on('menuSateChangeSpinner', function (evt, data) {
         if (data.stateStatus) {
             $scope.menuSateChangeSpinner = true
         } else {
@@ -20,157 +20,120 @@ function MainCtrl($scope, userAccount, apiResource, currentUser, $state, $stateP
     $scope.notificationText = "";
     $scope.email = "";
     $scope.userData = {
-        contactName: '',
-        restaurantName: '',
-        isChain: 'false',
-        email: '',
-        telephone: '',
-        username: '',
-        password: '',
-        confirmPassword: '',
-        isAgreeWithTerms: 'false',
-        userType: 'restauranteur'
+        EMAIL: '',
+        PASSWORD: '',
+        NAME: '',
+        TELEPHONE: '',
+        confirmPassword: ''
     };
-    //	$scope.deals=[{"dealTitle":"asdsd"},{"dealTitle":"asdsdas"},{"dealTitle":"asdsgfdgd"}];
     $scope.message = '';
-    initialLoad();
 
-    $scope.clearMessage = function() {
+    $scope.clearMessage = function ($event) {
         $scope.message = '';
-    }
-
-    $scope.reset = function(valid) {
-        var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        if (_.size($scope.email) > 0 && re.test($scope.email)) {
-            $scope.myPromise = userAccount.changePasswordFromLogin.changePassword({
-                email: $scope.email
-            }, function(response) {
-                notifier.success(response.message);
-                // $scope.notificationText = response.message;
-                $('#myModal').modal('hide');
-
-            }, function(response) {
-                notifier.error("Oops! We're having a problem, please try again");
-                $('#myModal').modal('hide');
-
-            })
+        if ($event.target.id == "register-form-link") {
+            $("#register-form").delay(100).fadeIn(100);
+            $("#login-form").fadeOut(100);
+            $('#login-form-link').removeClass('active');
+            $("#register-form-link").addClass('active');
+            $event.preventDefault();
         } else {
-            notifier.error("Something doesn't seem right with your email address");
+            $("#login-form").delay(100).fadeIn(100);
+            $("#register-form").fadeOut(100);
+            $('#register-form-link').removeClass('active');
+            $("#login-form-link").addClass('active');
+            $event.preventDefault();
         }
     }
 
-    $scope.$on('ps-menu-item-update', function(evt, data) {
-        initialLoad();
-    });
 
-    $scope.$on('notification', function(evt, data) {
+
+    $scope.$on('notification', function (evt, data) {
         $scope.notificationText = data.notification;
         $('#notificationModal').modal('show');
 
     });
 
-    function initialLoad() {
-        if ($scope.isLoggedIn()) {
 
-            apiResource.get({
-                isActive: true
-            }, function(response) {
-                $scope.activeDeals = [];
-                var key = [];
-                for (var i = 0; i < response.deals.length; i++) {
-                    if (angular.isUndefined(key[response.deals[i]["dealTitle"]])) {
-                        key[response.deals[i]["dealTitle"]] = true;
-                        $scope.activeDeals.push(response.deals[i]);
+
+
+
+
+    $scope.registerUser = function (form) {
+        $scope.submitted = true;
+        if (form) {
+            if ($scope.userData.confirmPassword === $scope.userData.PASSWORD) {
+                $scope.myPromise = userAccount.registration.registerUser({
+                        EMAIL: $scope.userData.EMAIL,
+                        PASSWORD: $scope.userData.PASSWORD,
+                        VIEW: "Employer"
+                    },
+                    function (data) {
+                        if (!data.error) {
+                            if (currentUser.setProfile(data.view, data.apiKey)) {
+                                $scope.myPromise = apiResource.addEmployer({
+                                    telephone: $scope.userData.TELEPHONE,
+                                    employer_name: $scope.userData.NAME
+                                }, function (response) {
+                                    $scope.login(true);
+                                }, function (error) {
+                                    $scope.notificationText = error.message;
+                                    $('#notificationModal').modal('show');
+
+                                });
+                            }
+                        }
+                        $scope.submitted = false;
+                        $scope.message = data.message;
+                    },
+                    function (response) {
+                        //   $scope.isLoggedIn = false;
+                        $scope.message = response.statusText + "\r\n";
+                        if (response.message)
+                            $scope.message += response.message;
+
+                    })
+            } else {
+                $scope.message = "Your passwords don't seem to match. Just double check those";
+            }
+        }
+
+    }
+
+    $scope.login = function (form) {
+
+        $scope.submitted = true;
+        if (form) {
+            $scope.userData.username = $scope.userData.EMAIL;
+            $scope.myPromise = userAccount.login.loginUser({email:$scope.userData.EMAIL,password:$scope.userData.PASSWORD},
+                function (data) {
+                    if (!data.error) {
+                        $scope.message = "";
+
+                         currentUser.setProfile(data.view, data.apiKey);
+
+                        window.location.reload();
+
                     }
-                }
-                //$scope.activeDeals=response.deals;
+                    $scope.message = data.message;
 
+                },
+                function (response) {
+                    $scope.userData.PASSWORD = "";
 
-                /* for(var i=0;i<$scope.activeDeals.length;i++)
-                {
-                	sum+=$scope.activeDeals[i].claims;
-                }
-                $scope.totalCliams=sum; */
-            }, function(response) {
-                $scope.activeDeals = [];
-            });
-
-            apiResource.get({
-                isActive: false
-            }, function(response) {
-                $scope.inactiveDeals = [];
-                var key = [];
-                for (var i = 0; i < response.deals.length; i++) {
-                    if (angular.isUndefined(key[response.deals[i]["dealTitle"]])) {
-                        key[response.deals[i]["dealTitle"]] = true;
-                        $scope.inactiveDeals.push(response.deals[i]);
+                    $scope.message = response.statusText + "\r\n";
+                    if (response.message) {
+                        $scope.message += response.message;
                     }
-                }
-            }, function(response) {
-                $scope.inactiveDeals = [];
-            });
+                    if (response.data.error) {
+                        $scope.message += response.data.error;
+                    }
+                })
 
         }
 
 
-    }
-
-
-
-    $scope.login = function(form) {
-        //     $scope.userData.grant_type = "password";
-        //     $scope.userData.username = $scope.userData.email;
-        currentUser.setProfile("muralili","123");
-        $scope.submitted = true;
-        // if (form) {
-        //     $scope.userData.username = $scope.userData.email;
-        //     $scope.myPromise = userAccount.login.loginUser($scope.userData,
-        //             function(data) {
-        //                 if (!data.error) {
-        //                     //    $scope.isLoggedIn = true;
-        //                     $scope.message = "";
-        //                     //   $scope.userData.password = "";
-        //                     // $scope.token = data.access_token;
-        //                     $scope.username = data.username;
-        //                     //		$scope.activeDeals=data.activeDeals;
-        //                     //		$scope.inactiveDeals=data.inactiveDeals;
-        //                     currentUser.setProfile(data.username, data.logo, data.apiKey);
-        //
-        //                     window.location.reload();
-        //                     /* $rootScope.$broadcast('dashboard-update',
-        //                           {
-        //
-        //                           }); */
-        //                     // $state.go("dashboard");
-        //                 }
-        //                 $scope.message = data.message;
-        //                 /* initialLoad();
-        //                 $scope.submitted=false;
-        //                 $scope.message=data.message; */
-        //                 //	 $scope.userData.email="";
-        //                 //   $scope.userData.password = "";
-        //                 //	loadMenu();
-        //
-        //                 //	$state.reload();
-        //             },
-        //             function(response) {
-        //                 $scope.userData.password = "";
-        //                 //  $scope.isLoggedIn = false;
-        //                 $scope.message = response.statusText + "\r\n";
-        //                 if (response.data.exceptionMessage) {
-        //                     $scope.message += response.data.exceptionMessage;
-        //                 }
-        //                 if (response.data.error) {
-        //                     $scope.message += response.data.error;
-        //                 }
-        //             })
-        //         //	$state.go("mypage.dashboard");
-        // }
-
-
 
     }
-
 
 
 

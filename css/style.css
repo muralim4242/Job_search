@@ -25,3 +25,8 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-font-smoothing: antialiased;
 }
+
+.active {
+    color: #029f5b;
+    font-size: 18px;
+}

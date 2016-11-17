@@ -168,6 +168,7 @@ $app->post('/register', function() use ($app)
 		
 		
 		$response['apiKey'] = $res['apiKey'];
+		$response['view']=$res['view'];
 		
 		
 		echoRespnse(201, $response);
@@ -254,9 +255,8 @@ $app->post('/login', function() use ($app)
 				
 				
 				$response["error"] = false;
-				
-				
 				$response['apiKey'] = $user[0];
+				$response['view']=$user[2];
 				
 				
 				// 				$response['created_at'] = $user['created_at'];
@@ -565,9 +565,81 @@ $app->get('/getIndPost/:postId', 'authenticate', function($postId) use ($app)
 	
 	
 	
+});
+
+
+$app->get('/getAllPostRelToEmp', 'authenticate', function() use ($app)
+{
+	
+	
+	
+	$response = array();
+	
+	
+	
+	global $user_id;
+	
+	
+	$db = new loginHandler();
+	$employerId=$db->getEmployerId($user_id);
+	
+	
+	// 	creating new Family Member
+	$getAllJobPost = $db->getAllJobPostRelToEmp($employerId);
+	
+	
+	
+	//p	rint_r $result;
+	
+	
+	if ($getAllJobPost)
+	{
+		
+		
+		$response["error"] = false;
+		
+		
+	
+		
+		$response["jobPosts"]=array();
+		
+		
+		// 		$response["indStdDets"]=array();
+	//	print_r($getAllJobPost);
+		foreach ($getAllJobPost as $key => $value) {
+				array_push($response["jobPosts"], $value);
+		}
+		
+		
+		}
+		
+	
+	
+	
+	else
+	{
+		
+		
+		// 		unknown error occurred
+		$response['error'] = true;
+		
+		
+		$response['message'] = "An error occurred. Please try again";
+		
+		
+	}
+	
+	
+	
+	echoRespnse(200, $response);
+	
+	
+	
 }
 
 );
+
+
 
 
 
@@ -943,6 +1015,17 @@ $app->put('/logout',function() use ($app)
 	
 	echoRespnse(200, $response);
 	
+});
+
+//Dashboard
+$app->get('/dashboard','authenticate',function()
+{
+	$response=array();
+	$db=new loginHandler();
+	$response["totalJobPosts"]=$db->total_job_posts();
+	$response["totalJobSeekers"]=$db->total_job_seekers();
+
+	echoRespnse(200,$response);
 });
 
 
