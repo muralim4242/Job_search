@@ -36,6 +36,18 @@ angular.module('app').config(['$logProvider', '$stateProvider', '$urlRouterProvi
             }
 
         }).
+        state('user.employer-post-add', {
+            url: '/employer-post-add',
+            templateUrl: 'app/view/user-employer-post-add.html',
+            controller: 'employerPostAdd',
+            resolve: {
+                title: function () {
+                    return "Add Post";
+                }
+
+            }
+
+        }).
         state('admin', {
             abstract: true,
             url: '/admin',

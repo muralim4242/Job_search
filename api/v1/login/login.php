@@ -962,7 +962,7 @@ $app->put('/job_seeker_post_update/:jSId',function($jSId) use ($app)
 
 
 //logout
-$app->put('/logout',function() use ($app)
+$app->get('/logout','authenticate',function() use ($app)
 {
     	$response = array();
 	
@@ -976,7 +976,7 @@ $app->put('/logout',function() use ($app)
 	
   
 	
-	
+	//	echo $user_id;
 
     	$res= $db->logout($user_id);
 	

@@ -824,6 +824,7 @@ class loginHandler
 	
 	public function logout($user_id)
 	{
+	//	echo $user_id;
 		return $this->conn->update("users",["API_KEY"=>null],["ID"=>$user_id]);
 	}
 

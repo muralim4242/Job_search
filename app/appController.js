@@ -135,6 +135,18 @@ function MainCtrl($scope, userAccount, apiResource, currentUser, $state, $stateP
 
     }
 
+    $scope.logout=function()
+    {
+        userAccount.logout.logout(function(response)
+        {
+            currentUser.removeProfile();
+        },function(error)
+        {
+
+        })
+        
+    }
+
 
 
 
