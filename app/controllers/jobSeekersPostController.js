@@ -39,15 +39,15 @@ angular.module("app").controller("jobSeekersPost", ["$scope", "$log", "apiResour
     if (valid)
 
     {
-      $scope.postData.START_DATE=new Date($scope.postData.START_DATE);
-       $scope.postData.END_DATE=new Date($scope.postData.END_DATE);
+      // $scope.postData.START_DATE=new Date($scope.postData.START_DATE);
+      //  $scope.postData.END_DATE=new Date($scope.postData.END_DATE);
 
-      $scope.myPromise = apiResource.postJob($scope.postData, function (respose) {
+      $scope.myPromise = apiResource.addJobSeeker($scope.postData, function (respose) {
           $rootScope.$broadcast('notification', {
             notification: respose.message
           });
           $scope.isLoading = false;
-          $state.go("user.employer-posts");
+    //      $state.go("user.employer-posts");
         }, function (error) {
           $rootScope.$broadcast('notification', {
             notification: "Yikes! Something has gone wrong here, please try again"
