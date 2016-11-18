@@ -31,6 +31,20 @@ body {
     color: #029f5b;
     font-size: 18px;
 }
+
+/*******************************************************About Us**********************************/
+.about-us {
+    padding: 0px 0px 25px 0px;
+}
+.about-us-detail {
+     text-align: justify;
+    letter-spacing: 0.2px;
+    line-height: 20px;
+}
+.about-us-image > img  {
+    padding-top: 60px;
+}
+/*******************************************************Upper Footer**********************************/
 .upper-bottom {
     background: #e4e4f9;
     font-size: 14px;
@@ -56,6 +70,7 @@ body {
 .upper-bottom ul li a{
     color: gray;
 }
+/*******************************************************footer*************************************/
 footer {
         padding-top: 30px;
     padding-bottom: 30px;
