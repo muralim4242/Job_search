@@ -7,6 +7,11 @@ function MainCtrl($scope, userAccount, apiResource, currentUser, $state, $stateP
         return currentUser.getProfile().isLoggedIn;
     };
 
+    $scope.view=function()
+    {
+        return currentUser.getProfile().view;
+    }
+
 
     $scope.menuSateChangeSpinner = false;
 

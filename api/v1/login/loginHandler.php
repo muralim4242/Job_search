@@ -562,7 +562,7 @@ class loginHandler
 	{
 		
 		
-		$data=$this->conn->select("users","API_KEY","ROLE_ID", [
+		$data=$this->conn->get("users",["API_KEY","ROLE_ID"], [
 		"EMAIL" => $email
 		]);
 		
@@ -573,14 +573,14 @@ class loginHandler
 		if(count($data)>0)
 		{
 			
-			
-			if($data[1]==1)
+		//	print_r($data);
+			if($data['ROLE_ID']==1)
 		{
-			$data[2]="Admin";
+			$data["view"]="Admin";
 		}
 		else
 		{
-			$data[2]="Employer";
+			$data["view"]="Employer";
 		}
 			
 			return $data;
@@ -658,8 +658,17 @@ class loginHandler
 	}
 
 	public function job_seeker_post($jobSeeker)
-	{
-		return $this->conn->insert("job_seekers",$jobSeeker);
+	{	
+		$file=$jobSeeker["file"];
+		$fileExtention=$jobSeeker["fileExtention"];
+		unset($jobSeeker["file"]);
+		unset($jobSeeker["fileExtention"]);
+		$res=$this->conn->insert("job_seekers",$jobSeeker);
+		$max=$this->conn->max("job_seekers","ID");
+		$data = base64_decode(preg_replace('#^data:application/\w+;base64,#i', '', $file));
+		file_put_contents('../../../app/assets/job-seekers-resume/'.$max.'.'.$fileExtention,$data);
+		$this->conn->update("job_seekers",["RESUME_LOCATION"=>'app/assets/job-seekers-resume/'.$max.'.'.$fileExtention],["ID"=>$max]);
+		return $res;
 	}
 	
 	

@@ -15,7 +15,8 @@ function apiResource($resource, appSetting, currentUser) {
 			  'updateEmployer':{method:'POST',url:appSetting.serverPath +"login/u	pdate_employer", headers: { 'Authorization': currentUser.getProfile().token }},
 			  'getAllOrIndJobSeeker':{method:'GET',url:appSetting.serverPath +"login/getJobSeek/:jSId", headers: { 'Authorization': currentUser.getProfile().token }},
 			  'addJobSeeker':{method:'POST',url:appSetting.serverPath +"login/job_seeker_post", headers: { 'Authorization': currentUser.getProfile().token }},
-			  'updateJobSeeker':{method:'PUT',url:appSetting.serverPath +"login/job_seeker_post_update/2", headers: { 'Authorization': currentUser.getProfile().token }}
+			  'updateJobSeeker':{method:'PUT',url:appSetting.serverPath +"login/job_seeker_post_update/2", headers: { 'Authorization': currentUser.getProfile().token }},
+			  'dashboard':{method:'GET',url:appSetting.serverPath +"login/dashboard", headers: { 'Authorization': currentUser.getProfile().token }},
 
         });
 }

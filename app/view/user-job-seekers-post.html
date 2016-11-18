@@ -94,35 +94,35 @@
                             <p ng-show="jobPostForm.INSTITION.$error.required &&  (jobPostForm.INSTITION.$dirty || submitted)" class="help-block">INSTITION is required.</p>
                         </div>
                     </div>
-
-                     <div class="form-group" ng-class="{ 'has-error' : jobPostForm.RESUME_TITLE.$invalid && (jobPostForm.RESUME_TITLE.$dirty || submitted)}">
+                    <div class="form-group" ng-class="{ 'has-error' : jobPostForm.RESUME_TITLE.$invalid && (jobPostForm.RESUME_TITLE.$dirty || submitted)}">
                         <label class="col-lg-4 col-sm-2 control-label">RESUME_TITLE</label>
                         <div class="col-lg-8">
                             <input type="text" class="form-control" name="RESUME_TITLE" ng-model="postData.RESUME_TITLE" placeholder="RESUME_TITLE" ng-required="true">
                             <p ng-show="jobPostForm.RESUME_TITLE.$error.required &&  (jobPostForm.RESUME_TITLE.$dirty || submitted)" class="help-block">RESUME_TITLE is required.</p>
                         </div>
                     </div>
-                    <!--<div class="form-group">
-            <label class="col-lg-4 col-sm-2 control-label">Logo</label>
-            <div class="col-lg-8" style="position:relative">
-              <button class="btn btn-info pull-right" type="button" ng-click="abc=!abc">Add / Update logo</button>
-              <div ng-show="postData.file">
-                <img width="100px" ng-src="{{postData.file}}"></img>
-              </div>
-              <div ng-show="abc">
-                <div>Select an image file:
-                  <input type="file" custom-on-change="handleFileSelect" />
-                </div>
-                <div class="cropArea">
-                  <img-crop image="myImage" area-type="rectangle" aspect-ratio="1.0" result-image="myCroppedImage" result-image-size='{w: 200,h: 200}'></img-crop>
-                </div>
-                <div>Cropped Image:</div>
-                <div>
-                  <img ng-src="{{myCroppedImage}}" />
-                </div>
-              </div>
-            </div>
-          </div>-->
+                    <div class="form-group">
+                        <label class="col-lg-4 col-sm-2 control-label">Resume</label>
+                        <div class="col-lg-8" style="position:relative">
+                            <input type="file" custom-on-change="handleFileSelect" />
+                            <!--<button class="btn btn-info pull-right" type="button" ng-click="abc=!abc">Add / Update logo</button>
+                            <div ng-show="postData.file">
+                                <img width="100px" ng-src="{{postData.file}}"></img>
+                            </div>-->
+                            <!--<div ng-show="abc">
+                                <div>Select an image file:
+                                    <input type="file" custom-on-change="handleFileSelect" />
+                                </div>
+                                <div class="cropArea">
+                                    <img-crop image="myImage" area-type="rectangle" aspect-ratio="1.0" result-image="myCroppedImage" result-image-size='{w: 200,h: 200}'></img-crop>
+                                </div>
+                                <div>Cropped Image:</div>
+                                <div>
+                                    <img ng-src="{{myCroppedImage}}" />
+                                </div>
+                            </div>-->
+                        </div>
+                    </div>
                     <button type="submit" class="btn btn-success">Add</button>
                     <!--<a ui-sref="user.employer-posts" class="btn btn-warning">Back</a>-->
                 </form>

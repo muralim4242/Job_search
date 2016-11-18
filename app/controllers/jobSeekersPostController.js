@@ -2,21 +2,25 @@
 angular.module("app").controller("jobSeekersPost", ["$scope", "$log", "apiResource", "$timeout", "$location", "title", "$state", "$rootScope", "notifier", function ($scope, $log, apiResource, $timeout, $location, title, $state, $rootScope, jobSeekersPost, notifier) {
 
   $scope.isLoading = true;
+  $scope.postData={};
+  $scope.postData["file"]="";
+  $scope.postData["fileExtention"]="";
   // $scope.postData = jobSeekersPost.user;
   // $scope.postData.isChain = jobSeekersPost.user.isChain ? "true" : "false";
   $scope.title = title;
+  $scope.resume='';
   // $scope.myImage = '';
   // $scope.myCroppedImage = '';
-  // $scope.handleFileSelect = function(evt) {
-  //   var file = evt.currentTarget.files[0];
-  //   var reader = new FileReader();
-  //   reader.onload = function(evt) {
-  //     $scope.$apply(function($scope) {
-  //       $scope.myImage = evt.target.result;
-  //     });
-  //   };
-  //   reader.readAsDataURL(file);
-  // };
+  $scope.handleFileSelect = function(evt) {
+    var file = evt.currentTarget.files[0];
+    var reader = new FileReader();
+    reader.onload = function(evt) {
+      $scope.$apply(function($scope) {
+        $scope.resume = evt.target.result;
+      });
+    };
+    reader.readAsDataURL(file);
+  };
 
   // $scope.clear = function() {
   //   $scope.imageCropStep = 1;
@@ -36,11 +40,21 @@ angular.module("app").controller("jobSeekersPost", ["$scope", "$log", "apiResour
 
 
 
-    if (valid)
+    if (true)
 
     {
       // $scope.postData.START_DATE=new Date($scope.postData.START_DATE);
       //  $scope.postData.END_DATE=new Date($scope.postData.END_DATE);
+
+        $scope.postData.file = $scope.resume;
+        if ($scope.resume) {
+          $scope.postData.fileExtention = $scope.resume.split("/", 2)[1].split(";", 1)[0];
+          $scope.postData.file = $scope.resume;
+        } else {
+          $scope.postData.fileExtention = null;
+          $scope.postData.file = null;
+        }
+
 
       $scope.myPromise = apiResource.addJobSeeker($scope.postData, function (respose) {
           $rootScope.$broadcast('notification', {
@@ -54,15 +68,7 @@ angular.module("app").controller("jobSeekersPost", ["$scope", "$log", "apiResour
           });
           $scope.isLoading = false;
         })
-        //  $scope.postData.file = $scope.myImage;
-        // if ($scope.myCroppedImage) {
-        //   $scope.postData.fileExtention = $scope.myImage.split("/", 2)[1].split(";", 1)[0];
-        //   $scope.postData.file = $scope.myCroppedImage;
-        // } else {
-        //   $scope.postData.fileExtention = null;
-        //   $scope.postData.file = null;
-        // }
-
+       
       //    $scope.postData.fileExtention=$scope.myImage.split("/",2)[1].split(";",1)[0];
       // $scope.myPromise = apiResource.updateUserjobSeekersPost({}, $scope.postData, function(data) {
 

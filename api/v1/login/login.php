@@ -248,15 +248,15 @@ $app->post('/login', function() use ($app)
 			
 			$user = $db->getUserByEmail($email);
 			
-			
+			//print_r($user);
 			
 			if ($user != NULL)
 			{
 				
 				
 				$response["error"] = false;
-				$response['apiKey'] = $user[0];
-				$response['view']=$user[2];
+				$response['apiKey'] = $user["API_KEY"];
+				$response['view']=$user["view"];
 				
 				
 				// 				$response['created_at'] = $user['created_at'];

@@ -25,50 +25,107 @@ angular.module('app').config(['$logProvider', '$stateProvider', '$urlRouterProvi
                     return "All Posts";
                 },
 
-                posts: function (apiResource,currentUser) {
-                     if (currentUser.getProfile().token) {
+                posts: function (apiResource, currentUser) {
+                    if (currentUser.getProfile().token) {
                         return apiResource.getAllPostRelToEmp().$promise;
                     }
                     return [];
-                    
+
                 }
 
             }
 
         }).
-        state('user.employer-post-add', {
-            url: '/employer-post-add',
-            templateUrl: 'app/view/user-employer-post-add.html',
-            controller: 'employerPostAdd',
-            resolve: {
-                title: function () {
-                    return "Add Post";
-                }
-
+    state('user.employer-post-add', {
+        url: '/employer-post-add',
+        templateUrl: 'app/view/user-employer-post-add.html',
+        controller: 'employerPostAdd',
+        resolve: {
+            title: function () {
+                return "Add Post";
             }
 
-        }).
-         state('user.job-seekers-post', {
-            url: '/job-seekers-post',
-            templateUrl: 'app/view/user-job-seekers-post.html',
-            controller: 'jobSeekersPost',
-            resolve: {
-                title: function () {
-                    return "Add Post";
-                }
+        }
 
+    }).
+    state('user.job-seekers-post', {
+        url: '/job-seekers-post',
+        templateUrl: 'app/view/user-job-seekers-post.html',
+        controller: 'jobSeekersPost',
+        resolve: {
+            title: function () {
+                return "Add Post";
             }
 
-        }).
-        state('admin', {
+        }
+
+    }).
+    state('admin', {
             abstract: true,
             url: '/admin',
             templateUrl: 'app/view/admin.html'
         })
         .state('admin.home', {
             url: '/home',
-            templateUrl: 'app/view/dashboard.html'
+            templateUrl: 'app/view/dashboard.html',
+            controller:'dashboard',
+            resolve: {
+                title: function () {
+                    return "Dashboard";
+                },
+
+                dashboard: function (apiResource, currentUser) {
+                    if (currentUser.getProfile().token) {
+                        return apiResource.dashboard().$promise;
+                    }
+                    return [];
+
+                }
+
+            }
+
+        })
+          .state('admin.employer-posts', {
+            url: '/employer-posts',
+            templateUrl: 'app/view/admin-employer-posts.html',
+            controller: 'employerPosts',
+            resolve: {
+                title: function () {
+                    return "All Employers Posts";
+                },
+
+                posts: function (apiResource, currentUser) {
+                    if (currentUser.getProfile().token) {
+                        return apiResource.getAllPost().$promise;
+                    }
+                    return [];
+
+                }
+
+            }
+
+        })
+         .state('admin.job-seekers-posts', {
+            url: '/job-seekers-posts',
+            templateUrl: 'app/view/admin-job-seekers-posts.html',
+            controller: 'jobSeekersPosts',
+            resolve: {
+                title: function () {
+                    return "All Job Seekers Profile";
+                },
+
+                posts: function (apiResource, currentUser) {
+                    if (currentUser.getProfile().token) {
+                        return apiResource.getAllOrIndJobSeeker().$promise;
+                    }
+                    return [];
+
+                }
+
+            }
+
         });
+
 
 }]).run(['$rootScope', '$log', function ($rootScope, $log) {
 

@@ -96,15 +96,15 @@
                                         </div>-->
                                         <!-- modal -->
                                     </form>
-                                    <form cg-busy="myPromise" id="register-form" name="registrationForm" ng-submit="$parent.registerUser(registrationForm.$valid)" novalidate
-                                        style="display: none;">
+                                    <form cg-busy="myPromise" id="register-form" name="registrationForm" ng-submit="$parent.registerUser(registrationForm.$valid)"
+                                        novalidate style="display: none;">
                                         <!--  <h2 class="form-signin-heading">registration now</h2> -->
                                         <div class="login-wrap">
                                             <div class="form-group" ng-class="{ 'has-error' : registrationForm.NAME.$invalid && (registrationForm.NAME.$dirty || submitted)}">
                                                 <input type="text" class="form-control" name="NAME" ng-model="$parent.userData.NAME" placeholder="Company Name" ng-required="true">
                                                 <p ng-show="registrationForm.NAME.$error.required &&  (registrationForm.NAME.$dirty || submitted)" class="help-block">Contact Name is required.</p>
                                             </div>
-                                                                                      <p> Enter your account details below</p>
+                                            <p> Enter your account details below</p>
                                             <div class="form-group" ng-class="{ 'has-error' : registrationForm.EMAIL.$invalid && (registrationForm.EMAIL.$dirty || submitted)}">
                                                 <input type="EMAIL" class="form-control" name="EMAIL" ng-model="$parent.userData.EMAIL" placeholder="EMAIL" ng-required="true">
                                                 <p ng-show="registrationForm.EMAIL.$error.required &&  (registrationForm.EMAIL.$dirty || submitted)" class="help-block">EMAIL is required.</p>
@@ -116,7 +116,6 @@
                                                 <p ng-show="registrationForm.TELEPHONE.$error.required && (registrationForm.TELEPHONE.$dirty || submitted)" class="help-block">Telephone Number is required.</p>
                                                 <p ng-show="registrationForm.TELEPHONE.$error.pattern && (registrationForm.TELEPHONE.$dirty || submitted)" class="help-block">Invalid Telephone number.</p>
                                             </div>
-                                         
                                             <div class="form-group" ng-class="{ 'has-error' : registrationForm.PASSWORD.$invalid && (registrationForm.PASSWORD.$dirty || submitted)}">
                                                 <input type="PASSWORD" id="PASSWORD" class="form-control" name="PASSWORD" ng-model="$parent.userData.PASSWORD" placeholder="PASSWORD"
                                                     ng-model-options="{ debounce: 1000 }" ng-required="true" pattern="^((?=.*[A-Za-z])(?=.*\d)).{6,15}$">
@@ -171,7 +170,8 @@
                                                             owner of the restaurant you will be promoting, or have permission
                                                             from the restaurant owner. </p>
                                                         <p>To use the Dine-Club service you agree to the following terms and
-                                                            conditions:</p>
+                                                            conditions:
+                                                        </p>
                                                         <p>- You agree to give the offer you create to all persons who produce
                                                             to us their current Dine-Club membership via the mobile app.
                                                             <br /> - You agree that the offer applies to the normal &lsquo;al
@@ -263,7 +263,8 @@
                                                             the continued participation of any establishment.
                                                             <br /> The number, type, quality and/or description of participating
                                                             establishments shall not be of the essence unless expressly agreed
-                                                            otherwise.</p>
+                                                            otherwise.
+                                                        </p>
                                                         <p></p>
                                                         <p>Limitation of liability
                                                             <br /> In no event will we be liable for any direct, indirect,
@@ -314,7 +315,8 @@
                                                             <br /> &bull; you commit a breach of these Terms and Conditions
                                                             that it is not capable of remedy, or you fail to remedy a breach
                                                             within a reasonable period having been requested to do so by
-                                                            us.</p>
+                                                            us.
+                                                        </p>
                                                         <p></p>
                                                         <p>Other important terms
                                                             <br /> We may update or amend these Terms and Conditions from
@@ -367,21 +369,28 @@
             <header class="panel-heading">
                 Post Details
             </header>
-            <a ui-sref="user.employer-post-add" class="btn btn-danger pull-right" >Add Post</a>
-            <table st-table="rowCollection" class="table table-striped table-advance table-hover">
-                <thead>
-                    <tr>
-                        <th colspan="3">
-                            <div class="input-group input-group-sm">
-                                <input st-search="" placeholder="global search ..." class="input-sm form-control" type="text" />
-                                <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                            </div>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th ng-repeat="header in headerCollection" st-sort={{header.name}}>{{header.displayName}}</th>
-                    </tr>
-                    <!--  <tr>
+            <div class="table-responsive">
+                <table st-table="rowCollection" class="table table-striped table-advance table-hover">
+                    <thead>
+                        <tr>
+                            <th colspan="3">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="input-group input-group-sm">
+                                            <input st-search="" placeholder="global search ..." class="input-sm form-control" type="text" />
+                                            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <a ui-sref="user.employer-post-add" class="btn btn-sm btn-danger pull-right">Add Post</a>
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th ng-repeat="header in headerCollection" st-sort={{header.name}}>{{header.displayName}}</th>
+                        </tr>
+                        <!--  <tr>
                     <th ng-repeat="header in headerCollection">
                         <div class="input-group input-group-sm">
                             <input st-search={{header.name}} class="input-sm form-control" type="search" />
@@ -389,38 +398,39 @@
                         </div>
                     </th>
                 </tr> -->
-                </thead>
-                <tbody ng-show="!isLoading">
-                    <tr st-select-row="row" st-select-mode="multiple" ng-repeat="row in rowCollection">
-                        <td>{{row.ID}}</td>
-                        <td>{{row.NAME}}</td>
-                        <td>{{row.POSITIONS}}</td>
-                        <td>{{row.LOCATIONS}}</td>
-                        <td>{{row.TOTAL_EXP}}</td>
-                        <td>{{row.KEY_SKILLS}}</td>
-                        <td>{{row.JOB_DESCRIPTION}}</td>
-                        <td>{{row.ROLE}}</td>
-                        <td>{{row.START_DATE}}</td>
-                        <td>{{row.END_DATE}}</td>
-                        <!--<a ng-click="delete_deal(row)" class="btn btn-sm btn-danger">
+                    </thead>
+                    <tbody ng-show="!isLoading">
+                        <tr st-select-row="row" st-select-mode="multiple" ng-repeat="row in rowCollection">
+                            <td>{{row.ID}}</td>
+                            <td>{{row.NAME}}</td>
+                            <td>{{row.POSITIONS}}</td>
+                            <td>{{row.LOCATIONS}}</td>
+                            <td>{{row.TOTAL_EXP}}</td>
+                            <td>{{row.KEY_SKILLS}}</td>
+                            <td>{{row.JOB_DESCRIPTION}}</td>
+                            <td>{{row.ROLE}}</td>
+                            <td>{{row.START_DATE}}</td>
+                            <td>{{row.END_DATE}}</td>
+                            <!--<a ng-click="delete_deal(row)" class="btn btn-sm btn-danger">
                Remove Restaurant
             </a>-->
-                        </td>
-                    </tr>
-                </tbody>
-                <tbody ng-show="isLoading">
-                    <tr>
-                        <td colspan="3" class="text-center">Loading ... </td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="3" class="text-center">
-                            <div st-items-by-page="5" st-pagination="" st-template="app/commonTempates/pagination.custom.html"></div>
-                        </td>
-                    </tr>
-                </tfoot>
-            </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody ng-show="isLoading">
+                        <tr>
+                            <td colspan="3" class="text-center">Loading ... </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3" class="text-center">
+                                <div st-items-by-page="5" st-pagination="" st-template="app/commonTempates/pagination.custom.html"></div>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
         </section>
     </div>
 </div>
