@@ -11,6 +11,7 @@
 .client-images li {
     padding: 0px 15px;
 }
+
 /* Import fonts */
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic);
 
@@ -29,4 +30,45 @@ body {
 .active {
     color: #029f5b;
     font-size: 18px;
+}
+.upper-bottom {
+    background: #e4e4f9;
+    font-size: 14px;
+    padding: 25px 0px;
+}
+.upper-bottom h3 {
+        margin-top: 0;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-size: 22px;
+    color: #000;
+}
+.upper-bottom ul {
+        list-style: none;
+    padding: .8em;
+    margin: 0;
+
+}
+.upper-bottom ul li {
+    display: block;
+    padding: 5px 0;
+}
+.upper-bottom ul li a{
+    color: gray;
+}
+footer {
+        padding-top: 30px;
+    padding-bottom: 30px;
+    color: #fff;
+    background: #323062;
+}
+
+footer ul {
+        list-style: none;
+    padding: 0;
+    margin: 0;
+}
+footer ul li {
+        display: inline-block;
+    margin-left: 15px;
 }
