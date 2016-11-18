@@ -45,14 +45,15 @@
 
 .ps-dashboard-header
 {
-    font-size:19px;
-    border-bottom:1px solid #444;
-    color:#797979;
-    background-color:#FFFFFF;
-    /*margin:-20px;*/
-    margin-bottom:20px;
-    min-height:40px;
-    padding:8px;
-    padding-left:22px;
-    width:auto;
+    font-size: 19px;
+    border-bottom: 1px solid #afafaf;
+    color: #797979;
+    background-color: #FFFFFF;
+    /* margin: -20px; */
+    /* margin-bottom: 20px; */
+    min-height: 40px;
+    padding: 8px;
+    padding-left: 22px;
+    width: auto;
+    border-radius: 10px 10px 0px 0px;
 }
