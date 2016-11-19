@@ -6,7 +6,9 @@ body {
   /* Margin bottom by footer height */
   margin-bottom: 80px;
 }
-
+.padding-top-25 {
+    padding-top: 25px;
+}
 .logo img {
     height: 50px;
 }
@@ -38,6 +40,10 @@ body {
 .active {
     color: #029f5b;
     font-size: 18px;
+}
+/*******************************************************Header**********************************/
+header {
+    background: #fff;
 }
 /*******************************************************Candidate Upload**********************************/
 .user-form-label {
