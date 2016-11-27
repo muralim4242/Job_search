@@ -23,6 +23,20 @@ body {
     padding: 0px 15px;
 }
 
+.custom-form {
+        background: #fdfdfd;
+    margin: 15px 0px;
+    padding-bottom: 35px;
+        border-radius: 10px;
+}
+.custom-form > h3 {
+       border-bottom: 1px solid #f1f2f7;
+    padding-bottom: 30px;
+    padding-top: 15px;
+}
+.custom-form >form >div > label {
+    text-align: right !IMPORTANT;
+}
 /* Import fonts */
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic);
 
@@ -127,3 +141,4 @@ footer ul li {
         display: inline-block;
     margin-left: 15px;
 }
+/****************************************Contact-Us*******************************************/

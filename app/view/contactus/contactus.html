@@ -1,0 +1,112 @@
+<section class="contact-us">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-6 custom-form">
+                <h3><i class="fa fa-envelope-o" aria-hidden="true"></i> Contact Us</h3>
+                <form id="register-form" class="form-horizontal" name="ContactUsForm" ng-submit="submitForm(ContactUsForm.$valid)" novalidate>
+
+                    <div class="form-group" ng-class="{ 'has-error' : ContactUsForm.CompanyName.$invalid && (ContactUsForm.CompanyName.$dirty || submitted)}">
+                        <label class="col-lg-3 col-sm-2 control-label">Company Name</label>
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" name="CompanyName" ng-model="PostData.CompanyName" placeholder="Company Name" ng-required="true">
+                            <p ng-show="ContactUsForm.CompanyName.$error.required &&  (ContactUsForm.CompanyName.$dirty || submitted)" class="help-block">Company Name is required.</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group" ng-class="{ 'has-error' : ContactUsForm.Sector.$invalid && (ContactUsForm.Sector.$dirty || submitted)}">
+                        <label class="col-lg-3 col-sm-2 control-label">Sector</label>
+                        <div class="col-lg-8">
+                            <select name="industry" class="form-control" ng-model="PostData.Sector">
+                                    <option value="" selected="selected">--Select Sector--</option>
+                                    <option value="Administration">Administration</option>
+                                    <option value="Advertising">Advertising</option>
+                                    <option value="Banking">Banking</option>
+                                    <option value="Call Center">Call Center</option>
+                                    <option value="Chemical">Chemical</option>
+                                    <option value="Civil">Civil</option>
+                                    <option value="Company Secretary">Company Secretary</option>
+                                    <option value="Consultancy">Consultancy</option>
+                                    <option value="Customer Service">Customer Service</option>
+                                    <option value="Electrical">Electrical</option>
+                                    <option value="Finance">Finance</option>
+                                    <option value="Human Resource Development">Human Resource Development</option>
+                                    <option value="Industrial Electronics">Industrial Electronics</option>
+                                    <option value="Insurance">Insurance</option>
+                                    <option value="IT">IT</option>
+                                    <option value="IT Hardware">IT Hardware</option>
+                                    <option value="IT Industry">IT Industry</option>
+                                    <option value="IT Software">IT Software</option>
+                                    <option value="Marketing">Marketing</option>
+                                    <option value="Mechnical">Mechnical</option>
+                                    <option value="Mutual Funds">Mutual Funds</option>
+                                    <option value="Production">Production</option>
+                                    <option value="Sales">Sales</option>
+                                    <option value="Secretaries">Secretaries</option>
+                                    <option value="Telecommunication">Telecommunication</option>
+                                    <option value="Top management">Top management</option>
+                                    <option value="Other (Please Specify)">Other (Please Specify)</option>
+</select>
+                        </div>
+                    </div>
+
+                    <div class="form-group" ng-class="{ 'has-error' : ContactUsForm.Location.$invalid && (ContactUsForm.Location.$dirty || submitted)}">
+                        <label class="col-lg-3 col-sm-2 control-label">Location</label>
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" name="Location" ng-model="PostData.Location" placeholder="Location" ng-required="true">
+                            <p ng-show="ContactUsForm.Location.$error.required &&  (ContactUsForm.Location.$dirty || submitted)" class="help-block">Location is required.</p>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group" ng-class="{ 'has-error' : ContactUsForm.Message.$invalid && (ContactUsForm.Message.$dirty || submitted)}">
+                        <label class="col-lg-3 col-sm-2 control-label">Message</label>
+                        <div class="col-lg-8">
+                            <textarea name="Message" class="form-control" ng-model="PostData.Message" ng-required="true"></textarea>
+                            <p ng-show="ContactUsForm.Message.$error.required &&  (ContactUsForm.Message.$dirty || submitted)" class="help-block">Message is required.</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group" ng-class="{ 'has-error' : ContactUsForm.ContactPerson.$invalid && (ContactUsForm.ContactPerson.$dirty || submitted)}">
+                        <label class="col-lg-3 col-sm-2 control-label">Contact Person</label>
+                        <div class="col-lg-8">
+                            <input type="number" class="form-control" name="ContactPerson" ng-model="PostData.ContactPerson" placeholder="Name" ng-required="true">
+                            <p ng-show="ContactUsForm.ContactPerson.$error.required &&  (ContactUsForm.ContactPerson.$dirty || submitted)" class="help-block">TOTAL EXP is required.</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group" ng-class="{ 'has-error' : ContactUsForm.PhoneNumber.$invalid && (ContactUsForm.PhoneNumber.$dirty || submitted)}">
+                        <label class="col-lg-3 col-sm-2 control-label">Phone No.</label>
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" name="PhoneNumber" ng-model="PostData.PhoneNumber" placeholder="Phone Number" ng-required="true">
+                            <p ng-show="ContactUsForm.PhoneNumber.$error.required &&  (ContactUsForm.PhoneNumber.$dirty || submitted)" class="help-block">PhoneNumber is required.</p>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error' : ContactUsForm.Email.$invalid && (ContactUsForm.Email.$dirty || submitted)}">
+                        <label class="col-lg-3 col-sm-2 control-label">Email ID</label>
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" name="Email" ng-model="PostData.Email" placeholder="Email" ng-required="true">
+                            <p ng-show="ContactUsForm.Email.$error.required &&  (ContactUsForm.Email.$dirty || submitted)" class="help-block">Email is required.</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-lg-3"></div>
+                        <div class="col-lg-8">
+                            <button type="submit" class="btn btn-success">Submit</button>
+                            <a ui-sref="user.employer-posts" class="btn btn-warning">Back</a>
+                        </div>
+                    </div>
+
+
+
+
+
+                </form>
+            </div>
+            <div class="col-md-3">
+            </div>
+        </div>
+    </div>
+</section>

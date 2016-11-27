@@ -24,6 +24,10 @@ angular.module('app').config(['$logProvider', '$stateProvider', '$urlRouterProvi
             url: '/services',
             templateUrl: 'app/view/services/services.html'
         })
+        .state('user.contactus', {
+            url: '/contactus',
+            templateUrl: 'app/view/contactus/contactus.html'
+        })
         .state('user.employer-posts', {
             url: '/employer-posts',
             templateUrl: 'app/view/user-employer-posts.html',
