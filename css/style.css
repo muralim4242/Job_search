@@ -61,6 +61,25 @@ header {
 .about-us-image > img  {
     padding-top: 60px;
 }
+.leadership h3 {
+   text-align: center;
+   padding: 50px 0px 20px 0px;
+}
+.leadership-content {
+    position: absolute;
+    width: 92.5%;
+    z-index: 50;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    padding: 10px;
+    color: #f0ebeb;
+}
+.leadership-content:hover {
+     color: #fff;
+}
+.leadership-name {
+    font-size: 20px;
+}
 /*******************************************************Upper Footer**********************************/
 .upper-bottom {
     background: #e4e4f9;
