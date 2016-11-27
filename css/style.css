@@ -42,8 +42,7 @@ body {
 
 body {
     color: #797979;
-    background: #f1f2f7;
-    font-family: 'Open Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
     padding: 0px !important;
     font-size:13px;
     text-rendering:optimizeLegibility;
@@ -55,6 +54,57 @@ body {
     color: #029f5b;
     font-size: 18px;
 }
+
+/***************************************Buttons**********************************/
+.custom-btn {
+    color: #fff;
+    font-size: 18px;
+    vertical-align: middle;
+    cursor: pointer;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border: 0px;
+    padding: 0 20px;
+}
+.btn-cyan {
+    background-color: #1abc9c;
+}
+.btn-cyan:hover {
+    background-color: #16a086;
+}
+.btn-orange {
+    background-color: #f80;
+}
+.btn-orange:hover {
+    background-color: #dc831c;
+}
+/***********************************Home***********************************************/
+.custom-carousel {
+    background-image: url("../images/sider1.png");
+        padding: 15px 0px;
+}
+.quick-links {
+        background: rgba(219,219,219,.7);
+    padding: 15px;
+}
+.quick-link-data {
+    background: #fff;
+    padding: 20px 15px;
+    text-align: center;
+
+}
+.quick-links > .quick-link-data:not(:last-child) {
+    margin-bottom: 15px;
+}
+.quick-link-data > p {
+    font-size: 1.4em;
+    font-weight: 400;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+
 /*******************************************************Header**********************************/
 header {
     background: #fff;
