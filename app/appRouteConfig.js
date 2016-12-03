@@ -72,6 +72,19 @@ angular.module('app').config(['$logProvider', '$stateProvider', '$urlRouterProvi
         }
 
     }).
+    .
+    state('user.franchiesies', {
+        url: '/franchiesies',
+        templateUrl: 'app/view/franchiesies.html',
+        controller: 'franchiesies',
+        resolve: {
+            title: function () {
+                return "Franchiesies";
+            }
+
+        }
+
+    }).
     state('admin', {
             abstract: true,
             url: '/admin',
