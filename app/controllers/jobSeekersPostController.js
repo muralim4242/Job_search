@@ -1,6 +1,9 @@
 "use strict";
-angular.module("app").controller("jobSeekersPost", ["$scope", "$log", "apiResource", "$timeout", "$location", "title", "$state", "$rootScope", "notifier", function ($scope, $log, apiResource, $timeout, $location,title, $state, $rootScope, jobSeekersPost, notifier) {
+angular.module("app").controller("jobSeekersPost",
+["$scope", "$log", "apiResource", "$timeout", "$location","posts","title", "$state", "$rootScope", "notifier", 
+function ($scope, $log, apiResource, $timeout,posts, $location,title, $state, $rootScope, jobSeekersPost, notifier) {
 
+  console.log(posts.jobPosts);
   $scope.isLoading = true;
   $scope.postData={};
   $scope.postData["file"]="";

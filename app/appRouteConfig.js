@@ -74,6 +74,9 @@ angular.module('app').config(['$logProvider', '$stateProvider', '$urlRouterProvi
             resolve: {
                 title: function () {
                     return "Add Post";
+                },
+                 posts: function (apiResource) {
+                        return apiResource.getAllPostDetailsForCandidates().$promise;
                 }
             }
 
