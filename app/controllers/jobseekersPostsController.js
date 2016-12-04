@@ -1,5 +1,7 @@
 "use strict";
-angular.module("app").controller("jobSeekersPosts", ["$scope",  "$log", "apiResource","posts","title", "$timeout", "$location","$stateParams","$state","$rootScope",function ($scope, $log,apiResource, posts,title, $timeout,$location,$stateParams,$state,$rootScope)
+angular.module("app").controller("jobSeekersPosts", 
+["$scope",  "$log", "apiResource","posts","title", "$timeout", "$location","$stateParams","$state","$rootScope",
+function ($scope, $log,apiResource, posts,title, $timeout,$location,$stateParams,$state,$rootScope)
 {
 //	$scope.isLoading = true;
  $scope.rowCollection = posts.jobSeekers;
@@ -69,14 +71,15 @@ angular.module("app").controller("jobSeekersPosts", ["$scope",  "$log", "apiReso
 
   ];
 
+
 	// $scope.expireDeal=function()
 	// {
 	// 	$scope.isLoading = true;
-	// 	$scope.myPromise=apiResource.update({isActive:true,dealTitle:$stateParams.dealTitle},{},function(response)
+	// 	$scope.myPromise=apiResource.getAllPostDetailsForCandidates({isActive:true,dealTitle:$stateParams.dealTitle},{},function(response)
 	// 		{
-    //     $rootScope.$broadcast('notification', {
-    //       notification: response.message
-    //     });
+  //       $rootScope.$broadcast('notification', {
+  //         notification: response.message
+  //       });
 	// 			 $rootScope.$broadcast('ps-menu-item-update',{});
 	// 			$state.go("inactivePosts",{isActive:false,dealTitle:$stateParams.dealTitle});
 	// 			$scope.isLoading = false;

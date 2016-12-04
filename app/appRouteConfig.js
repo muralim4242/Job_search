@@ -64,7 +64,6 @@ angular.module('app').config(['$logProvider', '$stateProvider', '$urlRouterProvi
                 title: function () {
                     return "Add Post";
                 }
-
             }
 
         }).
@@ -76,7 +75,6 @@ angular.module('app').config(['$logProvider', '$stateProvider', '$urlRouterProvi
                 title: function () {
                     return "Add Post";
                 }
-
             }
 
         }).

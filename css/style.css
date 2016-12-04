@@ -9,6 +9,9 @@ body {
 .padding-top-25 {
     padding-top: 25px;
 }
+.no-border-radius {
+    border-radius: 0px !important;
+}
 .logo img {
     height: 50px;
 }
@@ -189,6 +192,53 @@ header {
 .user-form-label {
 
 }
+.job-post-list {
+        border: 1px solid #CCC;
+    background: #FFF;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+.job-seeker-small-heading {
+     float: left;
+    min-height: 40px;
+    font-size: 11px;
+    min-width: 100px;
+}
+.job-details1 {
+       height: 42px;
+    overflow: hidden;
+    padding: 5px 0px;
+}
+.job-details2 {
+    height: 35px;
+    overflow: hidden;
+        padding: 5px 0px;
+}
+.job-details3
+{
+     height: 40px;
+    overflow: hidden;
+    padding: 5px 0px;
+}
+.job-details4 {
+    height: 40px;
+    overflow: hidden;
+        padding: 5px 0px;
+}
+.job-details5 {
+    min-height: 30px;
+    padding-top: 10px;
+    margin: 10px 0px 0px 0px;
+    border-top: 1px solid #78cd51;
+}
+.job-title {
+      font-size: 14px;
+    color: #0e82a9;
+    text-transform: capitalize;
+    line-height: 18px;
+}
 /*******************************************************About Us**********************************/
 .about-us {
     padding: 0px 0px 25px 0px;
@@ -268,3 +318,4 @@ footer ul li {
     margin-left: 15px;
 }
 /****************************************Contact-Us*******************************************/
+

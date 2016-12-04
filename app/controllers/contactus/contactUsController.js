@@ -19,6 +19,7 @@ function ($scope, $log, apiResource, $timeout, $location, title, $state, $rootSc
             notification: respose.message
           });
           $scope.isLoading = false;
+          $scope.showForm=false;
     //      $state.go("user.employer-posts");
         }, function (error) {
           $rootScope.$broadcast('notification', {

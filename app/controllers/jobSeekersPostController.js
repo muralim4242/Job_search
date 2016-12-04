@@ -1,5 +1,5 @@
 "use strict";
-angular.module("app").controller("jobSeekersPost", ["$scope", "$log", "apiResource", "$timeout", "$location", "title", "$state", "$rootScope", "notifier", function ($scope, $log, apiResource, $timeout, $location, title, $state, $rootScope, jobSeekersPost, notifier) {
+angular.module("app").controller("jobSeekersPost", ["$scope", "$log", "apiResource", "$timeout", "$location", "title", "$state", "$rootScope", "notifier", function ($scope, $log, apiResource, $timeout, $location,title, $state, $rootScope, jobSeekersPost, notifier) {
 
   $scope.isLoading = true;
   $scope.postData={};
@@ -28,6 +28,8 @@ angular.module("app").controller("jobSeekersPost", ["$scope", "$log", "apiResour
   //   delete $scope.result;
   //   delete $scope.resultBlob;
   // };
+
+      //Get all Posts
 
 
   $scope.submitForm = function (valid) {

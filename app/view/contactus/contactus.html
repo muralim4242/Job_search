@@ -1,6 +1,10 @@
 <section class="contact-us">
     <div class="container">
-        <div class="row">
+        <div class="row" ng-show="!showForm">
+            <h3>Thank you. We will get back  you shortly.</h3>
+             <a ui-sref="user.home" class="btn btn-warning">Home</a>
+        </div>
+        <div class="row" ng-show="showForm">
             <div class="col-md-3">
             </div>
             <div class="col-md-6 custom-form">

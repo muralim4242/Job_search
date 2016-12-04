@@ -433,76 +433,61 @@ $app->post('/update_employer','authenticate',function() use ($app)
 //get all post
 
 $app->get('/getAllPost', 'authenticate', function() use ($app)
-{
-	
-	
-	
-	$response = array();
-	
-	
-	
+{	
+	$response = array();	
 	global $user_id;
-	
-	
 	$db = new loginHandler();
-	
-	
-	
 	// 	creating new Family Member
 	$getAllJobPost = $db->getAllJobPost();
-	
-	
-	
 	//p	rint_r $result;
-	
-	
 	if ($getAllJobPost)
 	{
-		
-		
-		$response["error"] = false;
-		
-		
-	
-		
+		$response["error"] = false;	
 		$response["jobPosts"]=array();
-		
-		
-		// 		$response["indStdDets"]=array();
-	//	print_r($getAllJobPost);
-		foreach ($getAllJobPost as $key => $value) {
-				array_push($response["jobPosts"], $value);
-		}
-		
-		
-		}
-		
-	
-	
-	
-	else
-	{
-		
-		
-		// 		unknown error occurred
-		$response['error'] = true;
-		
-		
-		$response['message'] = "An error occurred. Please try again";
-		
-		
+		//$response["indStdDets"]=array();
+	    //print_r($getAllJobPost);
+			foreach ($getAllJobPost as $key => $value) {
+					array_push($response["jobPosts"], $value);
+			}		
 	}
-	
-	
-	
+	else
+	{	
+		// unknown error occurred
+		$response['error'] = true;
+		$response['message'] = "An error occurred. Please try again";
+	}
 	echoRespnse(200, $response);
-	
-	
-	
 }
-
 );
 
+//Get Posts for Candidates 
+$app->get('/get_All_Post_For_Candidates', function() use ($app)
+{	
+	$response = array();	
+	global $user_id;
+	$db = new loginHandler();
+	// 	creating new Family Member
+	$getAllJobPost = $db->getAllJobPost();
+	//p	rint_r $result;
+	if ($getAllJobPost)
+	{
+		$response["error"] = false;	
+		$response["jobPosts"]=array();
+		//$response["indStdDets"]=array();
+	    //print_r($getAllJobPost);
+			foreach ($getAllJobPost as $key => $value) {
+					array_push($response["jobPosts"], $value);
+			}		
+	}
+	else
+	{	
+		// unknown error occurred
+		$response['error'] = true;
+		$response['message'] = "An error occurred. Please try again";
+	}
+	echoRespnse(200, $response);
+}
+);
 
 $app->get('/getIndPost/:postId', 'authenticate', function($postId) use ($app)
 {
