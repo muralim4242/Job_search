@@ -138,6 +138,26 @@ angular.module('app').config(['$logProvider', '$stateProvider', '$urlRouterProvi
             }
 
         })
+        .state('admin.requsted-contacts', {
+            url: '/requsted-contacts',
+            templateUrl: 'app/view/admin/admin-requsted-contacts.html',
+            controller: 'requestedContacts',
+            resolve: {
+                title: function () {
+                    return "All Employers Posts";
+                },
+
+                posts: function (apiResource, currentUser) {
+                    if (currentUser.getProfile().token) {
+                        return apiResource.getAllPost().$promise;
+                    }
+                    return [];
+
+                }
+
+            }
+
+        })
         .state('admin.job-seekers-posts', {
             url: '/job-seekers-posts',
             templateUrl: 'app/view/admin-job-seekers-posts.html',
