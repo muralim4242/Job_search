@@ -17,8 +17,7 @@ function apiResource($resource, appSetting, currentUser) {
 			  'addJobSeeker':{method:'POST',url:appSetting.serverPath +"login/job_seeker_post", headers: { 'Authorization': currentUser.getProfile().token }},
 			  'updateJobSeeker':{method:'PUT',url:appSetting.serverPath +"login/job_seeker_post_update/2", headers: { 'Authorization': currentUser.getProfile().token }},
 			  'dashboard':{method:'GET',url:appSetting.serverPath +"login/dashboard", headers: { 'Authorization': currentUser.getProfile().token }},
-
+			  'contactUs':{method:'POST',url:appSetting.serverPath +"login/contact_us", headers: {'Authorization': currentUser.getProfile().token }},
 			  
-
         });
 }

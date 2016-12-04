@@ -355,42 +355,15 @@ class loginHandler
 	
 	public function getAllJobPost()
 	{
-		
-		
-		
-		
-		
 		$result1=$this->conn->select("employers_post","*");
-		
-		
-		
 		if($result1)
 		{
-			
-			
-		
-			
 			return $result1;
-			
-			
-			
 		}
-		
-		
-		
 		else
 		{
-			
-			
-			
 			return NULL;
-			
-			
-			
 		}
-		
-		
-		
 	}
 
 	public function getAllJobPostRelToEmp($employerId)
@@ -618,6 +591,33 @@ class loginHandler
             return false;
         }
     }
+
+    //contact us form detail
+	 public function contact_us($contactus)
+    {
+         if($this->conn->insert("contactus",$contactus))
+        {
+                return true;
+        }
+        else {
+			echo $this->conn->last_query();
+            return false;
+        }
+    }
+
+	//Get Contact Form Details
+	public function get_contact_us()
+	{
+		$result1=$this->conn->select("contactus","*");
+		if($result1)
+		{
+			return $result1;
+		}
+		else
+		{
+			return NULL;
+		}
+	}
 	
 
 	public function update_employer($user_id,$employer_name,$telephone)

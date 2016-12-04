@@ -71,7 +71,7 @@
                     <div class="form-group" ng-class="{ 'has-error' : ContactUsForm.ContactPerson.$invalid && (ContactUsForm.ContactPerson.$dirty || submitted)}">
                         <label class="col-lg-3 col-sm-2 control-label">Contact Person</label>
                         <div class="col-lg-8">
-                            <input type="number" class="form-control" name="ContactPerson" ng-model="PostData.ContactPerson" placeholder="Name" ng-required="true">
+                            <input type="text" class="form-control" name="ContactPerson" ng-model="PostData.ContactPerson" placeholder="Name" ng-required="true">
                             <p ng-show="ContactUsForm.ContactPerson.$error.required &&  (ContactUsForm.ContactPerson.$dirty || submitted)" class="help-block">TOTAL EXP is required.</p>
                         </div>
                     </div>
@@ -98,11 +98,6 @@
                             <a ui-sref="user.employer-posts" class="btn btn-warning">Back</a>
                         </div>
                     </div>
-
-
-
-
-
                 </form>
             </div>
             <div class="col-md-3">

@@ -85,10 +85,12 @@ body {
     padding-top: 50px;
     color: #f4f4f4;
     font-size: 43px;
+        padding-left: 80px;
 }
 .find-job {
         font-size: 35px;
     color: #fefefe;
+        padding-left: 80px;
 }
 .city {
     color: #5a7ba4;

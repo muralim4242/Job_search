@@ -26,7 +26,15 @@ angular.module('app').config(['$logProvider', '$stateProvider', '$urlRouterProvi
         })
         .state('user.contactus', {
             url: '/contactus',
-            templateUrl: 'app/view/contactus/contactus.html'
+            templateUrl: 'app/view/contactus/contactus.html',
+            controller: 'contactUS',
+              resolve: {
+                title: function () {
+                    return "Contact Us";
+                }
+
+            }
+
         })
         .state('user.employer-posts', {
             url: '/employer-posts',
@@ -48,44 +56,43 @@ angular.module('app').config(['$logProvider', '$stateProvider', '$urlRouterProvi
             }
 
         }).
-    state('user.employer-post-add', {
-        url: '/employer-post-add',
-        templateUrl: 'app/view/user-employer-post-add.html',
-        controller: 'employerPostAdd',
-        resolve: {
-            title: function () {
-                return "Add Post";
+        state('user.employer-post-add', {
+            url: '/employer-post-add',
+            templateUrl: 'app/view/user-employer-post-add.html',
+            controller: 'employerPostAdd',
+            resolve: {
+                title: function () {
+                    return "Add Post";
+                }
+
             }
 
-        }
+        }).
+        state('user.job-seekers-post', {
+            url: '/job-seekers-post',
+            templateUrl: 'app/view/user-job-seekers-post.html',
+            controller: 'jobSeekersPost',
+            resolve: {
+                title: function () {
+                    return "Add Post";
+                }
 
-    }).
-    state('user.job-seekers-post', {
-        url: '/job-seekers-post',
-        templateUrl: 'app/view/user-job-seekers-post.html',
-        controller: 'jobSeekersPost',
-        resolve: {
-            title: function () {
-                return "Add Post";
             }
 
-        }
+        }).
+        state('user.franchiesies', {
+            url: '/franchiesies',
+            templateUrl: 'app/view/franchiesies.html',
+            controller: 'franchiesies',
+            resolve: {
+                title: function () {
+                    return "Franchiesies";
+                }
 
-    }).
-    .
-    state('user.franchiesies', {
-        url: '/franchiesies',
-        templateUrl: 'app/view/franchiesies.html',
-        controller: 'franchiesies',
-        resolve: {
-            title: function () {
-                return "Franchiesies";
             }
 
-        }
-
-    }).
-    state('admin', {
+        }).
+        state('admin', {
             abstract: true,
             url: '/admin',
             templateUrl: 'app/view/admin.html'
@@ -93,7 +100,7 @@ angular.module('app').config(['$logProvider', '$stateProvider', '$urlRouterProvi
         .state('admin.home', {
             url: '/home',
             templateUrl: 'app/view/dashboard.html',
-            controller:'dashboard',
+            controller: 'dashboard',
             resolve: {
                 title: function () {
                     return "Dashboard";
@@ -110,7 +117,7 @@ angular.module('app').config(['$logProvider', '$stateProvider', '$urlRouterProvi
             }
 
         })
-          .state('admin.employer-posts', {
+        .state('admin.employer-posts', {
             url: '/employer-posts',
             templateUrl: 'app/view/admin-employer-posts.html',
             controller: 'employerPosts',
@@ -130,7 +137,7 @@ angular.module('app').config(['$logProvider', '$stateProvider', '$urlRouterProvi
             }
 
         })
-         .state('admin.job-seekers-posts', {
+        .state('admin.job-seekers-posts', {
             url: '/job-seekers-posts',
             templateUrl: 'app/view/admin-job-seekers-posts.html',
             controller: 'jobSeekersPosts',

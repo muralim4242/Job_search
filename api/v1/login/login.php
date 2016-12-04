@@ -772,137 +772,92 @@ $app->get("/getJobSeek(/:jSId)",'authenticate',function($jSId=null) use ($app)
 		$db=new loginHandler();
 		if($jSId)
 		{
-				$jobSeekers=$db->getAllJobSeekers($jSId);
+			$jobSeekers=$db->getAllJobSeekers($jSId);
 			if ($jobSeekers)
-	{
-		
-		
-		$response["error"] = false;
-		
-		
-	
-		
-		$response["jobSeeker"]=$jobSeekers[0];
-		
-		
-		
-		
-		}
-		
-	
-	
-	
-	else
-	{
-		
-		
-		// 		unknown error occurred
-		$response['error'] = true;
-		
-		
-		$response['message'] = "An error occurred. Please try again";
-		
-		
-	}
-
+			{		
+				$response["error"] = false;
+				$response["jobSeeker"]=$jobSeekers[0];
+			}
+			else
+			{
+		     // 		unknown error occurred
+				$response['error'] = true;			
+				$response['message'] = "An error occurred. Please try again";				
+			}
 		}
 		else
 		{
 			$jobSeekers=$db->getAllJobSeekers(null);
 			if ($jobSeekers)
-	{
-		
-		
-		$response["error"] = false;
-		
-		
-	
-		
-		$response["jobSeekers"]=array();
-		
-		
-		// 		$response["indStdDets"]=array();
-	//	print_r($getAllJobPost);
-		foreach ($jobSeekers as $key => $value) {
-				array_push($response["jobSeekers"], $value);
+			{	
+				$response["error"] = false;	
+				$response["jobSeekers"]=array();
+				// $response["indStdDets"]=array();
+				//print_r($getAllJobPost);
+				foreach ($jobSeekers as $key => $value) {
+						array_push($response["jobSeekers"], $value);
+					}		
+			}
+		else
+		{
+			//unknown error occurred
+			$response['error'] = true;			
+			$response['message'] = "An error occurred. Please try again";		
+	    }
 		}
-		
-		
-		}
-		
-	
-	
-	
-	else
-	{
-		
-		
-		// 		unknown error occurred
-		$response['error'] = true;
-		
-		
-		$response['message'] = "An error occurred. Please try again";
-		
-		
-	}
-
-		}
-
 		echoRespnse(200,$response);
 });
 
+//Job Seeker Method
 $app->post('/job_seeker_post',function() use ($app)
 {
-    	$response = array();
-	
-	
+    $response = array();	
 	$db = new loginHandler();
-
-
 	$request_params = json_decode($app->request()->getBody(), true);
-	
-	
-  
-	
-	
-
-    	$res= $db->job_seeker_post($request_params);
-	
-	
-	
+    $res= $db->job_seeker_post($request_params);
+		
 	if ($res)
-	{
-		
-		
-		$response["error"] = false;
-		
-		
-		
-	
-		
-		$response['message'] = "New Job Seeker Post Created successfully";
-		
-		
-	}
-	
-	
+	{	
+		$response["error"] = false;	
+		$response['message'] = "New Job Seeker Post Created successfully";	
+	}	
 	else
-	{
-		
-		
-		// 		unknown error occurred
-		$response['error'] = true;
-		
-		
-		$response['message'] = "An error occurred. Please try again";
-		
-		
-	}
-	
-	
-	
-	echoRespnse(200, $response);
-	
+	{	
+		//unknown error occurred
+		$response['error'] = true;	
+		$response['message'] = "An error occurred. Please try again";	
+	}		
+	echoRespnse(200, $response);	
+});
+
+//Contact us Method
+$app->post('/contact_us',function() use ($app)
+{
+    $response = array();	
+	$db = new loginHandler();
+	$request_params = json_decode($app->request()->getBody(), true);
+    $res= $db->contact_us($request_params);	
+	if ($res)
+	{	
+		$response["error"] = false;	
+		$response['message'] = "Your request submitted successfully";	
+	}	
+	else
+	{	
+		//unknown error occurred
+		$response['error'] = true;	
+		$response['message'] = "An error occurred. Please try again";	
+	}		
+	echoRespnse(200, $response);	
+});
+
+//Get Contact us Form Details
+$app->get("/getcontact_us",function() use ($app)
+{
+		$response=array();
+		$db=new loginHandler();
+		$response["contactUS"]=$db->get_contact_us();
+		echoRespnse(200,$response);
 });
 
 
