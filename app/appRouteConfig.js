@@ -83,22 +83,12 @@ angular.module('app').config(['$logProvider', '$stateProvider', '$urlRouterProvi
         }).
         state('user.franchiesies', {
             url: '/franchiesies',
-            templateUrl: 'app/view/franchiesies/franchiesies.html',
+            templateUrl: 'app/view/franchiesies.html',
             controller: 'franchiesies',
             resolve: {
                 title: function () {
                     return "Franchiesies";
-                },
-
-                posts: function (apiResource, currentUser) {
-                    if (currentUser.getProfile().token) {
-                        return apiResource.getAllPostRelToEmp().$promise;
-                    }
-                    return [];
-
                 }
-
-
 
             }
 
