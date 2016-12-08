@@ -1,13 +1,16 @@
 "use strict";
 angular.module("app").controller("jobSeekersPost",
-["$scope", "$log", "apiResource", "$timeout", "$location","posts","title", "$state", "$rootScope", "notifier", 
-function ($scope, $log, apiResource, $timeout,posts, $location,title, $state, $rootScope, jobSeekersPost, notifier) {
+["$scope", "$log", "apiResource","currentUser", "$timeout", "$location","posts","title", "$state", "$rootScope", "notifier",
+function ($scope, $log, apiResource,currentUser, $timeout, $location,posts,title, $state, $rootScope, jobSeekersPost, notifier) {
 
-  console.log(posts.jobPosts);
+//  console.log(posts.jobPosts);
   $scope.isLoading = true;
+  $scope.posts=posts.jobPosts;
+  $scope.postIdSelected=undefined;
   $scope.postData={};
   $scope.postData["file"]="";
   $scope.postData["fileExtention"]="";
+  $scope.disabled=true;
   // $scope.postData = jobSeekersPost.user;
   // $scope.postData.isChain = jobSeekersPost.user.isChain ? "true" : "false";
   $scope.title = title;
@@ -33,7 +36,59 @@ function ($scope, $log, apiResource, $timeout,posts, $location,title, $state, $r
   // };
 
       //Get all Posts
+    $scope.post_selected=function(id)
+    {
+      $scope.postIdSelected=id;
+    }
 
+    $scope.back=function()
+    {
+      $scope.postIdSelected=undefined;
+      $scope.postData={};
+      $scope.disabled=true;
+    }
+
+      $scope.enable=true;
+      $scope.postData.isProfilePresent=false;
+
+    $scope.is_userAvailable=function()
+    {
+
+      var mobNo=$scope.postData.TELEPHONE;
+      $scope.myPromise=apiResource.getJobSeekerCheckByMobNoNPostId({mobNo:$scope.postData.TELEPHONE,postId:$scope.postIdSelected},function(response)
+      {
+          if(response.error)
+          {
+                $scope.disabled=false;
+                  $scope.postData={};
+                  $scope.postData.TELEPHONE=mobNo;
+                    $scope.enable=false;
+                    $scope.postData.isProfilePresent=false;
+          }
+          else {
+              if(response.isSeekerAppliedForPost)
+              {
+
+                  // alert("Already applied for job");
+                  $scope.postIdSelected=undefined;
+                  $scope.postData={};
+                    $scope.disabled=true;
+                    $rootScope.$broadcast('notification', {
+                      notification:"Already applied for job"
+                    });
+
+              }
+              else {
+                  $scope.postData=response.jobSeeker;
+                  $scope.postData.isProfilePresent=true;
+                  $scope.disabled=true;
+                    $scope.enable=false;
+                  }
+
+
+          }
+      })
+    }
 
   $scope.submitForm = function (valid) {
 
@@ -60,20 +115,34 @@ function ($scope, $log, apiResource, $timeout,posts, $location,title, $state, $r
           $scope.postData.file = null;
         }
 
-
-      $scope.myPromise = apiResource.addJobSeeker($scope.postData, function (respose) {
+        var FID=function()
+        {
+            return currentUser.getProfile().token?currentUser.getProfile().token:0;
+        };
+        $scope.postData.FID=FID();
+        $scope.postData.PID=$scope.postIdSelected;
+        $scope.myPromise = apiResource.addJobSeeker($scope.postData, function (respose)
+        {
           $rootScope.$broadcast('notification', {
             notification: respose.message
           });
           $scope.isLoading = false;
+          $scope.disabled=false;
+            $scope.postData={};
+            $scope.postData.TELEPHONE=mobNo;
+              $scope.enable=false;
+              $scope.postData.isProfilePresent=false;
+
     //      $state.go("user.employer-posts");
-        }, function (error) {
+        }, function (error)
+        {
           $rootScope.$broadcast('notification', {
             notification: "Yikes! Something has gone wrong here, please try again"
           });
           $scope.isLoading = false;
+          $scope.postIdSelected=undefined;
         })
-       
+
       //    $scope.postData.fileExtention=$scope.myImage.split("/",2)[1].split(";",1)[0];
       // $scope.myPromise = apiResource.updateUserjobSeekersPost({}, $scope.postData, function(data) {
 

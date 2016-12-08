@@ -1,52 +1,52 @@
 <div class="container">
-    <div class="row">
-        <div class="col-md-3">
-        </div>
-        <div class="col-md-6">
-            <input type="text" placeholder="Search Job by Key Skill, Location, Job Description" class="form-control no-border-radius">
-        </div>
-        <div class="col-md-3">
-        </div>
-    </div>
-    <div class="row">
+  <div class="row" cg-busy="myPromise">
+
+    <div class="row" ng-if="!postIdSelected">
+      <div class="row">
+          <!-- <div class="col-md-3">
+          </div>-->
+          <br>
+          <div class="col-md-6 col-md-offset-3 text-center">
+              <input type="text" placeholder="Search Job by Key Skill, Location, Job Description" class="form-control no-border-radius">
+          </div>
+          <!-- <div class="col-md-3">
+          </div> -->
+      </div>
         <div class="jobposts">
             <div class="col-md-3">
             </div>
 
-             <div class="col-md-6 job-post-list">
+             <div class="col-md-6 job-post-list" ng-repeat="post in posts">
                      <div class="job-details1">
                          <div class="col-md-10">
                              <div class="job-title">
-                                 Requiremnt for QA, DO, and MCA for MNC,
-                                    Requiremnt for QA, DO, and MCA for MNC
-                                       Requiremnt for QA, DO, and MCA for MNC,    Requiremnt for QA, DO, and MCA for MNC
-                                          Requiremnt for QA, DO, and MCA for MNC
+                                 {{post.NAME}}
                              </div>
                          </div>
                           <div class="col-md-2">
-                              <button class="btn btn-success pull-right no-border-radius">Apply</button>
+                              <button class="btn btn-success pull-right no-border-radius" ng-click="post_selected(post.ID)">Apply</button>
                          </div>
                      </div>
                      <div class="job-details2">
                          <div class="col-md-3">
-                             <i class="fa fa-suitcase" aria-hidden="true"></i> 0-10 years
+                             <i class="fa fa-suitcase" aria-hidden="true"></i> {{post.TOTAL_EXP}} years
                          </div>
                           <div class="col-md-4">
-                              <i class="fa fa-map-marker" aria-hidden="true"></i> Bangalure
+                              <i class="fa fa-map-marker" aria-hidden="true"></i>{{post.LOCATIONS}}
                          </div>
                      </div>
                      <div class="job-details3">
                             <div class="col-md-12">
                                 <div class="job-seeker-small-heading">
                                     <i class="fa fa-tags" aria-hidden="true"></i> Key Skills:
-                                </div> kjsfjds khskdjf khsdkfj dsjhf sdkfhsdjkfh dskjfbdksjf skdjhf sdo drgdrfg dfjh sgfj shdf jhs dfgsd 
+                                </div> {{post.KEY_SKILLS}}
                          </div>
                      </div>
                      <div class="job-details4">
                              <div class="col-md-12">
                                    <div class="job-seeker-small-heading">
                                  <i class="fa fa-list-alt" aria-hidden="true"></i> Job Description:
-                                   </div> jsdfh kjshfkjhsd jhbsdkjf kjhsdkjhf kjsdhfkjhsd fkjhdskjfh dskjfhhsdkjh d jkbsbjfs dhsdf kjsdhf 
+                               </div> {{post.JOB_DESCRIPTION}}
                          </div>
                      </div>
                       <div class="job-details5">
@@ -54,46 +54,51 @@
                                  <i class="fa fa-inr" aria-hidden="true"></i> Not Disclossed
                          </div>
                      </div>
-          
+
             </div>
              <div class="col-md-3">
             </div>
 
         </div>
     </div>
-    <div class="row" cg-busy="myPromise">
+
         <div class="col-lg-2"></div>
-        <div class="col-lg-8 custom-form">
+        <div class="col-lg-8 custom-form" ng-if="postIdSelected">
             <h3><i class="fa fa-user-o" aria-hidden="true"></i> {{title}}</h3>
             <form id="register-form" class="form-horizontal" name="jobPostForm" ng-submit="submitForm(jobPostForm.$valid)" novalidate>
+              <div class="form-group" ng-class="{ 'has-error' : jobPostForm.TELEPHONE.$invalid && (jobPostForm.TELEPHONE.$dirty || submitted)}">
+                  <label class="col-md-3 col-sm-2 control-label user-form-label">TELEPHONE</label>
+                  <div class="col-md-6">
+                      <input type="text" class="form-control" name="TELEPHONE" ng-model="postData.TELEPHONE" ng-model-options="{ debounce: 1000 }"
+                          ng-required="true" placeholder="TELEPHONE" pattern="^[2-9]{2}[0-9]{8}$">
+                      <p ng-show="jobPostForm.TELEPHONE.$error.required && (jobPostForm.TELEPHONE.$dirty || submitted)" class="help-block">Telephone Number is required.</p>
+                      <p ng-show="jobPostForm.TELEPHONE.$error.pattern && (jobPostForm.TELEPHONE.$dirty || submitted)" class=< /div>
+                  </div>
+                  <div class="col-md-3">
+                      <button class="btn btn-sm btn-success" ng-disabled="jobPostForm.TELEPHONE.$error.required || jobPostForm.TELEPHONE.$error.pattern" type="button" ng-click="is_userAvailable()">Fetch</button>
+                        <button class="btn btn-sm btn-warning" type="button" ng-click="back()">Back</button>
+                  </div>
+              </div>
                 <div class="form-group" ng-class="{ 'has-error' : jobPostForm.FULL_NAME.$invalid && (jobPostForm.FULL_NAME.$dirty || submitted)}">
                     <label class="col-md-3 col-sm-2 control-label user-form-label">FULL NAME</label>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="FULL_NAME" ng-model="postData.FULL_NAME" placeholder="FULL NAME" ng-required="true">
+                        <input ng-disabled="disabled" type="text" class="form-control" name="FULL_NAME" ng-model="postData.FULL_NAME" placeholder="FULL NAME" ng-required="true">
                         <p ng-show="jobPostForm.FULL_NAME.$error.required &&  (jobPostForm.FULL_NAME.$dirty || submitted)" class="help-block">Contact Name is required.</p>
                     </div>
                 </div>
                 <div class="form-group" ng-class="{ 'has-error' : jobPostForm.EMAIL.$invalid && (jobPostForm.EMAIL.$dirty || submitted)}">
                     <label class="col-md-3 col-sm-2 control-label user-form-label">EMAIL</label>
                     <div class="col-md-6">
-                        <input type="email" class="form-control" name="EMAIL" ng-model="postData.EMAIL" placeholder="EMAIL" ng-required="true">
+                        <input ng-disabled="disabled" type="email" class="form-control" name="EMAIL" ng-model="postData.EMAIL" placeholder="EMAIL" ng-required="true">
                         <p ng-show="jobPostForm.EMAIL.$error.required &&  (jobPostForm.EMAIL.$dirty || submitted)" class="help-block">EMAIL is required.</p>
                         <p ng-show="jobPostForm.EMAIL.$error.EMAIL &&  (jobPostForm.EMAIL.$dirty || submitted)" class="help-block">This not a valid EMAIL address.</p>
                     </div>
                 </div>
-                <div class="form-group" ng-class="{ 'has-error' : jobPostForm.TELEPHONE.$invalid && (jobPostForm.TELEPHONE.$dirty || submitted)}">
-                    <label class="col-md-3 col-sm-2 control-label user-form-label">TELEPHONE</label>
-                    <div class="col-md-6">
-                        <input type="text" class="form-control" name="TELEPHONE" ng-model="postData.TELEPHONE" ng-model-options="{ debounce: 1000 }"
-                            ng-required="true" placeholder="Telephone" pattern="^(?:(?:\(?(?:0(?:0|11)\)?[\s-]?\(?|\+)44\)?[\s-]?(?:\(?0\)?[\s-]?)?)|(?:\(?0))(?:(?:\d{5}\)?[\s-]?\d{4,5})|(?:\d{4}\)?[\s-]?(?:\d{5}|\d{3}[\s-]?\d{3}))|(?:\d{3}\)?[\s-]?\d{3}[\s-]?\d{3,4})|(?:\d{2}\)?[\s-]?\d{4}[\s-]?\d{4}))(?:[\s-]?(?:x|ext\.?|\#)\d{3,4})?$">
-                        <p ng-show="jobPostForm.TELEPHONE.$error.required && (jobPostForm.TELEPHONE.$dirty || submitted)" class="help-block">Telephone Number is required.</p>
-                        <p ng-show="jobPostForm.TELEPHONE.$error.pattern && (jobPostForm.TELEPHONE.$dirty || submitted)" class=< /div>
-                    </div>
-                </div>
+
                 <div class="form-group" ng-class="{ 'has-error' : jobPostForm.CURRENT_LOCATION.$invalid && (jobPostForm.CURRENT_LOCATION.$dirty || submitted)}">
                     <label class="col-md-3 col-sm-2 control-label user-form-label">CURRENT_LOCATION</label>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="CURRENT_LOCATION" ng-model="postData.CURRENT_LOCATION" placeholder="CURRENT LOCATION"
+                        <input ng-disabled="disabled" type="text" class="form-control" name="CURRENT_LOCATION" ng-model="postData.CURRENT_LOCATION" placeholder="CURRENT LOCATION"
                             ng-required="true">
                         <p ng-show="jobPostForm.CURRENT_LOCATION.$error.required &&  (jobPostForm.CURRENT_LOCATION.$dirty || submitted)" class="help-block">Contact Name is required.</p>
                     </div>
@@ -101,45 +106,45 @@
                 <div class="form-group" ng-class="{ 'has-error' : jobPostForm.KEY_SKILLS.$invalid && (jobPostForm.KEY_SKILLS.$dirty || submitted)}">
                     <label class="col-md-3 col-sm-2 control-label user-form-label">JOB DESCRIPTION</label>
                     <div class="col-md-6">
-                        <textarea name="KEY_SKILLS" class="form-control" ng-model="postData.KEY_SKILLS" ng-required="true"></textarea>
+                        <textarea ng-disabled="disabled" name="KEY_SKILLS" class="form-control" ng-model="postData.KEY_SKILLS" ng-required="true"></textarea>
                         <p ng-show="jobPostForm.KEY_SKILLS.$error.required &&  (jobPostForm.KEY_SKILLS.$dirty || submitted)" class="help-block">JOB DESCRIPTION is required.</p>
                     </div>
                 </div>
                 <div class="form-group" ng-class="{ 'has-error' : jobPostForm.TOTAL_EXP.$invalid && (jobPostForm.TOTAL_EXP.$dirty || submitted)}">
                     <label class="col-md-3 col-sm-2 control-label user-form-label">TOTAL EXP</label>
                     <div class="col-md-6">
-                        <input type="number" class="form-control" name="TOTAL_EXP" ng-model="postData.TOTAL_EXP" placeholder="TOTAL_EXP" ng-required="true">
-                        <p ng-show="jobPostForm.TOTAL_EXP.$error.required &&  (jobPostForm.TOTAL_EXP.$dirty || submitted)" class="help-block">TOTAL EXP is required.</p>
+                        <input ng-disabled="disabled" type="text" class="form-control" name="TOTAL_EXP" ng-model="postData.TOTAL_EXP" placeholder="TOTAL_EXP">
+                        <!-- <p ng-show="jobPostForm.TOTAL_EXP.$error.required &&  (jobPostForm.TOTAL_EXP.$dirty || submitted)" class="help-block">TOTAL EXP is required.</p> -->
                     </div>
                 </div>
                 <div class="form-group" ng-class="{ 'has-error' : jobPostForm.CURRENT_DESIGNATION.$invalid && (jobPostForm.CURRENT_DESIGNATION.$dirty || submitted)}">
                     <label class="col-md-3 col-sm-2 control-label user-form-label">CURRENT_DESIGNATION</label>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="CURRENT_DESIGNATION" ng-model="postData.CURRENT_DESIGNATION" placeholder="CURRENT_DESIGNATION"
-                            ng-required="true">
-                        <p ng-show="jobPostForm.CURRENT_DESIGNATION.$error.required &&  (jobPostForm.CURRENT_DESIGNATION.$dirty || submitted)" class="help-block">CURRENT_DESIGNATION is required.</p>
+                        <input ng-disabled="disabled || postData.TOTAL_EXP==0 || !postData.TOTAL_EXP" type="text" class="form-control" name="CURRENT_DESIGNATION" ng-model="postData.CURRENT_DESIGNATION" placeholder="CURRENT_DESIGNATION"
+                          >
+                        <!-- <p ng-show="jobPostForm.CURRENT_DESIGNATION.$error.required &&  (jobPostForm.CURRENT_DESIGNATION.$dirty || submitted)" class="help-block">CURRENT_DESIGNATION is required.</p> -->
                     </div>
                 </div>
                 <div class="form-group" ng-class="{ 'has-error' : jobPostForm.CURRENT_EMPLOYER.$invalid && (jobPostForm.CURRENT_EMPLOYER.$dirty || submitted)}">
                     <label class="col-md-3 col-sm-2 control-label user-form-label">CURRENT_EMPLOYER</label>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="CURRENT_EMPLOYER" ng-model="postData.CURRENT_EMPLOYER" placeholder="CURRENT_EMPLOYER"
-                            ng-required="true">
-                        <p ng-show="jobPostForm.CURRENT_EMPLOYER.$error.required &&  (jobPostForm.CURRENT_EMPLOYER.$dirty || submitted)" class="help-block">CURRENT_EMPLOYER is required.</p>
+                        <input ng-disabled="disabled || postData.TOTAL_EXP==0 || !postData.TOTAL_EXP" type="text" class="form-control" name="CURRENT_EMPLOYER" ng-model="postData.CURRENT_EMPLOYER" placeholder="CURRENT_EMPLOYER"
+                            >
+                        <!-- <p ng-show="jobPostForm.CURRENT_EMPLOYER.$error.required &&  (jobPostForm.CURRENT_EMPLOYER.$dirty || submitted)" class="help-block">CURRENT_EMPLOYER is required.</p> -->
                     </div>
                 </div>
                 <div class="form-group" ng-class="{ 'has-error' : jobPostForm.CURRENT_SALARY.$invalid && (jobPostForm.CURRENT_SALARY.$dirty || submitted)}">
                     <label class="col-md-3 col-sm-2 control-label user-form-label">CURRENT_SALARY</label>
                     <div class="col-md-6">
-                        <input type="number" class="form-control" name="CURRENT_SALARY" ng-model="postData.CURRENT_SALARY" placeholder="CURRENT_SALARY"
-                            ng-required="true">
-                        <p ng-show="jobPostForm.CURRENT_SALARY.$error.required &&  (jobPostForm.CURRENT_SALARY.$dirty || submitted)" class="help-block">CURRENT_SALARY is required.</p>
+                        <input ng-disabled="disabled || postData.TOTAL_EXP==0 || !postData.TOTAL_EXP" type="text" class="form-control" name="CURRENT_SALARY" ng-model="postData.CURRENT_SALARY" placeholder="CURRENT_SALARY"
+                          >
+                        <!-- <p ng-show="jobPostForm.CURRENT_SALARY.$error.required &&  (jobPostForm.CURRENT_SALARY.$dirty || submitted)" class="help-block">CURRENT_SALARY is required.</p> -->
                     </div>
                 </div>
                 <div class="form-group" ng-class="{ 'has-error' : jobPostForm.HIGH_QUALIFICATION.$invalid && (jobPostForm.HIGH_QUALIFICATION.$dirty || submitted)}">
                     <label class="col-md-3 col-sm-2 control-label user-form-label">Highest Qulification</label>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="HIGH_QUALIFICATION" ng-model="postData.HIGH_QUALIFICATION" placeholder="HIGH_QUALIFICATION"
+                        <input ng-disabled="disabled" type="text" class="form-control" name="HIGH_QUALIFICATION" ng-model="postData.HIGH_QUALIFICATION" placeholder="HIGH_QUALIFICATION"
                             ng-required="true">
                         <p ng-show="jobPostForm.HIGH_QUALIFICATION.$error.required &&  (jobPostForm.HIGH_QUALIFICATION.$dirty || submitted)" class="help-block">HIGH_QUALIFICATION is required.</p>
                     </div>
@@ -147,21 +152,21 @@
                 <div class="form-group" ng-class="{ 'has-error' : jobPostForm.INSTITION.$invalid && (jobPostForm.INSTITION.$dirty || submitted)}">
                     <label class="col-md-3 col-sm-2 control-label user-form-label">INSTITION</label>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="INSTITION" ng-model="postData.INSTITION" placeholder="INSTITION" ng-required="true">
+                        <input ng-disabled="disabled" type="text" class="form-control" name="INSTITION" ng-model="postData.INSTITION" placeholder="INSTITION" ng-required="true">
                         <p ng-show="jobPostForm.INSTITION.$error.required &&  (jobPostForm.INSTITION.$dirty || submitted)" class="help-block">INSTITION is required.</p>
                     </div>
                 </div>
                 <div class="form-group" ng-class="{ 'has-error' : jobPostForm.RESUME_TITLE.$invalid && (jobPostForm.RESUME_TITLE.$dirty || submitted)}">
                     <label class="col-md-3 col-sm-2 control-label user-form-label">RESUME_TITLE</label>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="RESUME_TITLE" ng-model="postData.RESUME_TITLE" placeholder="RESUME_TITLE" ng-required="true">
+                        <input ng-disabled="disabled" type="text" class="form-control" name="RESUME_TITLE" ng-model="postData.RESUME_TITLE" placeholder="RESUME_TITLE" ng-required="true">
                         <p ng-show="jobPostForm.RESUME_TITLE.$error.required &&  (jobPostForm.RESUME_TITLE.$dirty || submitted)" class="help-block">RESUME_TITLE is required.</p>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-3 col-sm-2 control-label user-form-label">Resume</label>
                     <div class="col-md-6" style="position:relative">
-                        <input type="file" custom-on-change="handleFileSelect" />
+                        <input ng-disabled="disabled" type="file" custom-on-change="handleFileSelect" />
                         <!--<button class="btn btn-info pull-right" type="button" ng-click="abc=!abc">Add / Update logo</button>
                             <div ng-show="postData.file">
                                 <img width="100px" ng-src="{{postData.file}}"></img>
@@ -184,8 +189,8 @@
                     <div class="col-md-3">
                     </div>
                     <div class="col-md-9">
-                        <button type="submit" class="btn btn-success"> Save </button>
-                        <button type="reset" class="btn btn-warning"> Reset </button>
+                        <button ng-disabled="disabled && enable" type="submit" class="btn btn-success"> Apply </button>
+                        <button ng-disabled="disabled && enable" type="reset" class="btn btn-warning"> Reset </button>
                     </div>
                 </div>
 
