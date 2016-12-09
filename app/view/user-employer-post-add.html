@@ -3,7 +3,7 @@
 </div>
 <div class="row">
     <div class="col-md-2">
-        
+
 
 <div class="list-group">
     <a href="#" class="list-group-item active">Item 1</a>
@@ -11,7 +11,7 @@
     <a href="#" class="list-group-item">Item 3</a>
 </div>
 
-        
+
     </div>
     <div class="col-md-10">
 <div class="row" cg-busy="myPromise">
@@ -25,7 +25,7 @@
       </header>
       <div class="panel-body">
 
-        <form id="register-form" class="form-horizontal" name="jobPostForm" ng-submit="submitForm(jobPostForm.$valid)" novalidate>
+        <form id="register-form" class="form-horizontal" name="jobPostForm" ng-submit="submitForm(jobPostForm.$valid,'Employer')" novalidate>
 
           <div class="form-group" ng-class="{ 'has-error' : jobPostForm.NAME.$invalid && (jobPostForm.NAME.$dirty || submitted)}">
             <label class="col-lg-4 col-sm-2 control-label">POST NAME</label>

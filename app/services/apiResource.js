@@ -3,10 +3,12 @@
 angular.module("common.services")
 .factory("apiResource", ["$resource", "appSetting", "currentUser", apiResource]);
 
-function apiResource($resource, appSetting, currentUser) {
+function apiResource($resource, appSetting, currentUser)
+{
 		return $resource(appSetting.serverPath + "login", null,
         {
 			 'addEmployer':{method:'POST',url:appSetting.serverPath +"login/add_employer", headers: { 'Authorization': currentUser.getProfile().token }},
+			 'addFranchiesies':{method:'POST',url:appSetting.serverPath +"login/add_Franchiesies"},
 			 'getIndPost':{method:'GET',url:appSetting.serverPath +"login/getIndPost/:pId", headers: { 'Authorization': currentUser.getProfile().token }},
 			 'getAllPost':{method:'GET',url:appSetting.serverPath +"login/getAllPost", headers: { 'Authorization': currentUser.getProfile().token }},
 			  'getAllPostRelToEmp':{method:'GET',url:appSetting.serverPath +"login/getAllPostRelToEmp", headers: { 'Authorization': currentUser.getProfile().token }},

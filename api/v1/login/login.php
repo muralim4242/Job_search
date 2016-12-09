@@ -257,6 +257,7 @@ $app->post('/login', function() use ($app)
 				$response["error"] = false;
 				$response['apiKey'] = $user["API_KEY"];
 				$response['view']=$user["view"];
+				$response['status']=$user['STATUS'];
 
 
 				// 				$response['created_at'] = $user['created_at'];
@@ -324,6 +325,102 @@ $app->post('/add_employer','authenticate',function() use ($app)
     global $user_id;
 
 	$db = new loginHandler();
+
+    	$res= $db->add_employer($user_id,$employer_name,$telephone);
+
+
+
+	if ($res)
+	{
+
+
+		$response["error"] = false;
+
+
+
+
+		/*  $response['id'] = $user['id'];                            $response['apiKey'] = $user['api_Key'];                            $response['created_at'] = $user['created_at'];*/
+
+
+		$response['message'] = "Employer record created successfully";
+
+
+	}
+
+
+	else
+	{
+
+
+		// 		unknown error occurred
+		$response['error'] = true;
+
+
+		$response['message'] = "An error occurred. Please try again";
+
+
+	}
+
+
+
+	echoRespnse(200, $response);
+
+});
+
+$app->post('/add_Franchiesies',function() use ($app)
+{
+    	$response = array();
+
+
+	$request_params = json_decode($app->request()->getBody(), true);
+
+
+	$employer_name = $request_params['employer_name'];
+
+
+	$telephone = $request_params['telephone'];
+
+	$api_key=$request_params['api_key'];
+	$db = new loginHandler();
+
+	if (!$db->isValidApiKey($api_key)) {
+
+
+		// 			api key is not present in users table
+		$response["error"] = true;
+
+
+		$response["message"] = "Access Denied. Invalid Api key";
+
+
+		echoRespnse(401, $response);
+
+
+		$app->stop();
+
+
+	}
+
+	else {
+
+
+		global $user_id;
+
+
+		// 			get user primary key id
+		$user_id = $db->getUserId($api_key);
+
+
+		// 			echo $user_id;
+
+
+	}
+
+
+
+    global $user_id;
+
+
 
     	$res= $db->add_employer($user_id,$employer_name,$telephone);
 

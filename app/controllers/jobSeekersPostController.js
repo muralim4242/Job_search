@@ -4,6 +4,16 @@ angular.module("app").controller("jobSeekersPost",
 function ($scope, $log, apiResource,currentUser, $timeout, $location,posts,title, $state, $rootScope, jobSeekersPost, notifier) {
 
 //  console.log(posts.jobPosts);
+$scope.isLoggedIn = function () {
+    return currentUser.getProfile().isLoggedIn;
+};
+
+$scope.view=function()
+{
+    return currentUser.getProfile().view;
+}
+
+
   $scope.isLoading = true;
   $scope.posts=posts.jobPosts;
   $scope.postIdSelected=undefined;

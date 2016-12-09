@@ -90,12 +90,22 @@ class loginHandler
 			}
 
 
-			else
+			else if($user["VIEW"]=="Admin")
 			{
 	//			echo "hai2";
 				$user["API_KEY"]=$api_key;
 				$user["ROLE_ID"]=1;
 				$user["PASSWORD_HASH"]=$password_hash;
+				unset($user["PASSWORD"]);
+				unset($user["VIEW"]);
+				//print_r($user);
+				$isQueryExecuted=$this->conn->insert("users",$user);
+			}
+			else {
+				$user["API_KEY"]=$api_key;
+				$user["ROLE_ID"]=3;
+				$user["PASSWORD_HASH"]=$password_hash;
+				$user["STATUS"]=0;
 				unset($user["PASSWORD"]);
 				unset($user["VIEW"]);
 				//print_r($user);
@@ -537,7 +547,7 @@ class loginHandler
 	{
 
 
-		$data=$this->conn->get("users",["API_KEY","ROLE_ID"], [
+		$data=$this->conn->get("users",["API_KEY","ROLE_ID","STATUS"], [
 		"EMAIL" => $email
 		]);
 
@@ -553,9 +563,12 @@ class loginHandler
 		{
 			$data["view"]="Admin";
 		}
-		else
+		else if($data['ROLE_ID']==2)
 		{
 			$data["view"]="Employer";
+		}
+		else {
+				$data["view"]="Franchiesies";
 		}
 
 			return $data;

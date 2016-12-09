@@ -1,6 +1,16 @@
 "use strict";
-angular.module("app").controller("employerPosts", ["$scope",  "$log", "apiResource","posts","title", "$timeout", "$location","$stateParams","$state","$rootScope",function ($scope, $log,apiResource, posts,title, $timeout,$location,$stateParams,$state,$rootScope)
+angular.module("app").controller("employerPosts", ["$scope",  "$log", "apiResource","currentUser","posts","title", "$timeout", "$location","$stateParams","$state","$rootScope",function ($scope, $log,apiResource,currentUser, posts,title, $timeout,$location,$stateParams,$state,$rootScope)
 {
+  $scope.isLoggedIn = function () {
+      return currentUser.getProfile().isLoggedIn;
+  };
+
+  $scope.view=function()
+  {
+      return currentUser.getProfile().view;
+  }
+
+
 //	$scope.isLoading = true;
  $scope.rowCollection = posts.jobPosts;
   $scope.title = title;

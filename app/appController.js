@@ -63,17 +63,22 @@ function MainCtrl($scope, userAccount, apiResource, currentUser, $state, $stateP
 
 
 
-    $scope.registerUser = function (form) {
+    $scope.registerUser = function (form,View="") {
         $scope.submitted = true;
+        console.log(View);
+    //    console.log($stateParams);
         if (form) {
             if ($scope.userData.confirmPassword === $scope.userData.PASSWORD) {
                 $scope.myPromise = userAccount.registration.registerUser({
                         EMAIL: $scope.userData.EMAIL,
                         PASSWORD: $scope.userData.PASSWORD,
-                        VIEW: "Employer"
+                        VIEW: View
                     },
                     function (data) {
+
                         if (!data.error) {
+                          if(View=="Employer")
+                          {
                             if (currentUser.setProfile(data.view, data.apiKey)) {
                                 $scope.myPromise = apiResource.addEmployer({
                                     telephone: $scope.userData.TELEPHONE,
@@ -86,7 +91,23 @@ function MainCtrl($scope, userAccount, apiResource, currentUser, $state, $stateP
 
                                 });
                             }
-                        }
+                          }
+                          else {
+                            $scope.myPromise = apiResource.addFranchiesies({
+                                telephone: $scope.userData.TELEPHONE,
+                                employer_name: $scope.userData.NAME,
+                                api_key:data.apiKey
+                            }, function (response) {
+                              $scope.notificationText = "We will revert back soon";
+                              $('#notificationModal').modal('show');
+                              //  $scope.login(true);
+                            }, function (error) {
+                                $scope.notificationText = error.message;
+                                $('#notificationModal').modal('show');
+
+                            });
+                          }
+                                                    }
                         $scope.submitted = false;
                         $scope.message = data.message;
                     },
@@ -114,9 +135,17 @@ function MainCtrl($scope, userAccount, apiResource, currentUser, $state, $stateP
                     if (!data.error) {
                         $scope.message = "";
 
-                         currentUser.setProfile(data.view, data.apiKey);
+                        if(data.status==0 && data.view=="Franchiesies")
+                        {
+                          $scope.notificationText = "Account not activated or invalid credentials for Franchiesies";
+                          $('#notificationModal').modal('show');
+                        }
+                        else {
+                          currentUser.setProfile(data.view, data.apiKey);
 
-                        window.location.reload();
+                          window.location.reload();
+                        }
+
 
                     }
                     $scope.message = data.message;
@@ -149,7 +178,7 @@ function MainCtrl($scope, userAccount, apiResource, currentUser, $state, $stateP
         {
 
         })
-        
+
     }
 
 
