@@ -5,7 +5,7 @@
 <div class="container-fluid">
 
 <div cg-busy="myPromise">
-    <div ng-show="(!isLoggedIn()||view()=='Admin' ||view()=='Franchiesies')" class="sign-in-form" style="margin-top:90px">
+    <div ng-show="(!isLoggedIn()||view()=='Franchiesies')" class="sign-in-form" style="margin-top:90px">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">
@@ -368,7 +368,7 @@
             </div>
         </div>
     </div>
-    <div ng-show="(isLoggedIn()&&view()=='Employer') " class="col-lg-12">
+    <div ng-show="(isLoggedIn()&&(view()=='Employer'||view()=='Admin')) " class="col-lg-12">
         <div class="row">
     <div class="col-md-2">
 
