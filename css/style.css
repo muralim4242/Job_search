@@ -55,8 +55,8 @@ body {
 }
 
 .active {
-    color: #029f5b;
-    font-size: 18px;
+        font-size: 14px;
+    font-weight: bold;
 }
 
 .text-capital {
@@ -227,6 +227,11 @@ h2.title-v2:after {
 /*******************************************************Header**********************************/
 header {
     background: #fff;
+}
+.cust-navabar {
+        font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 400;
 }
 /*******************************************************Candidate Upload**********************************/
 .user-form-label {
