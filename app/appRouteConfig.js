@@ -151,12 +151,12 @@ angular.module('app').config(['$logProvider', '$stateProvider', '$urlRouterProvi
             controller: 'requestedContacts',
             resolve: {
                 title: function () {
-                    return "All Employers Posts";
+                    return "Requested to contact";
                 },
 
                 posts: function (apiResource, currentUser) {
                     if (currentUser.getProfile().token) {
-                        return apiResource.getAllPost().$promise;
+                        return apiResource.getContactUs().$promise;
                     }
                     return [];
 

@@ -10,7 +10,7 @@
             </header>
             <div class="table-responsive">
             <!--<a ui-sref="user.employer-post-add" class="btn btn-danger pull-right" >Add Post</a>-->
-            <table st-table="rowCollection" class="table table-striped table-advance table-hover">
+            <table st-table="rowCollection" class="table table-striped table-advance table-hover text-capital">
                 <thead>
                     <tr>
                         <th colspan="3">
@@ -46,7 +46,7 @@
                         <td>{{row.CURRENT_EMPLOYER}}</td>
                         <td>{{row.CURRENT_SALARY}}</td>
                         <td>{{row.HIGH_QUALIFICATION}}</td>
-                        <td>{{row.INSTITION}}</td>
+                        <!--<td>{{row.INSTITION}}</td>-->
                         <td>{{row.RESUME_TITLE}}</td>
                         <td><a ng-show="row.RESUME_LOCATION" ng-href={{row.RESUME_LOCATION}} target="_blank">Resume</a><span ng-show="!row.RESUME_LOCATION">No File</span></a> </td>
                         <!--<

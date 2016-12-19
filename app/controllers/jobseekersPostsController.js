@@ -13,60 +13,59 @@ function ($scope, $log,apiResource, posts,title, $timeout,$location,$stateParams
     },
 	{
       'name': 'FULL_NAME',
-      'displayName': 'FULL_NAME'
+      'displayName': 'Name'
     },
     {
         'name': 'EMAIL',
-        'displayName': 'EMAIL'
+        'displayName': 'Email'
       },
 			 {
         'name': 'TELEPHONE',
-        'displayName': 'TELEPHONE'
+        'displayName': 'Contact'
       }
 			,
 			 {
         'name': 'CURRENT_LOCATION',
-        'displayName': 'CURRENT_LOCATION EXP'
-      }
-				,
+        'displayName': 'Location'
+      },
 			 {
         'name': 'KEY_SKILLS',
-        'displayName': 'KEY SKILLS'
+        'displayName': 'Key Skills'
       }
 			,
 			 {
         'name': 'TOTAL_EXP',
-        'displayName': 'TOTAL_EXP'
+        'displayName': 'Experience'
       }
       ,
 			 {
         'name': 'CURRENT_DESIGNATION',
-        'displayName': 'CURRENT_DESIGNATION'
+        'displayName': 'Present Designation'
       }
 				,
 			 {
         'name': 'CURRENT_EMPLOYER',
-        'displayName': 'CURRENT_EMPLOYER'
+        'displayName': 'Present Employer'
       }
 			,
 			 {
         'name': 'CURRENT_SALARY',
-        'displayName': 'CURRENT_SALARY'
+        'displayName': 'Present Salaty'
       }
       	,
 			 {
         'name': 'HIGH_QUALIFICATION',
-        'displayName': 'HIGH_QUALIFICATION'
+        'displayName': 'Qualification'
       }
-      ,
-			 {
-        'name': 'INSTITION',
-        'displayName': 'INSTITION'
-      }
+      // ,
+			//  {
+      //   'name': 'INSTITION',
+      //   'displayName': 'Institution'
+      // }
         ,
 			 {
         'name': 'RESUME_TITLE',
-        'displayName': 'RESUME_TITLE'
+        'displayName': 'Resume'
       }
 
   ];

@@ -1,53 +1,42 @@
 "use strict";
 angular.module("app").controller("requestedContacts", 
 ["$scope",  "$log", "apiResource","posts","title", "$timeout", "$location","$stateParams","$state","$rootScope",
-function ($scope, $log,apiResource, posts,title, $timeout,$location,$stateParams,$state,$rootScope)
+function ($scope, $log,apiResource,posts,title, $timeout,$location,$stateParams,$state,$rootScope)
 {
 //	$scope.isLoading = true;
- $scope.rowCollection = posts.jobPosts;
+ $scope.rowCollection = posts.contactUS;
   $scope.title = title;
   $scope.dealTitle=$stateParams.dealTitle
   $scope.headerCollection = [{
-      'name': 'ID',
-      'displayName': 'SL.No'
+      'name': 'CompanyName',
+      'displayName': 'Company Name'
     },
 	{
-      'name': 'NAME',
-      'displayName': 'NAME'
+      'name': 'Sector',
+      'displayName': 'Sector'
     },
     {
-        'name': 'POSITIONS',
-        'displayName': 'POSITIONS'
+        'name': 'Location',
+        'displayName': 'Location'
+      }
+			,
+			 {
+        'name': 'Message',
+        'displayName': 'Message'
       },
 			 {
-        'name': 'LOCATIONS',
-        'displayName': 'LOCATIONS'
-      }
-			,
+        'name': 'ContactPerson',
+        'displayName': 'Contact Person'
+      },
 			 {
-        'name': 'TOTAL_EXP',
-        'displayName': 'TOTAL EXP'
-      }
-				,
+        'name': 'PhoneNumber',
+        'displayName': 'PhoneNumber'
+      },
 			 {
-        'name': 'KEY_SKILLS',
-        'displayName': 'KEY SKILLS'
+        'name': 'Email',
+        'displayName': 'Email'
       }
-			,
-			 {
-        'name': 'JOB_DESCRIPTION',
-        'displayName': 'JOB DESCRIPTION'
-      }
-				,
-			 {
-        'name': 'START_DATE',
-        'displayName': 'START DATE'
-      }
-			,
-			 {
-        'name': 'END_DATE',
-        'displayName': 'END DATE'
-      }
+			
   ];
 
 	$scope.expireDeal=function()

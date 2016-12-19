@@ -59,6 +59,10 @@ body {
     font-size: 18px;
 }
 
+.text-capital {
+    text-transform: capitalize;
+}
+
 /***************************************Buttons**********************************/
 .custom-btn {
     color: #fff;

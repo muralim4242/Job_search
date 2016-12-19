@@ -1,77 +1,34 @@
 <?php
 require_once 'loginHandler.php';
-
-
 require_once '../../../api/includes/passHash.php';
-
-
 require '../../../api/libs/Slim/Slim.php';
-
-
-
 \Slim\Slim::registerAutoloader();
 
 
 
 $app = new \Slim\Slim();
-
-
-
 // User id from db - Global Variable
 $user_id = NULL;
 
-
-
-
-
 /** * Adding Middle Layer to authenticate every request * Checking if the request has valid api key in the 'Authorization' header */
-
-
 function authenticate(\Slim\Route $route) {
-
-
 	// 	Getting request headers
 	$headers = apache_request_headers();
-
-
 	$response = array();
-
-
 	$app = \Slim\Slim::getInstance();
-
-
-
 	// 	Verifying Authorization Header
 	if (isset($headers['Authorization'])) {
-
-
 		$db = new loginHandler ();
-
-
-
 		// 		get the api key
 		$api_key = $headers['Authorization'];
-
-
 		// 		validating api key
 		if (!$db->isValidApiKey($api_key)) {
-
-
-			// 			api key is not present in users table
+			// 	api key is not present in users table
 			$response["error"] = true;
-
-
 			$response["message"] = "Access Denied. Invalid Api key";
-
-
 			echoRespnse(401, $response);
-
-
 			$app->stop();
-
-
 		}
-
 		else {
 
 
