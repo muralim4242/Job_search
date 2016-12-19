@@ -877,6 +877,11 @@ class loginHandler
 		return $this->conn->count("job_seekers");
 	}
 
+	 public function total_requested_contacts($value='')
+	{
+		return $this->conn->count("contactus");
+	}
+
 	public function logout($user_id)
 	{
 	//	echo $user_id;

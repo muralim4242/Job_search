@@ -12,30 +12,44 @@
   <i class="fa fa-spinner fa-5x fa-spin"></i>
 </div> -->
 
-<div cg-busy="myPromise" class="row state-overview">
-  <div class="col-lg-3 col-sm-6">
-    <section class="panel">
-      <div class="symbol terques">
+<div cg-busy="myPromise" class="dashboard-overview">
+  <div class="col-md-3 col-sm-6">
+    <section class="panel cust-dasboard-panel panel-orange ">
+      <div class="symbol">
         <i class="fa fa-user"></i>
       </div>
       <div class="value">
+         <p>Total Job Post</p>
         <h1 class="count">
           {{totalJobPosts?totalJobPosts:0}}
         </h1>
-        <p>Total Job Post</p>
+       
       </div>
     </section>
   </div>
-  <div class="col-lg-3 col-sm-6">
-    <section class="panel">
-      <div class="symbol red">
+  <div class="col-md-3 col-sm-6">
+    <section class="panel cust-dasboard-panel panel-green">
+      <div class="symbol">
         <i class="fa fa-tags"></i>
       </div>
       <div class="value">
-        <h1 class=" count2">
+         <p>Total Job Seekers</p>
+        <h1 class="count">
           {{totalJobSeekers?totalJobSeekers:0}}
-        </h1>
-        <p>Total Job Seekers</p>
+        </h1> 
+      </div>
+    </section>
+  </div>
+   <div class="col-md-3 col-sm-6">
+    <section class="panel cust-dasboard-panel panel-lightpink">
+      <div class="symbol">
+      <i class="fa fa-retweet" aria-hidden="true"></i>
+      </div>
+      <div class="value">
+         <p>Total Requested Contacts</p>
+        <h1 class="count">
+          {{totalRequestedContacts?totalRequestedContacts:0}}
+        </h1> 
       </div>
     </section>
   </div>

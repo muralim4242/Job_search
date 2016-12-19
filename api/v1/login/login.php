@@ -1064,7 +1064,7 @@ $app->get('/dashboard','authenticate',function()
 	$db=new loginHandler();
 	$response["totalJobPosts"]=$db->total_job_posts();
 	$response["totalJobSeekers"]=$db->total_job_seekers();
-
+    $response["totalRequestedContacts"]=$db->total_requested_contacts();
 	echoRespnse(200,$response);
 });
 

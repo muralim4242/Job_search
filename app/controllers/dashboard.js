@@ -4,6 +4,7 @@ angular.module("app").controller("dashboard", ["$scope", "$log", "apiResource", 
     $scope.title = title;
     $scope.totalJobPosts = dashboard.totalJobPosts;
     $scope.totalJobSeekers = dashboard.totalJobSeekers;
+    $scope.totalRequestedContacts=dashboard.totalRequestedContacts;
 
 }]);
 
