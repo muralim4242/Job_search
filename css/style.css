@@ -90,14 +90,13 @@ body {
 /***********************************Home***********************************************/
 .best-job {
     padding-top: 50px;
-    color: #f4f4f4;
-    font-size: 43px;
-        padding-left: 80px;
+    color: #fff;
+    font-size: 45px;
+    letter-spacing: 2px;
 }
 .find-job {
         font-size: 35px;
-    color: #fefefe;
-        padding-left: 80px;
+    color: #fff;
 }
 .city {
     color: #5a7ba4;
@@ -136,6 +135,9 @@ body {
 }
 .what-we-do {
     background: #fff;
+    text-align: center;
+    line-height: 24px;
+    font-size: 14px;
 }
 h2.title-v2 {
     color: #555;
@@ -143,12 +145,12 @@ h2.title-v2 {
     margin-bottom: 30px;
 }
 h2.title-v2:after {
-    left: 0;
-    width: 70px;
+left: 48%;
+    width: 60px;
     height: 2px;
     content: " ";
     bottom: -10px;
-    background: #555;
+    background: #72c02c;
     position: absolute;
 }
 
@@ -187,6 +189,11 @@ h2.title-v2:after {
 }
 .headline-center p {
     font-size: 14px;
+}
+.clients {
+        background: #fff;
+    padding-top: 45px;
+    padding-bottom: 60px;
 }
 /***********************************************Dashboard****************************************/
 .dashboard-overview {

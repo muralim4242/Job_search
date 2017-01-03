@@ -103,11 +103,11 @@ angular.module('app').config(['$logProvider', '$stateProvider', '$urlRouterProvi
         state('admin', {
             abstract: true,
             url: '/admin',
-            templateUrl: 'app/view/admin.html'
+            templateUrl: 'app/view/admin/admin.html'
         })
         .state('admin.home', {
             url: '/home',
-            templateUrl: 'app/view/dashboard.html',
+            templateUrl: 'app/view/admin/dashboard.html',
             controller: 'dashboard',
             resolve: {
                 title: function () {
@@ -127,7 +127,7 @@ angular.module('app').config(['$logProvider', '$stateProvider', '$urlRouterProvi
         })
         .state('admin.employer-posts', {
             url: '/employer-posts',
-            templateUrl: 'app/view/admin-employer-posts.html',
+            templateUrl: 'app/view/admin/admin-employer-posts.html',
             controller: 'employerPosts',
             resolve: {
                 title: function () {
@@ -167,7 +167,7 @@ angular.module('app').config(['$logProvider', '$stateProvider', '$urlRouterProvi
         })
         .state('admin.job-seekers-posts', {
             url: '/job-seekers-posts',
-            templateUrl: 'app/view/admin-job-seekers-posts.html',
+            templateUrl: 'app/view/admin/admin-job-seekers-posts.html',
             controller: 'jobSeekersPosts',
             resolve: {
                 title: function () {
