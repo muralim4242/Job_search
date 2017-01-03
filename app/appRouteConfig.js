@@ -5,6 +5,7 @@ angular.module('app').config(['$logProvider', '$stateProvider', '$urlRouterProvi
     $logProvider.debugEnabled(true);
 
     $urlRouterProvider.otherwise('/user/home');
+    $urlRouterProvider.when("/user/employer", "/user/employer/user-employer-posts");
 
     $stateProvider
         .state('user', {
@@ -36,9 +37,13 @@ angular.module('app').config(['$logProvider', '$stateProvider', '$urlRouterProvi
             }
 
         })
-        .state('user.employer-posts', {
-            url: '/employer-posts',
-            templateUrl: 'app/view/user-employer-posts.html',
+        .state('user.employer',{
+             url: '/employer',
+             templateUrl: 'app/view/employer/employer-dashboard.html',
+        })
+        .state('user.employer.employer-posts', {
+            url: '/user-employer-posts',
+            templateUrl: 'app/view/employer/user-employer-posts.html',
             controller: 'employerPosts',
             resolve: {
                 title: function () {
@@ -56,9 +61,9 @@ angular.module('app').config(['$logProvider', '$stateProvider', '$urlRouterProvi
             }
 
         }).
-        state('user.employer-post-add', {
+        state('user.employer.employer-post-add', {
             url: '/employer-post-add',
-            templateUrl: 'app/view/user-employer-post-add.html',
+            templateUrl: 'app/view/employer/user-employer-post-add.html',
             controller: 'employerPostAdd',
             resolve: {
                 title: function () {

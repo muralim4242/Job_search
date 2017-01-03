@@ -1,0 +1,103 @@
+<section class="padding-top-25">
+    <div class="container-fluid">
+        <div cg-busy="myPromise">
+            <div ng-show="(!isLoggedIn()||view()=='Franchiesies')" class="sign-in-form" style="margin-top:90px">
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-login">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <a href="" class="active" id="login-form-link" ng-click="$parent.clearMessage($event)">Login</a>
+                        </div>
+                        <div class="col-xs-6">
+                            <a href="" id="register-form-link" ng-click="$parent.clearMessage($event)">Register</a>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <form cg-busy="myPromise" id="login-form" name="loginForm" ng-submit="$parent.login(loginForm.$valid)" novalidate style="display: block;">
+<div class="login-wrap">
+    <div class="form-group" ng-class="{ 'has-error' : loginForm.EMAIL.$invalid && (loginForm.EMAIL.$dirty || submitted)}">
+        <input type="EMAIL" class="form-control" name="EMAIL" ng-model="$parent.userData.EMAIL" placeholder="EMAIL" ng-required="true">
+        <p ng-show="loginForm.EMAIL.$error.required &&  (loginForm.EMAIL.$dirty || submitted)" class="help-block">EMAIL is required.</p>
+        <p ng-show="loginForm.EMAIL.$error.EMAIL &&  (loginForm.EMAIL.$dirty || submitted)" class="help-block">This not a valid EMAIL address.</p>
+    </div>
+    <div class="form-group" ng-class="{ 'has-error' : loginForm.PASSWORD.$invalid && (loginForm.PASSWORD.$dirty || submitted)}">
+        <input type="PASSWORD" id="PASSWORD" class="form-control" name="PASSWORD" ng-model="$parent.userData.PASSWORD" placeholder="PASSWORD"
+            ng-model-options="{ debounce: 1000 }" ng-required="true" pattern="^((?=.*[A-Za-z])(?=.*\d)).{6,15}$">
+        <p ng-show="loginForm.PASSWORD.$error.required &&  (loginForm.PASSWORD.$dirty || submitted)" class="help-block">This field is required</p>
+        <p ng-show="loginForm.PASSWORD.$error.pattern &&  (loginForm.PASSWORD.$dirty || submitted)" class="help-block">Minimum 8 and Maximum 15 characters, must include at least 1 number</p>
+    </div>
+
+    <br>
+    <br>
+    <button class="btn btn-lg btn-login btn-block">Sign in</button>
+</div>
+
+</form>
+<form cg-busy="myPromise" id="register-form" name="registrationForm" ng-submit="$parent.registerUser(registrationForm.$valid)"
+    novalidate style="display: none;">
+<!--  <h2 class="form-signin-heading">registration now</h2> -->
+<div class="login-wrap">
+    <div class="form-group" ng-class="{ 'has-error' : registrationForm.NAME.$invalid && (registrationForm.NAME.$dirty || submitted)}">
+        <input type="text" class="form-control" name="NAME" ng-model="$parent.userData.NAME" placeholder="Company Name" ng-required="true">
+        <p ng-show="registrationForm.NAME.$error.required &&  (registrationForm.NAME.$dirty || submitted)" class="help-block">Contact Name is required.</p>
+    </div>
+    <!-- <p> Enter your account details below</p> -->
+    <div class="form-group" ng-class="{ 'has-error' : registrationForm.EMAIL.$invalid && (registrationForm.EMAIL.$dirty || submitted)}">
+        <input type="EMAIL" class="form-control" name="EMAIL" ng-model="$parent.userData.EMAIL" placeholder="EMAIL" ng-required="true">
+        <p ng-show="registrationForm.EMAIL.$error.required &&  (registrationForm.EMAIL.$dirty || submitted)" class="help-block">EMAIL is required.</p>
+        <p ng-show="registrationForm.EMAIL.$error.EMAIL &&  (registrationForm.EMAIL.$dirty || submitted)" class="help-block">This not a valid EMAIL address.</p>
+    </div>
+    <div class="form-group" ng-class="{ 'has-error' : registrationForm.TELEPHONE.$invalid && (registrationForm.TELEPHONE.$dirty || submitted)}">
+        <input type="text" class="form-control" name="TELEPHONE" ng-model="$parent.userData.TELEPHONE" ng-model-options="{ debounce: 1000 }"
+            ng-required="true" placeholder="Telephone" pattern="^(?:(?:\(?(?:0(?:0|11)\)?[\s-]?\(?|\+)44\)?[\s-]?(?:\(?0\)?[\s-]?)?)|(?:\(?0))(?:(?:\d{5}\)?[\s-]?\d{4,5})|(?:\d{4}\)?[\s-]?(?:\d{5}|\d{3}[\s-]?\d{3}))|(?:\d{3}\)?[\s-]?\d{3}[\s-]?\d{3,4})|(?:\d{2}\)?[\s-]?\d{4}[\s-]?\d{4}))(?:[\s-]?(?:x|ext\.?|\#)\d{3,4})?$">
+        <p ng-show="registrationForm.TELEPHONE.$error.required && (registrationForm.TELEPHONE.$dirty || submitted)" class="help-block">Telephone Number is required.</p>
+        <p ng-show="registrationForm.TELEPHONE.$error.pattern && (registrationForm.TELEPHONE.$dirty || submitted)" class="help-block">Invalid Telephone number.</p>
+    </div>
+    <div class="form-group" ng-class="{ 'has-error' : registrationForm.PASSWORD.$invalid && (registrationForm.PASSWORD.$dirty || submitted)}">
+        <input type="PASSWORD" id="PASSWORD" class="form-control" name="PASSWORD" ng-model="$parent.userData.PASSWORD" placeholder="PASSWORD"
+            ng-model-options="{ debounce: 1000 }" ng-required="true" pattern="^((?=.*[A-Za-z])(?=.*\d)).{6,15}$">
+        <p ng-show="registrationForm.PASSWORD.$error.required &&  (registrationForm.PASSWORD.$dirty || submitted)" class="help-block">This field is required</p>
+        <p ng-show="registrationForm.PASSWORD.$error.pattern &&  (registrationForm.PASSWORD.$dirty || submitted)" class="help-block">Password must be a minimum of 8 characters, containing at least 1 number</p>
+    </div>
+    <div class="form-group" ng-class="{ 'has-error' : registrationForm.confirmPassword.$invalid && (registrationForm.confirmPassword.$dirty || submitted)}">
+        <input type="password" id="confirmPassword" class="form-control" name="confirmPassword" ng-model="$parent.userData.confirmPassword"
+            placeholder="Confirm Password" ng-model-options="{ debounce: 1000 }" ng-required="true" pattern="^((?=.*[A-Za-z])(?=.*\d)).{6,15}$">
+        <p ng-show="registrationForm.confirmPassword.$error.required &&  (registrationForm.confirmPassword.$dirty || submitted)"
+            class="help-block">This field is required</p>
+        <p ng-show="registrationForm.confirmPassword.$error.pattern &&  (registrationForm.confirmPassword.$dirty || submitted)" class="help-block">Password must be a minimum of 8 characters, containing at least 1 number</p>
+    </div>
+    <input type="hidden" name="view" ng-model="$parent.userData.VIEW" value="Employer">
+
+    <button type="submit" class="btn btn-lg btn-login btn-block">Submit</button>
+</div>
+</div>
+</form>
+<div class="alert alert-info " ng-show="message ">{{message}}</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div ng-show="(isLoggedIn()&&(view()=='Employer'||view()=='Admin'))">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="list-group">
+                <a href="#" class="list-group-item active" ui-sref="user.employer.employer-posts">View Job Post Lists</a>
+                <a href="#" class="list-group-item" ui-sref="user.employer.employer-post-add">Post a Job</a>
+            </div>
+        </div>
+        <div class="col-md-10">
+            <div ui-view></div>
+        </div>
+    </div>
+</div>
