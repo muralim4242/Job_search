@@ -27,15 +27,17 @@ body {
 }
 
 .custom-form {
-        background: #fdfdfd;
+          background: #FFF;
     margin: 15px 0px;
-    padding-bottom: 35px;
-        border-radius: 10px;
+    padding-bottom: 50px;
+    padding-top: 10px;
 }
 .custom-form > h3 {
        border-bottom: 1px solid #f1f2f7;
     padding-bottom: 30px;
     padding-top: 15px;
+        color: #3498db;
+    padding-left: 113px;
 }
 .custom-form >form >div > label {
     text-align: right !IMPORTANT;
@@ -61,6 +63,9 @@ body {
 
 .text-capital {
     text-transform: capitalize;
+}
+.form-horizontal .control-label {
+    color: #231c1c;
 }
 
 /***************************************Buttons**********************************/
