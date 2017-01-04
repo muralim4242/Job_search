@@ -67,7 +67,7 @@ angular.module('app').config(['$logProvider', '$stateProvider', '$urlRouterProvi
             controller: 'employerPostAdd',
             resolve: {
                 title: function () {
-                    return "Add Post";
+                    return "Please Fill The Details";
                 }
             }
 
@@ -78,7 +78,7 @@ angular.module('app').config(['$logProvider', '$stateProvider', '$urlRouterProvi
             controller: 'jobSeekersPost',
             resolve: {
                 title: function () {
-                    return "Add Post";
+                    return "Please Fill The Details";
                 },
                  posts: function (apiResource) {
                         return apiResource.getAllPostDetailsForCandidates().$promise;

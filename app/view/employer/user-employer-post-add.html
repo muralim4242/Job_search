@@ -14,7 +14,7 @@
           <div class="form-group" ng-class="{ 'has-error' : jobPostForm.NAME.$invalid && (jobPostForm.NAME.$dirty || submitted)}">
             <label class="col-md-2  col-sm-2 control-label">Post Name</label>
             <div class="col-lg-5">
-              <input type="text" class="form-control" name="NAME" ng-model="postData.NAME" placeholder="Post Name" ng-required="true">
+              <input type="text" class="form-control no-border-radius" name="NAME" ng-model="postData.NAME" placeholder="Post Name" ng-required="true">
               <p ng-show="jobPostForm.NAME.$error.required &&  (jobPostForm.NAME.$dirty || submitted)" class="help-block">Post Name is required.</p>
             </div>
           </div>
@@ -22,7 +22,7 @@
            <div class="form-group" ng-class="{ 'has-error' : jobPostForm.POSITIONS.$invalid && (jobPostForm.POSITIONS.$dirty || submitted)}">
             <label class="col-md-2  col-sm-2 control-label">Positions</label>
             <div class="col-lg-5">
-              <input type="number" class="form-control" name="POSITIONS" ng-model="postData.POSITIONS" placeholder="Positions" ng-required="true">
+              <input type="number" class="form-control no-border-radius" name="POSITIONS" ng-model="postData.POSITIONS" placeholder="Positions" ng-required="true">
               <p ng-show="jobPostForm.POSITIONS.$error.required &&  (jobPostForm.POSITIONS.$dirty || submitted)" class="help-block">Positions filed is required.</p>
             </div>
           </div>
@@ -30,7 +30,7 @@
             <div class="form-group" ng-class="{ 'has-error' : jobPostForm.LOCATIONS.$invalid && (jobPostForm.LOCATIONS.$dirty || submitted)}">
             <label class="col-md-2  col-sm-2 control-label">Location</label>
             <div class="col-lg-5">
-              <input type="text" class="form-control" name="LOCATIONS" ng-model="postData.LOCATIONS" placeholder="Location" ng-required="true">
+              <input type="text" class="form-control no-border-radius" name="LOCATIONS" ng-model="postData.LOCATIONS" placeholder="Location" ng-required="true">
               <p ng-show="jobPostForm.LOCATIONS.$error.required &&  (jobPostForm.LOCATIONS.$dirty || submitted)" class="help-block">Location is required.</p>
             </div>
           </div>
@@ -38,7 +38,7 @@
           <div class="form-group" ng-class="{ 'has-error' : jobPostForm.TOTAL_EXP.$invalid && (jobPostForm.TOTAL_EXP.$dirty || submitted)}">
             <label class="col-md-2  col-sm-2 control-label">Minimum Experince</label>
             <div class="col-lg-5">
-              <input type="number" class="form-control" name="TOTAL_EXP" ng-model="postData.TOTAL_EXP" placeholder="Experince" ng-required="true">
+              <input type="number" class="form-control no-border-radius" name="TOTAL_EXP" ng-model="postData.TOTAL_EXP" placeholder="Experince" ng-required="true">
               <p ng-show="jobPostForm.TOTAL_EXP.$error.required &&  (jobPostForm.TOTAL_EXP.$dirty || submitted)" class="help-block">Experince field is required.</p>
             </div>
           </div>
@@ -46,7 +46,7 @@
            <div class="form-group" ng-class="{ 'has-error' : jobPostForm.KEY_SKILLS.$invalid && (jobPostForm.KEY_SKILLS.$dirty || submitted)}">
             <label class="col-md-2  col-sm-2 control-label">Key Skills</label>
             <div class="col-lg-5">
-              <textarea name="KEY_SKILLS" class="form-control" ng-model="postData.KEY_SKILLS"  ng-required="true"></textarea>
+              <textarea name="KEY_SKILLS" class="form-control no-border-radius" ng-model="postData.KEY_SKILLS"  ng-required="true"></textarea>
               <p ng-show="jobPostForm.KEY_SKILLS.$error.required &&  (jobPostForm.KEY_SKILLS.$dirty || submitted)" class="help-block">Key Skill field is required.</p>
             </div>
           </div>
@@ -54,7 +54,7 @@
            <div class="form-group" ng-class="{ 'has-error' : jobPostForm.JOB_DESCRIPTION.$invalid && (jobPostForm.JOB_DESCRIPTION.$dirty || submitted)}">
             <label class="col-md-2  col-sm-2 control-label">Job Description</label>
             <div class="col-lg-5">
-              <textarea name="JOB_DESCRIPTION" class="form-control" ng-model="postData.JOB_DESCRIPTION"  ng-required="true"></textarea>
+              <textarea name="JOB_DESCRIPTION" class="form-control no-border-radius" ng-model="postData.JOB_DESCRIPTION"  ng-required="true"></textarea>
               <p ng-show="jobPostForm.JOB_DESCRIPTION.$error.required &&  (jobPostForm.JOB_DESCRIPTION.$dirty || submitted)" class="help-block">Job Description field is required.</p>
             </div>
           </div>
@@ -62,7 +62,7 @@
            <div class="form-group" ng-class="{ 'has-error' : jobPostForm.ROLE.$invalid && (jobPostForm.ROLE.$dirty || submitted)}">
             <label class="col-md-2  col-sm-2 control-label">Role</label>
             <div class="col-lg-5">
-              <input type="text" class="form-control" name="ROLE" ng-model="postData.ROLE" placeholder="Role" ng-required="true">
+              <input type="text" class="form-control no-border-radius" name="ROLE" ng-model="postData.ROLE" placeholder="Role" ng-required="true">
               <p ng-show="jobPostForm.ROLE.$error.required &&  (jobPostForm.ROLE.$dirty || submitted)" class="help-block">Role field is required.</p>
             </div>
           </div>
@@ -70,7 +70,7 @@
           <div class="form-group" ng-class="{ 'has-error' : jobPostForm.START_DATE.$invalid && (jobPostForm.START_DATE.$dirty || submitted)}">
             <label class="col-md-2  col-sm-2 control-label">Start Date</label>
             <div class="col-lg-5">
-              <input type="date" class="form-control" name="START_DATE" ng-model="postData.START_DATE" placeholder="Start Date" ng-required="true">
+              <input type="date" class="form-control no-border-radius" name="START_DATE" ng-model="postData.START_DATE" placeholder="Start Date" ng-required="true">
               <p ng-show="jobPostForm.START_DATE.$error.required &&  (jobPostForm.START_DATE.$dirty || submitted)" class="help-block">Start Date is required.</p>
             </div>
           </div>
@@ -78,14 +78,18 @@
            <div class="form-group" ng-class="{ 'has-error' : jobPostForm.END_DATE.$invalid && (jobPostForm.END_DATE.$dirty || submitted)}">
             <label class="col-md-2  col-sm-2 control-label">End Date</label>
             <div class="col-lg-5">
-              <input type="date" class="form-control" name="END_DATE" ng-model="postData.END_DATE" placeholder="End Date" ng-required="true">
+              <input type="date" class="form-control no-border-radius" name="END_DATE" ng-model="postData.END_DATE" placeholder="End Date" ng-required="true">
               <p ng-show="jobPostForm.END_DATE.$error.required &&  (jobPostForm.END_DATE.$dirty || submitted)" class="help-block">End Date  is required.</p>
             </div>
           </div>
 
-
-          <button type="submit" class="btn btn-success">Add</button>
-          <a ui-sref="user.employer-posts" class="btn btn-warning">Back</a>
+          <div class="">
+            <div class="col-md-2"></div>
+            <div class="col-md-5">
+            <button type="submit" class="btn btn-success no-border-radius">Post</button>
+            <a ui-sref="user.employer.employer-posts" class="btn btn-warning no-border-radius">Back</a>
+            </div>
+          </div>
 
 
 

@@ -27,8 +27,11 @@
                                         <!--  <h2 class="form-signin-heading">sign in now</h2> -->
                                         <div class="login-wrap">
                                             <div class="form-group" ng-class="{ 'has-error' : loginForm.EMAIL.$invalid && (loginForm.EMAIL.$dirty || submitted)}">
-                                                <input type="EMAIL" class="form-control" name="EMAIL" ng-model="$parent.userData.EMAIL" placeholder="EMAIL" ng-required="true">
-                                                <p ng-show="loginForm.EMAIL.$error.required &&  (loginForm.EMAIL.$dirty || submitted)" class="help-block">EMAIL is required.</p>
+                                                 <div class="input-group">
+          <span class="input-group-addon no-border-radius"><i class="fa fa-envelope"></i></span>
+                                                <input type="EMAIL" class="form-control no-border-radius" name="EMAIL" ng-model="$parent.userData.EMAIL" placeholder="Email" ng-required="true">
+                                                 </div>
+                                                <p ng-show="loginForm.EMAIL.$error.required &&  (loginForm.EMAIL.$dirty || submitted)" class="help-block">Email is required.</p>
                                                 <p ng-show="loginForm.EMAIL.$error.EMAIL &&  (loginForm.EMAIL.$dirty || submitted)" class="help-block">This not a valid EMAIL address.</p>
                                             </div>
                                             <!-- <div class="form-group" ng-class="{ 'has-error' : loginForm.username.$invalid && (loginForm.username.$dirty || submitted)}">
@@ -37,9 +40,12 @@
                         <p ng-show="loginForm.username.$error.pattern &&  (loginForm.username.$dirty || submitted)" class="help-block">Input should only alphnumeric.</p>
                       </div> -->
                                             <div class="form-group" ng-class="{ 'has-error' : loginForm.PASSWORD.$invalid && (loginForm.PASSWORD.$dirty || submitted)}">
-                                                <input type="PASSWORD" id="PASSWORD" class="form-control" name="PASSWORD" ng-model="$parent.userData.PASSWORD" placeholder="PASSWORD"
+                                                 <div class="input-group">
+          <span class="input-group-addon no-border-radius"><i class="fa fa-key" aria-hidden="true"></i></span>
+                                                <input type="PASSWORD" id="PASSWORD" class="form-control no-border-radius" name="PASSWORD" ng-model="$parent.userData.PASSWORD" placeholder="Password"
                                                     ng-model-options="{ debounce: 1000 }" ng-required="true" pattern="^((?=.*[A-Za-z])(?=.*\d)).{6,15}$">
-                                                <p ng-show="loginForm.PASSWORD.$error.required &&  (loginForm.PASSWORD.$dirty || submitted)" class="help-block">This field is required</p>
+                                                 </div>
+                                                <p ng-show="loginForm.PASSWORD.$error.required &&  (loginForm.PASSWORD.$dirty || submitted)" class="help-block">Password is required</p>
                                                 <p ng-show="loginForm.PASSWORD.$error.pattern &&  (loginForm.PASSWORD.$dirty || submitted)" class="help-block">Minimum 8 and Maximum 15 characters, must include at least 1 number</p>
                                             </div>
                                             <!-- <div class="g-recaptcha" data-sitekey="6LcpzxkTAAAAAKSicVvoN2gtlAgr-_BHIO5oQeoV"></div> -->
@@ -57,7 +63,7 @@
                                             <!-- <div vc-recaptcha key="6LcpzxkTAAAAAL3ybjwZZkku5d6rZ75rqeYsqPMj"></div> -->
                                             <br>
                                             <br>
-                                            <button class="btn btn-lg btn-login btn-block">Sign in</button>
+                                            <button class="btn btn-lg btn-login btn-block no-border-radius">Sign in</button>
                                             <!--  <p>or you can sign in via social network</p>
             <div class="login-social-link">
                 <a href="index.html" class="facebook">
