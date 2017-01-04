@@ -9,6 +9,9 @@ body {
 .padding-top-25 {
     padding-top: 25px;
 }
+.padding-bottom-50 {
+    padding-bottom: 50px;
+}
 .no-border-radius {
     border-radius: 0px !important;
 }
@@ -331,20 +334,21 @@ header {
 }
 /*******************************************************Upper Footer**********************************/
 .upper-bottom {
-    background: #e4e4f9;
+    background: #272727;
     font-size: 14px;
-    padding: 25px 0px;
+        padding: 48px 0px;
 }
 .upper-bottom h3 {
         margin-top: 0;
     margin-bottom: 10px;
     text-transform: uppercase;
-    font-size: 22px;
-    color: #000;
+       font-size: 18px;
+    color: #ede8e8;
+    letter-spacing: 1px;
 }
 .upper-bottom ul {
         list-style: none;
-    padding: .8em;
+        padding: 0.8em .8em 0.8em 0;
     margin: 0;
 
 }
@@ -360,7 +364,7 @@ footer {
         padding-top: 30px;
     padding-bottom: 30px;
     color: #fff;
-    background: #323062;
+        background: #000000;
         position: absolute;
     bottom: 0;
     width: 100%;
