@@ -301,6 +301,18 @@ header {
     text-transform: capitalize;
     line-height: 18px;
 }
+.cust-employer-list-group > .list-group-item {
+    border-radius: 0px !important;
+        background: #242424;
+               color: #aaa;
+    text-decoration: none;
+    cursor: pointer;
+}
+.cust-employer-list-group > a.list-group-item:hover,
+.cust-employer-list-group > a.list-group-item:focus {
+     background: #111 !important;
+     color: #aaa;
+}
 /*******************************************************About Us**********************************/
 .about-us {
     padding: 0px 0px 25px 0px;
