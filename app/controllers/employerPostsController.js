@@ -47,6 +47,11 @@ angular.module("app").controller("employerPosts", ["$scope",  "$log", "apiResour
         'displayName': 'JOB DESCRIPTION'
       }
 				,
+        {
+         'name': 'ROLE',
+         'displayName': 'ROLE'
+       }
+         ,
 			 {
         'name': 'START_DATE',
         'displayName': 'START DATE'
@@ -58,19 +63,22 @@ angular.module("app").controller("employerPosts", ["$scope",  "$log", "apiResour
       }
   ];
 
-	$scope.expireDeal=function()
-	{
-		$scope.isLoading = true;
-		$scope.myPromise=apiResource.update({isActive:true,dealTitle:$stateParams.dealTitle},{},function(response)
-			{
-        $rootScope.$broadcast('notification', {
-          notification: response.message
+  $scope.handleSelectedRecord=function(id) {
+        $scope.selectedRecord=id;
+  }
+
+  $scope.delete=function() {
+      // console.log($scope.selectedRecord);
+      $scope.myPromise=apiResource.job_post_delete({jId:$scope.selectedRecord},{},function(response)
+        {
+          $scope.rowCollection=response.jobPosts;
+          $rootScope.$broadcast('notification', {
+            notification: response.message
+          });
+          $scope.isLoading = false;
         });
-				 $rootScope.$broadcast('ps-menu-item-update',{});
-				$state.go("inactivePosts",{isActive:false,dealTitle:$stateParams.dealTitle});
-				$scope.isLoading = false;
-			});
-	};
+  }
+
 
 
 

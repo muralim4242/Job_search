@@ -4,6 +4,35 @@
 
 angular.module("app", ["ui.router", "psFramework", "ngStorage", "common.services", "smart-table", "ngAnimate", "angucomplete-alt", "ngImgCrop", "cgBusy"])
 
+.directive('stringToNumber', function() {
+  return {
+    require: 'ngModel',
+    link: function(scope, element, attrs, ngModel) {
+      ngModel.$parsers.push(function(value) {
+        return '' + value;
+      });
+      ngModel.$formatters.push(function(value) {
+        return parseFloat(value);
+      });
+    }
+  };
+})
+
+.directive('stringToDate', function() {
+  return {
+    require: 'ngModel',
+    link: function(scope, element, attrs, ngModel) {
+      // ngModel.$parsers.push(function(value) {
+      //   return '' + value;
+      // });
+      ngModel.$formatters.push(function(value) {
+        return new Date(value);
+      });
+    }
+  };
+})
+
+
 .directive('stPersist', function() {
   return {
     require: '^stTable',

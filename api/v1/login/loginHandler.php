@@ -365,7 +365,7 @@ class loginHandler
 
 	public function getAllJobPost()
 	{
-		$result1=$this->conn->select("employers_post","*");
+		$result1=$this->conn->select("employers_post","*",["DELETE_FL"=>false]);
 		if($result1)
 		{
 			return $result1;
@@ -383,7 +383,7 @@ class loginHandler
 
 
 
-		$result1=$this->conn->select("employers_post","*",["E_ID"=>$employerId]);
+		$result1=$this->conn->select("employers_post","*",["AND"=>["E_ID"=>$employerId,"DELETE_FL"=>false]]);
 
 
 
@@ -510,6 +510,11 @@ class loginHandler
 	public function job_post_update($postId,$updatedPost)
 	{
 		return $this->conn->update("employers_post",$updatedPost,["ID"=>$postId]);
+	}
+
+	public function job_post_delete($postId)
+	{
+		return $this->conn->update("employers_post",["DELETE_FL"=>true],["ID"=>$postId]);
 	}
 
 
@@ -651,7 +656,7 @@ class loginHandler
 		if($jSId)
 		{
 		//	echo $jSId;
-			$response=$this->conn->select("job_seekers","*",["ID"=>$jSId]);
+			$response=$this->conn->select("job_seekers","*",["AND"=>["DELETE_FL"=>false,"ID"=>$jSId]]);
 			if($response)
 			{
 				return $response;

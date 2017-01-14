@@ -62,7 +62,7 @@ angular.module('app').config(['$logProvider', '$stateProvider', '$urlRouterProvi
 
         }).
         state('user.employer.employer-post-add', {
-            url: '/employer-post-add',
+            url: '/employer-post-add/:id',
             templateUrl: 'app/view/employer/user-employer-post-add.html',
             controller: 'employerPostAdd',
             resolve: {
@@ -95,7 +95,7 @@ angular.module('app').config(['$logProvider', '$stateProvider', '$urlRouterProvi
                     return "Franchiesies";
                 },
 
-                
+
                  posts: function (apiResource) {
                         return apiResource.getAllPostDetailsForCandidates().$promise;
                 }

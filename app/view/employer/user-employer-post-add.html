@@ -22,7 +22,7 @@
            <div class="form-group" ng-class="{ 'has-error' : jobPostForm.POSITIONS.$invalid && (jobPostForm.POSITIONS.$dirty || submitted)}">
             <label class="col-md-2  col-sm-2 control-label">Positions</label>
             <div class="col-lg-5">
-              <input type="number" class="form-control no-border-radius" name="POSITIONS" ng-model="postData.POSITIONS" placeholder="Positions" ng-required="true">
+              <input type="number" string-to-number class="form-control no-border-radius" name="POSITIONS" ng-model="postData.POSITIONS" placeholder="Positions" ng-required="true">
               <p ng-show="jobPostForm.POSITIONS.$error.required &&  (jobPostForm.POSITIONS.$dirty || submitted)" class="help-block">Positions filed is required.</p>
             </div>
           </div>
@@ -38,7 +38,7 @@
           <div class="form-group" ng-class="{ 'has-error' : jobPostForm.TOTAL_EXP.$invalid && (jobPostForm.TOTAL_EXP.$dirty || submitted)}">
             <label class="col-md-2  col-sm-2 control-label">Minimum Experince</label>
             <div class="col-lg-5">
-              <input type="number" class="form-control no-border-radius" name="TOTAL_EXP" ng-model="postData.TOTAL_EXP" placeholder="Experince" ng-required="true">
+              <input type="number" string-to-number class="form-control no-border-radius" name="TOTAL_EXP" ng-model="postData.TOTAL_EXP" placeholder="Experince" ng-required="true">
               <p ng-show="jobPostForm.TOTAL_EXP.$error.required &&  (jobPostForm.TOTAL_EXP.$dirty || submitted)" class="help-block">Experince field is required.</p>
             </div>
           </div>
@@ -70,7 +70,7 @@
           <div class="form-group" ng-class="{ 'has-error' : jobPostForm.START_DATE.$invalid && (jobPostForm.START_DATE.$dirty || submitted)}">
             <label class="col-md-2  col-sm-2 control-label">Start Date</label>
             <div class="col-lg-5">
-              <input type="date" class="form-control no-border-radius" name="START_DATE" ng-model="postData.START_DATE" placeholder="Start Date" ng-required="true">
+              <input type="date" string-to-date class="form-control no-border-radius" name="START_DATE" ng-model="postData.START_DATE" placeholder="Start Date" ng-required="true">
               <p ng-show="jobPostForm.START_DATE.$error.required &&  (jobPostForm.START_DATE.$dirty || submitted)" class="help-block">Start Date is required.</p>
             </div>
           </div>
@@ -78,7 +78,7 @@
            <div class="form-group" ng-class="{ 'has-error' : jobPostForm.END_DATE.$invalid && (jobPostForm.END_DATE.$dirty || submitted)}">
             <label class="col-md-2  col-sm-2 control-label">End Date</label>
             <div class="col-lg-5">
-              <input type="date" class="form-control no-border-radius" name="END_DATE" ng-model="postData.END_DATE" placeholder="End Date" ng-required="true">
+              <input type="date" string-to-date class="form-control no-border-radius" name="END_DATE" ng-model="postData.END_DATE" placeholder="End Date" ng-required="true">
               <p ng-show="jobPostForm.END_DATE.$error.required &&  (jobPostForm.END_DATE.$dirty || submitted)" class="help-block">End Date  is required.</p>
             </div>
           </div>
@@ -86,7 +86,7 @@
           <div class="">
             <div class="col-md-2"></div>
             <div class="col-md-5">
-            <button type="submit" class="btn btn-success no-border-radius">Post</button>
+            <button type="submit" class="btn btn-success no-border-radius">{{isUpdate?"Update":"Post"}}</button>
             <a ui-sref="user.employer.employer-posts" class="btn btn-warning no-border-radius">Back</a>
             </div>
           </div>

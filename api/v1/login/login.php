@@ -745,7 +745,7 @@ $app->post('/job_post','authenticate',function() use ($app)
 });
 
 
-$app->put('/job_post_update/:jId','authenticate',function($jId) use ($app)
+$app->put('/job_post/:jId','authenticate',function($jId) use ($app)
 {
     	$response = array();
 
@@ -778,6 +778,76 @@ $app->put('/job_post_update/:jId','authenticate',function($jId) use ($app)
 
 
 		$response['message'] = "New Job Post Updated successfully";
+
+
+	}
+
+
+	else
+	{
+
+
+		// 		unknown error occurred
+		$response['error'] = true;
+
+
+		$response['message'] = "An error occurred. Please try again";
+
+
+	}
+
+
+
+	echoRespnse(200, $response);
+
+});
+
+$app->delete('/job_post/:jId','authenticate',function($jId) use ($app)
+{
+    	$response = array();
+
+
+	$db = new loginHandler();
+
+
+	//$request_params = json_decode($app->request()->getBody(), true);
+
+
+
+
+    global $user_id;
+
+
+
+
+    	$res= $db->job_post_delete($jId);
+
+
+
+	if ($res)
+	{
+
+		$employerId=$db->getEmployerId($user_id);
+
+
+		// 	creating new Family Member
+		$getAllJobPost = $db->getAllJobPostRelToEmp($employerId);
+
+		$response["error"] = false;
+		$response["jobPosts"]=array();
+
+
+		// 		$response["indStdDets"]=array();
+	//	print_r($getAllJobPost);
+		foreach ($getAllJobPost as $key => $value) {
+				array_push($response["jobPosts"], $value);
+		}
+
+
+
+
+
+		$response['message'] = "Job Post Deleted successfully";
 
 
 	}
