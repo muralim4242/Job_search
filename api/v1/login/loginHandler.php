@@ -360,7 +360,18 @@ class loginHandler
 
 
 
-
+	public function getAllFranchiesies()
+	{
+		$result1=$this->conn->select("franchesies",["[>]users" => ["U_ID" => "ID"]],"*",["franchesies.DELETE_FL"=>false]);
+		if($result1)
+		{
+			return $result1;
+		}
+		else
+		{
+			return NULL;
+		}
+	}
 
 
 	public function getAllJobPost()
@@ -517,6 +528,11 @@ class loginHandler
 		return $this->conn->update("employers_post",["DELETE_FL"=>true],["ID"=>$postId]);
 	}
 
+	public function UpdateUserStatus($uId,$status)
+	{
+		return $this->conn->update("users",["STATUS"=>$status],["ID"=>$uId]);
+	}
+
 
 
 
@@ -534,12 +550,12 @@ class loginHandler
         $api_key = $this->generateApiKey();
         if ($this->isValidApiKey($api_key)) {
             $this->conn->update("users",["API_KEY"=>$api_key,"#MODIFIED_AT"=>"NOW()"],[
-		"EMAIL" => $email
-		]);
+							"EMAIL" => $email
+							]);
         } else {
              $this->conn->update("users",["API_KEY"=>$api_key,"#MODIFIED_AT"=>"NOW()"],[
-		"EMAIL" => $email
-		]);
+							 "EMAIL" => $email
+							 ]);
         }
 
         return true;
@@ -602,6 +618,17 @@ class loginHandler
     public function add_employer($user_id,$employer_name,$telephone)
     {
          if($this->conn->insert("employers",["U_ID"=>$user_id,"NAME"=>$employer_name,"TELEPHONE"=>$telephone]))
+        {
+                return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+		public function add_Franchiesies($user_id,$employer_name,$telephone)
+    {
+         if($this->conn->insert("franchesies",["U_ID"=>$user_id,"NAME"=>$employer_name,"TELEPHONE"=>$telephone]))
         {
                 return true;
         }
@@ -889,7 +916,7 @@ class loginHandler
 
 	public function logout($user_id)
 	{
-	//	echo $user_id;
+		//	echo $user_id;
 		return $this->conn->update("users",["API_KEY"=>null],["ID"=>$user_id]);
 	}
 

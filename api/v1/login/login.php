@@ -5,7 +5,6 @@ require '../../../api/libs/Slim/Slim.php';
 \Slim\Slim::registerAutoloader();
 
 
-
 $app = new \Slim\Slim();
 // User id from db - Global Variable
 $user_id = NULL;
@@ -68,15 +67,9 @@ function authenticate(\Slim\Route $route) {
 
 }
 
-
-
-
-
-
 /** * Verifying required params posted or not */
 
 /** * User Registration * url - /register * method - POST * params - name, email, password */
-
 
 $app->post('/register', function() use ($app)
 {
@@ -165,7 +158,6 @@ $app->post('/register', function() use ($app)
 }
 
 );
-
 
 
 /** * User Login * url - /login * method - POST * params - email, password */
@@ -379,7 +371,7 @@ $app->post('/add_Franchiesies',function() use ($app)
 
 
 
-    	$res= $db->add_employer($user_id,$employer_name,$telephone);
+    	$res= $db->add_Franchiesies($user_id,$employer_name,$telephone);
 
 
 
@@ -419,7 +411,6 @@ $app->post('/add_Franchiesies',function() use ($app)
 	echoRespnse(200, $response);
 
 });
-
 
 $app->post('/update_employer','authenticate',function() use ($app)
 {
@@ -479,9 +470,6 @@ $app->post('/update_employer','authenticate',function() use ($app)
 
 });
 
-
-
-
 // job post
 
 //get all post
@@ -502,6 +490,34 @@ $app->get('/getAllPost', 'authenticate', function() use ($app)
 	    //print_r($getAllJobPost);
 			foreach ($getAllJobPost as $key => $value) {
 					array_push($response["jobPosts"], $value);
+			}
+	}
+	else
+	{
+		// unknown error occurred
+		$response['error'] = true;
+		$response['message'] = "An error occurred. Please try again";
+	}
+	echoRespnse(200, $response);
+}
+);
+
+$app->get('/getAllFranchiesies', 'authenticate', function() use ($app)
+{
+	$response = array();
+	global $user_id;
+	$db = new loginHandler();
+	// 	creating new Family Member
+	$getAllFranchiesies = $db->getAllFranchiesies();
+	//p	rint_r $result;
+	if ($getAllFranchiesies)
+	{
+		$response["error"] = false;
+		$response["franchesies"]=array();
+		//$response["indStdDets"]=array();
+	    //print_r($getAllJobPost);
+			foreach ($getAllFranchiesies as $key => $value) {
+					array_push($response["franchesies"], $value);
 			}
 	}
 	else
@@ -956,12 +972,12 @@ $app->get("/getJobSeekerCheckByMobNoNPostId(/:mobNo)(/:postId)",function($mobNo=
 //Job Seeker Method
 $app->post('/job_seeker_post',function() use ($app)
 {
-    $response = array();
+  $response = array();
 	$db = new loginHandler();
 	$request_params = json_decode($app->request()->getBody(), true);
-//    $res= $db->job_seeker_post($request_params);
+	//    $res= $db->job_seeker_post($request_params);
 
-//	print_r($request_params);
+	//	print_r($request_params);
 	$result=null;
 	if($request_params["isProfilePresent"])
 	{
@@ -1014,7 +1030,6 @@ $app->get("/getcontact_us",function() use ($app)
 		$response["contactUS"]=$db->get_contact_us();
 		echoRespnse(200,$response);
 });
-
 
 $app->put('/job_seeker_post_update/:jSId',function($jSId) use ($app)
 {
@@ -1070,6 +1085,26 @@ $app->put('/job_seeker_post_update/:jSId',function($jSId) use ($app)
 
 });
 
+$app->put('/UpdateUserStatus/:uId/:status','authenticate',function($uId,$status) use ($app)
+{
+    	$response = array();
+			$db = new loginHandler();
+			$request_params = json_decode($app->request()->getBody(), true);
+    	$res= $db->UpdateUserStatus($uId,$status);
+			if ($res)
+			{
+				$response["error"] = false;
+				$response['message'] = "Status Updated successfully";
+			}
+			else
+			{
+				// 		unknown error occurred
+				$response['error'] = true;
+				$response['message'] = "An error occurred. Please try again";
+			}
+			echoRespnse(200, $response);
+
+});
 
 //logout
 $app->get('/logout','authenticate',function() use ($app)
@@ -1137,8 +1172,6 @@ $app->get('/dashboard','authenticate',function()
     $response["totalRequestedContacts"]=$db->total_requested_contacts();
 	echoRespnse(200,$response);
 });
-
-
 
 //internal helper functions
 
@@ -1226,13 +1259,7 @@ function verifyRequiredParams($required_fields)
 
 }
 
-
-
-
-
 /** * Validating email address */
-
-
 function validateEmail($email)
 {
 
@@ -1260,14 +1287,7 @@ function validateEmail($email)
 
 
 }
-
-
-
-
-
 /** * Echoing json response to client * @param String $status_code Http response code * @param Int $response Json response */
-
-
 function echoRespnse($status_code, $response)
 {
 
@@ -1290,10 +1310,5 @@ function echoRespnse($status_code, $response)
 
 }
 
-
-
 $app->run();
-
-
-
 ?>

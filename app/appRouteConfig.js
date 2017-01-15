@@ -189,6 +189,26 @@ angular.module('app').config(['$logProvider', '$stateProvider', '$urlRouterProvi
 
             }
 
+        })
+        .state('admin.franchiesies', {
+            url: '/franchiesies',
+            templateUrl: 'app/view/admin/admin-franchiesies.html',
+            controller: 'adminFranchiesies',
+            resolve: {
+                title: function () {
+                    return "All Franchiesies";
+                },
+
+                franchiesies: function (apiResource, currentUser) {
+                    if (currentUser.getProfile().token) {
+                        return apiResource.getAllFranchiesies().$promise;
+                    }
+                    return [];
+
+                }
+
+            }
+
         });
 
 

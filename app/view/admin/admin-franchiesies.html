@@ -1,0 +1,79 @@
+<section class="panel">
+    <header class="panel-heading">
+        Franchesies Details
+    </header>
+    <div class="table-responsive">
+        <table st-table="rowCollection" class="table table-striped table-advance table-hover">
+            <thead>
+                <tr>
+                    <th colspan="3">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="input-group input-group-sm">
+                                    <input st-search="" placeholder="global search ..." class="input-sm form-control" type="text" />
+                                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                                </div>
+                            </div>
+                            <!-- <div class="col-md-4">
+                                <a ui-sref="user.employer.employer-post-add" class="btn btn-sm btn-danger pull-right no-border-radius">Add Post</a>
+                            </div> -->
+                        </div>
+                    </th>
+                </tr>
+                <tr>
+                    <th ng-repeat="header in headerCollection" st-sort={{header.name}}>{{header.displayName}}</th>
+                    <th>ACTION</th>
+                </tr>
+            </thead>
+            <tbody ng-show="!isLoading">
+                <tr st-select-row="row" st-select-mode="multiple" ng-repeat="row in rowCollection">
+                    <td>{{row.ID}}</td>
+                    <td>{{row.NAME}}</td>
+                    <td>{{row.STATUS?"Not Active":"Active"}}</td>
+                    <td>{{row.TELEPHONE}}</td>
+                    <td><a href="" ng-click="UpdateUserStatus(row.ID,0)" ng-show="row.STATUS" alt="Acpect"><span class="glyphicon glyphicon-ok"></span></a>{{" "}}
+                      <a href="" ng-click="UpdateUserStatus(row.ID,1)" ng-hide="row.STATUS" alt="Reject"><span class="glyphicon glyphicon-remove"></span></a>{{" "}}
+                      <a href="" ng-click="export(row.ID)" alt="Export"><span class="glyphicon glyphicon-export"></span></a>{{" "}}
+                      <a href="" data-toggle="modal" data-target="#delteModal" ng-click="handleSelectedRecord(row.ID)"><span class="glyphicon glyphicon-trash"></span></a></td>
+
+                </tr>
+            </tbody>
+            <tbody ng-show="isLoading">
+                <tr>
+                    <td colspan="3" class="text-center">Loading ... </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" class="text-center">
+                        <div st-items-by-page="5" st-pagination="" st-template="app/commonTempates/pagination.custom.html"></div>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <!-- Button trigger modal -->
+    <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#delteModal">
+  Launch demo modal
+</button> -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="delteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Delete</h4>
+                </div>
+                <div class="modal-body">
+                    Do you want delete data?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                    <button type="button" class="btn btn-primary" ng-click="delete()" data-dismiss="modal">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
