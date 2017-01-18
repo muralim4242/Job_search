@@ -720,6 +720,10 @@ class loginHandler
 	{
 			return $this->conn->insert("applied_post",$detail);
 	}
+	public function direct_upload($detail)
+	{
+			return $this->conn->insert("directupload",$detail);
+	}
 
 	public function isSeekerAppliedForPost($jSId,$postId)
 	{
@@ -736,7 +740,9 @@ class loginHandler
 	{
 		$file=$jobSeeker["file"];
 		$fileExtention=$jobSeeker["fileExtention"];
-		$PID=$jobSeeker["PID"];
+		if(!$jobSeeker["directUpload"]){
+			$PID=$jobSeeker["PID"];
+		}
 		unset($jobSeeker["file"]);
 		unset($jobSeeker["fileExtention"]);
 		unset($jobSeeker["PID"]);
@@ -746,7 +752,11 @@ class loginHandler
 		$data = base64_decode(preg_replace('#^data:application/\w+;base64,#i', '', $file));
 		file_put_contents('../../../app/assets/job-seekers-resume/'.$max.'.'.$fileExtention,$data);
 		$this->conn->update("job_seekers",["RESUME_LOCATION"=>'app/assets/job-seekers-resume/'.$max.'.'.$fileExtention],["ID"=>$max]);
+		if(!$jobSeeker["directUpload"]){
 		return $this->apply_for_post(array('JSID' =>$max ,'PID'=>$PID ));
+		}else{
+			return $this->direct_upload(array('candidateId' =>$max));
+		}
 	}
 
 

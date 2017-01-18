@@ -25,6 +25,20 @@ angular.module('app').config(['$logProvider', '$stateProvider', '$urlRouterProvi
             url: '/services',
             templateUrl: 'app/view/services/services.html'
         })
+        .state('user.uploadresume', {
+            url: '/uploadresume',
+            templateUrl: 'app/view/directupload/uploadresume.html',
+            controller: 'jobSeekersPost',
+            resolve: {
+                title: function () {
+                    return "Please Fill The Details";
+                },
+                 posts: function (apiResource) {
+                        return apiResource.getAllPostDetailsForCandidates().$promise;
+                }
+            }
+
+        })
         .state('user.contactus', {
             url: '/contactus',
             templateUrl: 'app/view/contactus/contactus.html',

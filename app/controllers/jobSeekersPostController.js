@@ -13,7 +13,7 @@ $scope.view=function()
     return currentUser.getProfile().view;
 }
 
-
+  $scope.IfDirectUpload = true;
   $scope.isLoading = true;
   $scope.posts=posts.jobPosts;
   $scope.postIdSelected=undefined;
@@ -76,29 +76,33 @@ $scope.view=function()
                     $scope.postData.isProfilePresent=false;
           }
           else {
-              if(response.isSeekerAppliedForPost)
-              {
+                  if(response.isSeekerAppliedForPost)
+                  {
 
-                  // alert("Already applied for job");
-                  $scope.postIdSelected=undefined;
-                  $scope.postData={};
-                    $scope.disabled=true;
-                    $rootScope.$broadcast('notification', {
-                      notification:"Already applied for job"
-                    });
+                      // alert("Already applied for job");
+                      $scope.postIdSelected=undefined;
+                      $scope.postData={};
+                        $scope.disabled=true;
+                        $rootScope.$broadcast('notification', {
+                          notification:"Already applied for job"
+                        });
 
-              }
-              else {
-                  $scope.postData=response.jobSeeker;
-                  $scope.postData.isProfilePresent=true;
-                  $scope.disabled=true;
-                    $scope.enable=false;
                   }
+                  else {
+                      $scope.postData=response.jobSeeker;
+                      $scope.postData.isProfilePresent=true;
+                      $scope.disabled=true;
+                        $scope.enable=false;
+                      }
 
 
           }
+          
       })
     }
+
+
+
 
   $scope.submitForm = function (valid) {
 
@@ -130,7 +134,10 @@ $scope.view=function()
             return currentUser.getProfile().token?currentUser.getProfile().token:0;
         };
         $scope.postData.FID=FID();
-        $scope.postData.PID=$scope.postIdSelected;
+        $scope.postData.PID=$scope.postIdSelected; 
+        //if it is direct upload      
+        $location.absUrl().search("uploadresume") != -1 ? $scope.postData.directUpload= true:$scope.postData.directUpload= false;
+
         $scope.myPromise = apiResource.addJobSeeker($scope.postData, function (respose)
         {
           $rootScope.$broadcast('notification', {

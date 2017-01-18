@@ -70,7 +70,16 @@ body {
 .form-horizontal .control-label {
     color: #231c1c;
 }
-
+.uploadresume  {
+    position: fixed;
+    border: 1px solid #ccc;
+    padding: 25px 10px;
+    background: orange;
+    color: White;
+    right: 5px;
+    top: 613px;
+    z-index: 5000;
+}
 /***************************************Buttons**********************************/
 .custom-btn {
     color: #fff;
