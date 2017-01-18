@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 19, 2016 at 07:00 PM
+-- Generation Time: Jan 18, 2017 at 12:58 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.5.38
 
@@ -44,7 +44,10 @@ CREATE TABLE `applied_post` (
 INSERT INTO `applied_post` (`ID`, `JSID`, `PID`, `CREATED_BY`, `CREATED_AT`, `MODIFIED_BY`, `MODIFIED_AT`, `DELETE_FL`) VALUES
 (1, 1, 1, 1, '2016-12-05 10:07:15', NULL, NULL, NULL),
 (2, 1, 2, 0, '2016-12-08 10:09:43', NULL, NULL, NULL),
-(3, 21, 2, 0, '2016-12-08 10:29:59', NULL, NULL, NULL);
+(3, 21, 2, 0, '2016-12-08 10:29:59', NULL, NULL, NULL),
+(4, 22, 1, 0, '2017-01-18 08:10:04', NULL, NULL, NULL),
+(5, 23, 2, 0, '2017-01-18 08:20:59', NULL, NULL, NULL),
+(6, 23, 10, 0, '2017-01-18 11:56:58', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -72,8 +75,29 @@ INSERT INTO `contactus` (`ContactId`, `CompanyName`, `Sector`, `Location`, `Mess
 (1, 'NewCompany', 'Admin', 'bangalure', 'hhhh', 'hghghg', '9876543210', 'test@test.com', '2016-12-04 02:44:11'),
 (5, 'NewCompany', 'Admin', 'bangalure', 'hhhh', 'hghghg', '9876543210', 'test@test.com', '2016-12-04 02:44:11'),
 (6, 'NewCvbvbgompany', 'Admin', 'bangalure', 'hhhh', 'hghghg', '9876543210', 'test@test.com', '2016-12-04 02:44:11'),
-(7, 'test', 'Advertising', 'testLocation', 'TestMessage', 'Text', '9865478952', 'test@test.com', '2016-12-04 02:44:53'),
-(8, 'tes', 'Advertising', 'dsgdsf', 'dfgdr', 'dfgrdf', '9008182348', 'test@test.com', '2016-12-17 08:20:45');
+(7, 'test', 'Advertising', 'testLocation', 'TestMessage', 'Text', '9865478952', 'test@test.com', '2016-12-04 02:44:53');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `directupload`
+--
+
+CREATE TABLE `directupload` (
+  `Id` int(11) NOT NULL,
+  `candidateId` int(11) NOT NULL,
+  `createdby` varchar(50) DEFAULT NULL,
+  `createddate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modifiedby` varchar(50) DEFAULT NULL,
+  `modifieddate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `directupload`
+--
+
+INSERT INTO `directupload` (`Id`, `candidateId`, `createdby`, `createddate`, `modifiedby`, `modifieddate`) VALUES
+(1, 23, NULL, '2017-01-18 11:52:04', NULL, '2017-01-18 11:52:04');
 
 -- --------------------------------------------------------
 
@@ -102,7 +126,8 @@ CREATE TABLE `employers` (
 
 INSERT INTO `employers` (`ID`, `U_ID`, `NAME`, `CONTACT_PERSON`, `TELEPHONE`, `ADDRESS`, `PINCODE`, `CREATED_AT`, `CREATED_BY`, `MODIFIED_AT`, `MODIFIED_BY`, `DELETE_FL`) VALUES
 (1, 1, 'GWL2', NULL, '7795929033', NULL, NULL, '2016-11-12 18:57:51', NULL, NULL, NULL, 0),
-(2, 12, 'dell12', NULL, '07795929033', NULL, NULL, '2016-11-17 11:29:07', NULL, NULL, NULL, 0);
+(2, 12, 'dell12', NULL, '07795929033', NULL, NULL, '2016-11-17 11:29:07', NULL, NULL, NULL, 0),
+(3, 16, 'at0z', NULL, '07795929033', NULL, NULL, '2016-12-09 07:02:44', NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -134,11 +159,10 @@ CREATE TABLE `employers_post` (
 --
 
 INSERT INTO `employers_post` (`ID`, `E_ID`, `NAME`, `POSITIONS`, `LOCATIONS`, `TOTAL_EXP`, `KEY_SKILLS`, `JOB_DESCRIPTION`, `ROLE`, `START_DATE`, `END_DATE`, `CREATED_AT`, `CREATED_BY`, `MODIFIED_AT`, `MODIFIED_BY`, `DELETE_FL`) VALUES
-(1, 1, 'Angular developer', 10, 'bangalore', '3', 'angualr,javascript', 'dasdadasdasdasd', 'Senior software developer', '2016-11-01 00:00:00', '2016-11-17 00:00:00', '2016-11-12 19:03:36', NULL, NULL, NULL, 0),
+(1, 1, 'Angular developer urgent1', 10, 'bangalore', '2', 'angualr,javascript', 'dasdadasdasdasd', 'Senior software developerasdas', '2016-10-31 07:30:00', '2016-11-12 07:30:00', '2016-11-12 19:03:36', NULL, NULL, NULL, 0),
 (2, 1, 'react developer', 3, 'sdasdad', '1', 'react and redux', 'asdasdasdas', 'SOftware developer', '2016-11-15 00:00:00', '2016-11-30 00:00:00', '2016-11-12 19:03:36', NULL, NULL, NULL, 0),
 (7, 1, 'react developer2', 3, 'sdasdad', '1', 'react and redux', 'asdasdasdas', 'SOftware developer', '2016-11-15 00:00:00', '2016-11-30 00:00:00', '2016-11-16 10:11:49', NULL, NULL, NULL, 0),
 (8, 1, 'react developer by murali121', 3, 'sdasdad', '1', 'react and redux,dot net', 'asdasdasdas', 'SOftware developer', '2016-11-15 00:00:00', '2016-11-30 00:00:00', '2016-11-16 10:12:19', NULL, NULL, NULL, 0),
-(9, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2016-11-16 18:42:17', NULL, NULL, NULL, 0),
 (10, 1, 'Angualr', 4, 'bangalore', '5', 'sadasd', 'dasdasd', 'asdasdas', '2016-11-16 18:30:00', '2016-11-26 18:30:00', '2016-11-17 13:24:09', NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
@@ -152,7 +176,7 @@ CREATE TABLE `franchesies` (
   `U_ID` int(11) NOT NULL,
   `NAME` varchar(50) DEFAULT NULL,
   `CONTACT_PERSON` varchar(50) DEFAULT NULL,
-  `TELPHONE` varchar(15) DEFAULT NULL,
+  `TELEPHONE` varchar(15) DEFAULT NULL,
   `ADDRESS` text,
   `PINCODE` varchar(10) DEFAULT NULL,
   `CREATED_AT` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
@@ -161,6 +185,16 @@ CREATE TABLE `franchesies` (
   `MODIFIED_BY` int(11) DEFAULT NULL,
   `DELETE_FL` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `franchesies`
+--
+
+INSERT INTO `franchesies` (`ID`, `U_ID`, `NAME`, `CONTACT_PERSON`, `TELEPHONE`, `ADDRESS`, `PINCODE`, `CREATED_AT`, `CREATED_BY`, `MODIFFIED_AT`, `MODIFIED_BY`, `DELETE_FL`) VALUES
+(1, 14, 'gwl', NULL, '7795929033', NULL, NULL, '2017-01-14 12:14:28', NULL, NULL, NULL, 0),
+(2, 15, 'gwl2', NULL, '8867002948', NULL, NULL, '2017-01-14 12:14:28', NULL, NULL, NULL, 0),
+(3, 16, 'gwl2', NULL, '8553436940', NULL, NULL, '2017-01-14 12:14:50', NULL, NULL, NULL, 0),
+(4, 17, 'neudesic', NULL, '08553436950', NULL, NULL, '2017-01-15 12:13:14', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -196,26 +230,8 @@ CREATE TABLE `job_seekers` (
 --
 
 INSERT INTO `job_seekers` (`ID`, `FID`, `FULL_NAME`, `EMAIL`, `TELEPHONE`, `CURRENT_LOCATION`, `KEY_SKILLS`, `TOTAL_EXP`, `CURRENT_DESIGNATION`, `CURRENT_EMPLOYER`, `CURRENT_SALARY`, `HIGH_QUALIFICATION`, `INSTITION`, `RESUME_TITLE`, `RESUME_LOCATION`, `CREATED_AT`, `CREATED_BY`, `MODIFIED_AT`, `MODIFIED_BY`, `DELETE_FL`) VALUES
-(1, 0, 'Murali', 'muralim0033@gmail.com', '7795929033', 'Bangalore', 'anguale,react,knockout', '4', 'consultant', 'neudesic', '600000', 'be', 'uvce', '4 yeara exp', NULL, '2016-11-16 13:08:21', NULL, NULL, NULL, 0),
-(2, 0, 'Murali M 4', 'muralim0032@gmail.com', '7795929033', 'Bangalore', 'anguale,react,knockout', '4', 'consultant', 'neudesic', '600000', 'be', 'uvce', '4 yeara exp', NULL, '2016-11-16 13:08:21', NULL, NULL, NULL, 0),
-(3, 0, 'Murali M', 'muralim0032@gmail.com', '7795929033', 'Bangalore', 'anguale,react,knockout', '4', 'consultant', 'neudesic', '600000', 'be', 'uvce', '4 yeara exp', NULL, '2016-11-16 13:08:21', NULL, NULL, NULL, 0),
-(4, 0, 'Murali mm', 'muralim0032@gmail.com', '7795929033', 'Bangalore', 'dot net', '4', 'consultant', 'neudesic', '600000', 'be', 'uvce', '4 yeara exp', NULL, '2016-11-16 13:08:21', NULL, NULL, NULL, 0),
-(5, 0, 'Murali M 2', 'muralim0032@gmail.com', '7795929033', 'Bangalore', 'anguale,react,knockout', '4', 'consultant', 'neudesic', '600000', 'be', 'uvce', '4 yeara exp', NULL, '2016-11-16 13:08:21', NULL, NULL, NULL, 0),
-(6, 0, 'Murali M 3', 'muralim0032@gmail.com', '7795929033', 'Bangalore', 'anguale,react,knockout', '4', 'consultant', 'neudesic', '600000', 'be', 'uvce', '4 yeara exp', NULL, '2016-11-16 13:08:21', NULL, NULL, NULL, 0),
-(7, 0, 'Murali M 4', 'muralim0032@gmail.com', '7795929033', 'Bangalore', 'anguale,react,knockout', '4', 'consultant', 'neudesic', '600000', 'be', 'uvce', '4 yeara exp', NULL, '2016-11-16 13:08:42', NULL, NULL, NULL, 0),
-(8, 0, 'Murali M 4', 'muralim0032@gmail.com', '7795929033', 'Bangalore', 'anguale,react,knockout', '4', 'consultant', 'neudesic', '600000', 'be', 'uvce', '4 yeara exp', NULL, '2016-11-17 16:37:32', NULL, NULL, NULL, 0),
-(9, 0, 'Murali M', 'muralim4242@gmail.com', '07795929033', 'bangalore', 'asdsad', '3', 'asfs', 'fsdf', '2334555', 'fdsfsd', 'daf', 'fsdf', NULL, '2016-11-17 17:31:55', NULL, NULL, NULL, 0),
-(10, 0, 'Murali M2', 'muralim4242@gmail.com', '07795929033', 'bangalore', 'asdsad', '3', 'asfs', 'fsdf', '2334555', 'fdsfsd', 'daf', 'fsdf', NULL, '2016-11-17 17:33:06', NULL, NULL, NULL, 0),
-(11, 0, 'Murali M', 'muralim4242@gmail.com', '07795929033', 'Bangloare', 'dsafaf', '4', 'fdsfa', 'rfsgfsd', '434545352', 'rsdg', 'rqgfdsadsfd', 'qgdfg', NULL, '2016-11-18 10:28:36', NULL, NULL, NULL, 0),
-(12, 0, 'Murali M', 'muralim4242@gmail.com', '07795929033', 'Bangloare', 'dsafaf', '4', 'fdsfa', 'rfsgfsd', '434545352', 'rsdg', 'rqgfdsadsfd', 'qgdfg', NULL, '2016-11-18 10:30:22', NULL, NULL, NULL, 0),
-(13, 0, 'Murali M', 'muralim4242@gmail.com', '07795929033', 'Bangloare', 'dsafaf', '4', 'fdsfa', 'rfsgfsd', '434545352', 'rsdg', 'rqgfdsadsfd', 'qgdfg', NULL, '2016-11-18 10:39:10', NULL, NULL, NULL, 0),
-(14, 0, 'Murali M', 'muralim4242@gmail.com', '07795929033', 'Bangloare', 'dsafaf', '4', 'fdsfa', 'rfsgfsd', '434545352', 'rsdg', 'rqgfdsadsfd', 'qgdfg', NULL, '2016-11-18 10:40:02', NULL, NULL, NULL, 0),
-(15, 0, 'Murali M', 'muralim4242@gmail.com', '07795929033', 'Bangloare', 'dsafaf', '4', 'fdsfa', 'rfsgfsd', '434545352', 'rsdg', 'rqgfdsadsfd', 'qgdfg', NULL, '2016-11-18 10:43:00', NULL, NULL, NULL, 0),
-(16, 0, 'Murali M', 'muralim4242@gmail.com', '07795929033', 'Bangloare', 'dsafaf', '4', 'fdsfa', 'rfsgfsd', '434545352', 'rsdg', 'rqgfdsadsfd', 'qgdfg', NULL, '2016-11-18 10:44:40', NULL, NULL, NULL, 0),
-(17, 0, 'Murali M', 'muralim4242@gmail.com', '07795929033', 'bangalore', 'asd', '4', 'ddasd', 'asf', '4400404', 'dsafasf', 'fasf', 'fasf', 'app/assets/job-seekers-resume/17.pdf', '2016-11-18 11:02:56', NULL, NULL, NULL, 0),
-(18, 0, 'Murali M', 'muralim4242@gmail.com', '07795929033', 'bangalore', 'asd', '4', 'ddasd', 'asf', '4400404', 'dsafasf', 'fasf', 'fasf', 'app/assets/job-seekers-resume/18.pdf', '2016-11-18 11:05:48', NULL, NULL, NULL, 0),
-(19, 0, 'Murali M', 'muralim4242@gmail.com', '07795929033', 'bangalore', 'asd', '4', 'ddasd', 'asf', '4400404', 'dsafasf', 'fasf', 'fasf', 'app/assets/job-seekers-resume/19.pdf', '2016-11-18 11:05:51', NULL, NULL, NULL, 0),
-(21, 0, 'Murali M', 'muralim4242@gmail.com', '8553436940', 'bangalore', 'sdfsdf', '0', NULL, NULL, NULL, 'be', 'uvce', 'fresher', 'app/assets/job-seekers-resume/21.pdf', '2016-12-08 10:29:59', NULL, NULL, NULL, 0);
+(22, 0, 'Murali', 'muralim4242@gmail.com', '7795929033', 'Bangalure', 'Ffron end developer', '0', NULL, NULL, NULL, 'MCA', 'RNSIT', '3 years', 'app/assets/job-seekers-resume/22.', '2017-01-18 08:10:04', NULL, NULL, NULL, 0),
+(23, 0, 'dsfdsf', 'sdf@gmil.com', '7795929035', 'bangalure', 'sdfdsf', '0', NULL, NULL, NULL, 'BSC', 'SJIT', '4 years', 'app/assets/job-seekers-resume/23.', '2017-01-18 08:20:59', NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -258,7 +274,8 @@ CREATE TABLE `roles` (
 
 INSERT INTO `roles` (`ID`, `NAME`, `CREATED_AT`, `CREATED_BY`, `MODIFIED_AT`, `MODIFIED_BY`, `VERSION_ID`, `DELETE_FL`) VALUES
 (1, 'Admin', '2016-11-11 10:16:12', NULL, NULL, NULL, NULL, 0),
-(2, 'Employer', '2016-11-11 10:16:12', NULL, NULL, NULL, NULL, 0);
+(2, 'Employer', '2016-11-11 10:16:12', NULL, NULL, NULL, NULL, 0),
+(3, 'Franchiesies', '2016-12-08 10:47:56', NULL, NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -304,7 +321,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`ID`, `EMAIL`, `PASSWORD_HASH`, `API_KEY`, `ROLE_ID`, `STATUS`, `CREATED_AT`, `CREATED_BY`, `MODIFIED_AT`, `MODIFIED_BY`, `VERSION_ID`, `DELETE_FL`) VALUES
-(1, 'muralim4242@gmail.com', '$2a$10$3e60afadf0eeca9e42c61u/M3RbFA6ODMxz/S77puAWRCwLTX9YHm', 'db10a0898148e0c3a4ee14b57503bb79', 1, 1, '2016-11-12 14:52:56', NULL, '2016-12-19 17:34:56', NULL, NULL, 0),
+(1, 'muralim4242@gmail.com', '$2a$10$3e60afadf0eeca9e42c61u/M3RbFA6ODMxz/S77puAWRCwLTX9YHm', NULL, 1, 1, '2016-11-12 14:52:56', NULL, '2017-01-17 13:51:10', NULL, NULL, 0),
 (2, 'muralim42423@gmail.com', '$2a$10$d7136421f7f01a7b631f0uOhMe4zvUztM7hW0y1NKm7j3fAriJeOi', 'be10d0ee8e8e9f4b22f42b66d50841e4', 2, 1, '2016-11-12 15:19:34', NULL, '2016-11-18 06:49:26', NULL, NULL, 0),
 (3, 'muralim42424@gmail.com', '$2a$10$9aae8a888ae5d7f9b6ff6OuJZo9eZZUn9en2xR5A.UdwF54.AHgEK', '5fc68ff23dde6348224a608943af293f', 2, 1, '2016-11-16 10:30:48', NULL, NULL, NULL, NULL, 0),
 (4, 'muralim42425@gmail.com', '$2a$10$2979b65fb1a5176c3994auMqr9vefrQXFxU6mkatcRPZgv6DmIgmO', 'b716473fc96821b4fa4245ee680dd3a1', 2, 1, '2016-11-16 10:31:26', NULL, NULL, NULL, NULL, 0),
@@ -316,7 +333,11 @@ INSERT INTO `users` (`ID`, `EMAIL`, `PASSWORD_HASH`, `API_KEY`, `ROLE_ID`, `STAT
 (10, 'muralim424210@gmail.com', '$2a$10$776b5871d22026b8a705deA6s2lSGdeZzreHQj6pMJHm1rmReON8C', '6c83dfab7b9e332c263da8d55e11f087', 2, 1, '2016-11-17 11:08:24', NULL, NULL, NULL, NULL, 0),
 (11, 'muralim424211@gmail.com', '$2a$10$ad8d7cb3b47908e482edbOpslYOeJ4x2nGVpvLg7YKtZn.JUtTZl.', '7f61a8fa3027b8cbc06872cf0a99bea5', 2, 1, '2016-11-17 11:09:27', NULL, NULL, NULL, NULL, 0),
 (12, 'muralim424213@gmail.com', '$2a$10$7f462133fa96e5af59bbbOziDNsoap5F3hCOO7RYlbTHYUvJdd8e.', '01bb35fca10d0c0aa0120ff104ab765c', 2, 1, '2016-11-17 11:16:53', NULL, NULL, NULL, NULL, 0),
-(13, 'muralim424215@gmail.com', '$2a$10$eee14fcdf94f969a4b055u8jVSFOc6qjpUNUtODRsPBHow2zDrv9S', 'a10fc7ca3c250c4f3e711171a1b45e0c', 2, 1, '2016-11-17 11:29:01', NULL, NULL, NULL, NULL, 0);
+(13, 'muralim424215@gmail.com', '$2a$10$eee14fcdf94f969a4b055u8jVSFOc6qjpUNUtODRsPBHow2zDrv9S', 'a10fc7ca3c250c4f3e711171a1b45e0c', 2, 1, '2016-11-17 11:29:01', NULL, NULL, NULL, NULL, 0),
+(14, 'muralim424216@gmail.com', '$2a$10$d10040490360117e8b921OreGGPFwyVmD.MOrO3H3yIi50NQQyFYC', 'cd6b73e63bbe71a950e4f93f946d1a90', 3, 0, '2016-12-09 06:00:35', NULL, '2016-12-09 07:15:59', NULL, NULL, 0),
+(15, 'muralim424217@gmail.com', '$2a$10$ac88af7256a110d5a0c62uGCK9Kz0enQnfVBpf6AH6jwVPc6tB8PC', '3e4ffac043f0fd540d49840b19323de6', 3, 1, '2016-12-09 07:01:39', NULL, NULL, NULL, NULL, 0),
+(16, 'muralim424218@gmail.com', '$2a$10$2d2dada63ff6eecd416f9uxFSE6PLJaHr2XeLZKAGzGbNt.NyLU9G', NULL, 3, 1, '2016-12-09 07:02:41', NULL, '2016-12-09 07:16:11', NULL, NULL, 0),
+(17, 'muralim424234@gmail.com', '$2a$10$98fc48d1be95fe9c5c571ePPdpf7fEi6U1.oGHmYJEjnHELBfkk.S', NULL, 3, 1, '2017-01-15 12:13:14', NULL, '2017-01-15 12:17:40', NULL, NULL, 0);
 
 --
 -- Indexes for dumped tables
@@ -330,10 +351,10 @@ ALTER TABLE `applied_post`
   ADD KEY `JID` (`JSID`,`PID`);
 
 --
--- Indexes for table `contactus`
+-- Indexes for table `directupload`
 --
-ALTER TABLE `contactus`
-  ADD PRIMARY KEY (`ContactId`);
+ALTER TABLE `directupload`
+  ADD PRIMARY KEY (`Id`);
 
 --
 -- Indexes for table `employers`
@@ -398,17 +419,17 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `applied_post`
 --
 ALTER TABLE `applied_post`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
--- AUTO_INCREMENT for table `contactus`
+-- AUTO_INCREMENT for table `directupload`
 --
-ALTER TABLE `contactus`
-  MODIFY `ContactId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+ALTER TABLE `directupload`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `employers`
 --
 ALTER TABLE `employers`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `employers_post`
 --
@@ -418,12 +439,12 @@ ALTER TABLE `employers_post`
 -- AUTO_INCREMENT for table `franchesies`
 --
 ALTER TABLE `franchesies`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `job_seekers`
 --
 ALTER TABLE `job_seekers`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT for table `permissions`
 --
@@ -433,7 +454,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `role_permission`
 --
@@ -443,7 +464,7 @@ ALTER TABLE `role_permission`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- Constraints for dumped tables
 --
