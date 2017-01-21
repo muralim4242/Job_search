@@ -530,6 +530,76 @@ $app->get('/getAllFranchiesies', 'authenticate', function() use ($app)
 }
 );
 
+$app->get('/getAllJobSeekersRelToFranchiesies(/:id)', 'authenticate', function($id=null) use ($app)
+{
+
+
+
+	$response = array();
+
+
+
+	global $user_id;
+
+
+	$db = new loginHandler();
+	// $employerId=$db->getEmployerId($user_id);
+
+
+	$getAllJobSeekersRelToFranchiesies = $db->getAllJobSeekersRelToFranchiesies($id?$id:$user_id);
+
+
+
+	//p	rint_r $result;
+
+
+	if ($getAllJobSeekersRelToFranchiesies)
+	{
+
+
+		$response["error"] = false;
+
+
+
+
+		$response["jobSeekers"]=array();
+
+
+		// 		$response["indStdDets"]=array();
+	//	print_r($getAllJobPost);
+		foreach ($getAllJobSeekersRelToFranchiesies as $key => $value) {
+				array_push($response["jobSeekers"], $value);
+		}
+
+
+		}
+
+
+
+
+	else
+	{
+
+
+		// 		unknown error occurred
+		$response['error'] = true;
+
+
+		$response['message'] = "An error occurred. Please try again";
+
+
+	}
+
+
+
+	echoRespnse(200, $response);
+
+
+
+}
+
+);
+
 //Get Posts for Candidates
 $app->get('/get_All_Post_For_Candidates', function() use ($app)
 {
@@ -888,6 +958,65 @@ $app->delete('/job_post/:jId','authenticate',function($jId) use ($app)
 
 });
 
+$app->delete('/deleteFranchiesies/:fId','authenticate',function($fId) use ($app)
+{
+    	$response = array();
+
+
+	$db = new loginHandler();
+
+
+	//$request_params = json_decode($app->request()->getBody(), true);
+
+
+
+
+    global $user_id;
+
+
+
+
+    	$res= $db->deleteFranchiesies($fId);
+
+
+
+	if ($res)
+	{
+
+
+
+		// 	creating new Family Member
+
+		$response["error"] = false;
+
+
+
+
+		$response['message'] = "Franchiesies Deleted successfully";
+
+
+	}
+
+
+	else
+	{
+
+
+		// 		unknown error occurred
+		$response['error'] = true;
+
+
+		$response['message'] = "An error occurred. Please try again";
+
+
+	}
+
+
+
+	echoRespnse(200, $response);
+
+});
+
 //job_seeks
 
 $app->get("/getJobSeek(/:jSId)",'authenticate',function($jSId=null) use ($app)
@@ -979,6 +1108,7 @@ $app->post('/job_seeker_post',function() use ($app)
 
 	//	print_r($request_params);
 	$result=null;
+	$request_params["FID"] = $db->getUserId($request_params["FID"]);
 	if($request_params["isProfilePresent"])
 	{
 			$result=$db->apply_for_post(array('JSID' =>$request_params["ID"] ,'PID'=>$request_params["PID"]));

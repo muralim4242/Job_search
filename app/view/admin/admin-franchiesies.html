@@ -29,11 +29,11 @@
                 <tr st-select-row="row" st-select-mode="multiple" ng-repeat="row in rowCollection">
                     <td>{{row.ID}}</td>
                     <td>{{row.NAME}}</td>
-                    <td>{{row.STATUS?"Not Active":"Active"}}</td>
+                    <td>{{row.STATUS=='1'?'Active':'Not Active'}}</td>
                     <td>{{row.TELEPHONE}}</td>
-                    <td><a href="" ng-click="UpdateUserStatus(row.ID,0)" ng-show="row.STATUS" alt="Acpect"><span class="glyphicon glyphicon-ok"></span></a>{{" "}}
-                      <a href="" ng-click="UpdateUserStatus(row.ID,1)" ng-hide="row.STATUS" alt="Reject"><span class="glyphicon glyphicon-remove"></span></a>{{" "}}
-                      <a href="" ng-click="export(row.ID)" alt="Export"><span class="glyphicon glyphicon-export"></span></a>{{" "}}
+                    <td><a href="" ng-click="UpdateUserStatus(row.ID,1)" ng-show="row.STATUS!='1'?true:false" alt="Acpect"><span class="glyphicon glyphicon-ok"></span></a>{{" "}}
+                      <a href="" ng-click="UpdateUserStatus(row.ID,0)" ng-show="row.STATUS!='1'?false:true" alt="Reject"><span class="glyphicon glyphicon-remove"></span></a>{{" "}}
+                      <a href="" ui-sref="admin.franchiesiesCandidate({id:row.ID})" alt="Export"><span class="glyphicon glyphicon-export"></span></a>{{" "}}
                       <a href="" data-toggle="modal" data-target="#delteModal" ng-click="handleSelectedRecord(row.ID)"><span class="glyphicon glyphicon-trash"></span></a></td>
 
                 </tr>

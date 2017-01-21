@@ -102,20 +102,39 @@ angular.module('app').config(['$logProvider', '$stateProvider', '$urlRouterProvi
         }).
         state('user.franchiesies', {
             url: '/franchiesies',
-            templateUrl: 'app/view/franchiesies/franchiesies.html',
-            controller: 'jobSeekersPost',
+            templateUrl: 'app/view/franchiesies/franchiesies.html'
+        }).
+        state('user.franchiesies.franchiesies-posts', {
+            url: '/user-franchiesies-posts',
+            templateUrl: 'app/view/admin/admin-job-seekers-posts.html',
+            controller: 'jobSeekersPosts',
             resolve: {
                 title: function () {
-                    return "Franchiesies";
+                    return "All Job seekers";
                 },
 
+                posts: function (apiResource, currentUser) {
+                    if (currentUser.getProfile().token) {
+                        return apiResource.getAllJobSeekersRelToFranchiesies().$promise;
+                    }
+                    return [];
 
-                 posts: function (apiResource) {
-                        return apiResource.getAllPostDetailsForCandidates().$promise;
                 }
 
+            }
 
-
+        }).
+        state('user.franchiesies.franchiesies-post-add', {
+            url: '/franchiesies-post-add/:id',
+            templateUrl: 'app/view/franchiesies/user-franchiesies-post-add.html',
+            controller: 'franchiesiesPostAdd',
+            resolve: {
+                title: function () {
+                    return "Please Fill The Details";
+                },
+                posts: function (apiResource, currentUser) {
+                    return [];
+                }
             }
 
         }).
@@ -223,7 +242,29 @@ angular.module('app').config(['$logProvider', '$stateProvider', '$urlRouterProvi
 
             }
 
+        }).
+        state('admin.franchiesiesCandidate', {
+            url: '/user-franchiesies-posts/:id',
+            templateUrl: 'app/view/admin/admin-job-seekers-posts.html',
+            controller: 'jobSeekersPosts',
+            resolve: {
+                title: function () {
+                    return "Franchiesies Candidates";
+                },
+
+                posts: function (apiResource, currentUser,$stateParams) {
+                    if (currentUser.getProfile().token) {
+                        return apiResource.getAllJobSeekersRelToFranchiesies({id:$stateParams.id}).$promise;
+                    }
+                    return [];
+
+                }
+
+            }
+
         });
+
+
 
 
 }]).run(['$rootScope', '$log', function ($rootScope, $log) {

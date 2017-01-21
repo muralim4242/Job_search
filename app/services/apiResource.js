@@ -12,6 +12,7 @@ function apiResource($resource, appSetting, currentUser)
 			 'getIndPost':{method:'GET',url:appSetting.serverPath +"login/getIndPost/:pId", headers: { 'Authorization': currentUser.getProfile().token }},
 			 'getAllPost':{method:'GET',url:appSetting.serverPath +"login/getAllPost", headers: { 'Authorization': currentUser.getProfile().token }},
 			  'getAllPostRelToEmp':{method:'GET',url:appSetting.serverPath +"login/getAllPostRelToEmp", headers: { 'Authorization': currentUser.getProfile().token }},
+				'getAllJobSeekersRelToFranchiesies':{method:'GET',url:appSetting.serverPath +"login/getAllJobSeekersRelToFranchiesies/:id", headers: { 'Authorization': currentUser.getProfile().token }},
 				'getAllFranchiesies':{method:'GET',url:appSetting.serverPath +"login/getAllFranchiesies", headers: { 'Authorization': currentUser.getProfile().token }},
 			  'postJob':{method:'POST',url:appSetting.serverPath +"login/job_post", headers: { 'Authorization': currentUser.getProfile().token }},
 			  'UpdatePostJob':{method:'PUT',url:appSetting.serverPath +"login/job_post_update/:pId", headers: { 'Authorization': currentUser.getProfile().token }},
@@ -25,6 +26,7 @@ function apiResource($resource, appSetting, currentUser)
 			  'getContactUs':{method:'GET',url:appSetting.serverPath +"login/getcontact_us", headers: {'Authorization': currentUser.getProfile().token }},
 				'job_post_update':{method:'PUT',url:appSetting.serverPath +"login/job_post/:jId", headers: {'Authorization': currentUser.getProfile().token }},
 				'job_post_delete':{method:'DELETE',url:appSetting.serverPath +"login/job_post/:jId", headers: {'Authorization': currentUser.getProfile().token }},
+				'deleteFranchiesies':{method:'DELETE',url:appSetting.serverPath +"login/deleteFranchiesies/:fId", headers: {'Authorization': currentUser.getProfile().token }},
 			  'getAllPostDetailsForCandidates':{method:'GET',url:appSetting.serverPath +"login/get_All_Post_For_Candidates", headers: { } },
 				"getJobSeekerCheckByMobNoNPostId":{method:'GET',url:appSetting.serverPath+"login/getJobSeekerCheckByMobNoNPostId/:mobNo/:postId"}
         });

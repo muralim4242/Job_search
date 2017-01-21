@@ -78,7 +78,7 @@ class loginHandler
 			// 			insert query
 			if($user["VIEW"]=="Employer")
 			{
-		//		echo "hai";
+				//		echo "hai";
 				$user["API_KEY"]=$api_key;
 				$user["ROLE_ID"]=2;
 				$user["PASSWORD_HASH"]=$password_hash;
@@ -92,7 +92,7 @@ class loginHandler
 
 			else if($user["VIEW"]=="Admin")
 			{
-	//			echo "hai2";
+				//			echo "hai2";
 				$user["API_KEY"]=$api_key;
 				$user["ROLE_ID"]=1;
 				$user["PASSWORD_HASH"]=$password_hash;
@@ -373,6 +373,19 @@ class loginHandler
 		}
 	}
 
+	public function getAllJobSeekersRelToFranchiesies($userId)
+	{
+		$result1=$this->conn->select("job_seekers","*",["AND"=>["DELETE_FL"=>false,"FID"=>$userId]]);
+		if($result1)
+		{
+			return $result1;
+		}
+		else
+		{
+			return NULL;
+		}
+	}
+
 
 	public function getAllJobPost()
 	{
@@ -526,6 +539,12 @@ class loginHandler
 	public function job_post_delete($postId)
 	{
 		return $this->conn->update("employers_post",["DELETE_FL"=>true],["ID"=>$postId]);
+	}
+
+	public function deleteFranchiesies($fId)
+	{
+
+			return $this->conn->update("franchesies",["DELETE_FL"=>true],["U_ID"=>$fId]);
 	}
 
 	public function UpdateUserStatus($uId,$status)
@@ -740,6 +759,7 @@ class loginHandler
 	{
 		$file=$jobSeeker["file"];
 		$fileExtention=$jobSeeker["fileExtention"];
+		$isDirectApply=$jobSeeker["directUpload"];
 		if(!$jobSeeker["directUpload"]){
 			$PID=$jobSeeker["PID"];
 		}
@@ -747,15 +767,17 @@ class loginHandler
 		unset($jobSeeker["fileExtention"]);
 		unset($jobSeeker["PID"]);
 		unset($jobSeeker["isProfilePresent"]);
+		unset($jobSeeker["directUpload"]);
 		$res=$this->conn->insert("job_seekers",$jobSeeker);
 		$max=$this->conn->max("job_seekers","ID");
 		$data = base64_decode(preg_replace('#^data:application/\w+;base64,#i', '', $file));
 		file_put_contents('../../../app/assets/job-seekers-resume/'.$max.'.'.$fileExtention,$data);
 		$this->conn->update("job_seekers",["RESUME_LOCATION"=>'app/assets/job-seekers-resume/'.$max.'.'.$fileExtention],["ID"=>$max]);
-		if(!$jobSeeker["directUpload"]){
+		if(!$isDirectApply){
 		return $this->apply_for_post(array('JSID' =>$max ,'PID'=>$PID ));
 		}else{
-			return $this->direct_upload(array('candidateId' =>$max));
+				return $res;
+			// return $this->direct_upload(array('candidateId' =>$max));
 		}
 	}
 
