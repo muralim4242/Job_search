@@ -62,15 +62,15 @@
                                                             <input type="EMAIL" class="form-control no-border-radius" name="EMAIL" ng-model="$parent.userData.EMAIL" placeholder="Email" ng-required="true">
                                                         </div>
                                                         <p ng-show="registrationForm.EMAIL.$error.required &&  (registrationForm.EMAIL.$dirty || submitted)" class="help-block">Email is required.</p>
-                                                        <p ng-show="registrationForm.EMAIL.$error.EMAIL &&  (registrationForm.EMAIL.$dirty || submitted)" class="help-block">This is not a valid Email address.</p>
+                                                        <p ng-show="registrationForm.EMAIL.$error.email &&  (registrationForm.EMAIL.$dirty || submitted)" class="help-block">Please enter valid email address</p>
                                                     </div>
                                                     <div class="form-group" ng-class="{ 'has-error' : registrationForm.TELEPHONE.$invalid && (registrationForm.TELEPHONE.$dirty || submitted)}">
                                                         <div class="input-group">
                                                             <span class="input-group-addon no-border-radius"><i class="fa fa-phone"></i></span>
-                                                            <input type="text" class="form-control no-border-radius" name="TELEPHONE" ng-model="$parent.userData.TELEPHONE" ng-model-options="{ debounce: 1000 }" ng-required="true" placeholder="Phone number" pattern="^(?:(?:\(?(?:0(?:0|11)\)?[\s-]?\(?|\+)44\)?[\s-]?(?:\(?0\)?[\s-]?)?)|(?:\(?0))(?:(?:\d{5}\)?[\s-]?\d{4,5})|(?:\d{4}\)?[\s-]?(?:\d{5}|\d{3}[\s-]?\d{3}))|(?:\d{3}\)?[\s-]?\d{3}[\s-]?\d{3,4})|(?:\d{2}\)?[\s-]?\d{4}[\s-]?\d{4}))(?:[\s-]?(?:x|ext\.?|\#)\d{3,4})?$">
+                                                            <input type="number" class="form-control no-border-radius" name="TELEPHONE" ng-model="$parent.userData.TELEPHONE" ng-model-options="{ debounce: 1000 }" ng-required="true" placeholder="Phone number" ng-minlength="10" ng-maxlength="10" >
                                                         </div>
-                                                        <p ng-show="registrationForm.TELEPHONE.$error.required && (registrationForm.TELEPHONE.$dirty || submitted)" class="help-block">Phone Number is required.</p>
-                                                        <p ng-show="registrationForm.TELEPHONE.$error.pattern && (registrationForm.TELEPHONE.$dirty || submitted)" class="help-block">Invalid Phone number.</p>
+                                                        <p ng-show="(registrationForm.TELEPHONE.$error.required || registrationForm.TELEPHONE.$error.number) && (registrationForm.TELEPHONE.$dirty || submitted)" class="help-block">Phone Number is required.</p>
+                                                        <p ng-show="(registrationForm.TELEPHONE.$error.minlength || registrationForm.TELEPHONE.$error.maxlength) && registrationForm.TELEPHONE.$error.pattern && (registrationForm.TELEPHONE.$dirty || submitted)" class="help-block">Please enter valid phone number</p>
                                                     </div>
                                                     <div class="form-group" ng-class="{ 'has-error' : registrationForm.PASSWORD.$invalid && (registrationForm.PASSWORD.$dirty || submitted)}">
                                                         <div class="input-group">
