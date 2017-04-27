@@ -390,6 +390,7 @@ class loginHandler
 	public function getAllJobPost()
 	{
 		$result1=$this->conn->select("employers_post","*",["DELETE_FL"=>false]);
+		// return isset($result1) ? $result1 : null;
 		if($result1)
 		{
 			return $result1;
@@ -402,42 +403,15 @@ class loginHandler
 
 	public function getAllJobPostRelToEmp($employerId)
 	{
-
-
-
-
-
-		$result1=$this->conn->select("employers_post","*",["AND"=>["E_ID"=>$employerId,"DELETE_FL"=>false]]);
-
-
-
+		$result1=$this->conn->select("employers_post","*",["AND"=>["DELETE_FL"=>0,"E_ID"=>$employerId]]);
 		if($result1)
 		{
-
-
-
-
 			return $result1;
-
-
-
 		}
-
-
-
 		else
 		{
-
-
-
 			return NULL;
-
-
-
 		}
-
-
-
 	}
 
 
@@ -526,8 +500,8 @@ class loginHandler
 
 	public function job_post($employerId,$post)
 	{
-		 $post["E_ID"]=$employerId;
-		return $this->conn->insert("employers_post",$post);
+		//$post["E_ID"]=$employerId;
+		return $this->conn->insert("employers_post",$post,["E_ID"=>$employerId]);
 
 	}
 
@@ -647,7 +621,7 @@ class loginHandler
 
 		public function add_Franchiesies($user_id,$employer_name,$telephone)
     {
-         if($this->conn->insert("franchesies",["U_ID"=>$user_id,"NAME"=>$employer_name,"TELEPHONE"=>$telephone]))
+         if($this->conn->insert("franchesies",["U_ID"=>$user_id,"NAME"=>$employer_name,"TELEPHONE"=>$telephone,"DELETE_FL"=>0]))
         {
                 return true;
         }
