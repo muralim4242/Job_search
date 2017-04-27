@@ -67,39 +67,3 @@ angular.module("app").controller("franchiesies", ["$scope",  "$log", "apiResourc
 }]);
 
 
-	// $scope.reActiveDeal=function()
-	// {
-	// 	$scope.isLoading = true;
-	// 	$scope.myPromise=apiResource.update({isActive:false,dealTitle:$stateParams.dealTitle},{},function(response)
-	// 		{
-
-
-  //       $rootScope.$broadcast('notification', {
-  //         notification: response.message
-  //       });
-	// 			 $rootScope.$broadcast('ps-menu-item-update',{});
-	// 			$state.go("activePosts",{isActive:true,dealTitle:$stateParams.dealTitle});
-	// 			$scope.isLoading = false;
-	// 		});
-	// };
-
-	// $scope.delete_deal=function(row)
-	// {
-	// 	$scope.isLoading = true;
-	// 	$scope.myPromise=apiResource.delete({isActive:true,dealTitle:$stateParams.dealTitle,id:row.objectId},function(response)
-	// 		{
-  //       $rootScope.$broadcast('notification', {
-  //         notification: response.message
-  //       });
-	// 			apiResource.get({isActive:true,dealTitle:$stateParams.dealTitle},function(response)
-	// 				{
-	// 					$scope.rowCollection=response.posts;
-	// 						$scope.isLoading = false;
-	// 				},function(response)
-  //       {
-  //          $rootScope.$broadcast('ps-menu-item-update',{});
-  //            $state.go("dashboard");
-
-  //       })
-	// 		})
-	// }

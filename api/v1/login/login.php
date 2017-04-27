@@ -29,16 +29,12 @@ function authenticate(\Slim\Route $route) {
 			$app->stop();
 		}
 		else {
+            global $user_id;
 
-
-			global $user_id;
-
-
-			// 			get user primary key id
 			$user_id = $db->getUserId($api_key);
 
 
-			// 			echo $user_id;
+			//echo $user_id;
 
 
 		}
@@ -260,214 +256,103 @@ $app->post('/login', function() use ($app)
 
 $app->post('/add_employer','authenticate',function() use ($app)
 {
-    	$response = array();
-
-
+    $response = array();
 	$request_params = json_decode($app->request()->getBody(), true);
-
-
 	$employer_name = $request_params['employer_name'];
-
-
 	$telephone = $request_params['telephone'];
-
-    global $user_id;
-
+  	$api_key=$request_params['api_key'];
 	$db = new loginHandler();
-
-    	$res= $db->add_employer($user_id,$employer_name,$telephone);
-
-
-
+	if (!$db->isValidApiKey($api_key)) {
+		// api key is not present in users table
+		$response["error"] = true;
+		$response["message"] = "Access Denied. Invalid Api key";
+		echoRespnse(401, $response);
+		$app->stop();
+	}
+	else {
+		global $user_id;
+		// get user primary key id
+		$user_id = $db->getUserId($api_key);
+		// 			echo $user_id;
+	}
+    global $user_id;
+    $res= $db->add_employer($user_id,$employer_name,$telephone);
 	if ($res)
 	{
-
-
 		$response["error"] = false;
-
-
-
-
 		/*  $response['id'] = $user['id'];                            $response['apiKey'] = $user['api_Key'];                            $response['created_at'] = $user['created_at'];*/
-
-
 		$response['message'] = "Employer record created successfully";
-
-
 	}
-
-
 	else
 	{
-
-
-		// 		unknown error occurred
+	// 		unknown error occurred
 		$response['error'] = true;
-
-
 		$response['message'] = "An error occurred. Please try again";
-
-
 	}
-
-
-
 	echoRespnse(200, $response);
 
 });
 
 $app->post('/add_Franchiesies',function() use ($app)
 {
-    	$response = array();
-
-
+    $response = array();
 	$request_params = json_decode($app->request()->getBody(), true);
-
-
 	$employer_name = $request_params['employer_name'];
-
-
 	$telephone = $request_params['telephone'];
-
 	$api_key=$request_params['api_key'];
 	$db = new loginHandler();
-
 	if (!$db->isValidApiKey($api_key)) {
-
-
 		// 			api key is not present in users table
 		$response["error"] = true;
-
-
 		$response["message"] = "Access Denied. Invalid Api key";
-
-
 		echoRespnse(401, $response);
-
-
 		$app->stop();
-
-
 	}
-
 	else {
-
-
 		global $user_id;
-
-
 		// 			get user primary key id
 		$user_id = $db->getUserId($api_key);
-
-
 		// 			echo $user_id;
-
-
 	}
-
-
-
     global $user_id;
-
-
-
-    	$res= $db->add_Franchiesies($user_id,$employer_name,$telephone);
-
-
-
+    $res= $db->add_Franchiesies($user_id,$employer_name,$telephone);
 	if ($res)
 	{
-
-
 		$response["error"] = false;
-
-
-
-
 		/*  $response['id'] = $user['id'];                            $response['apiKey'] = $user['api_Key'];                            $response['created_at'] = $user['created_at'];*/
-
-
 		$response['message'] = "Employer record created successfully";
-
-
 	}
-
-
 	else
 	{
-
-
 		// 		unknown error occurred
 		$response['error'] = true;
-
-
 		$response['message'] = "An error occurred. Please try again";
-
-
 	}
-
-
-
 	echoRespnse(200, $response);
-
 });
 
 $app->post('/update_employer','authenticate',function() use ($app)
 {
-    	$response = array();
-
-
+   	$response = array();
 	$request_params = json_decode($app->request()->getBody(), true);
-
-
 	$employer_name = $request_params['employer_name'];
-
-
 	$telephone = $request_params['telephone'];
-
     global $user_id;
-
 	$db = new loginHandler();
-
-    	$res= $db->update_employer($user_id,$employer_name,$telephone);
-
-
-
+   	$res= $db->update_employer($user_id,$employer_name,$telephone);
 	if ($res)
 	{
-
-
 		$response["error"] = false;
-
-
-
-
 		/*  $response['id'] = $user['id'];                            $response['apiKey'] = $user['api_Key'];                            $response['created_at'] = $user['created_at'];*/
-
-
 		$response['message'] = "Employer record updated successfully";
-
-
 	}
-
-
 	else
 	{
-
-
 		// 		unknown error occurred
 		$response['error'] = true;
-
-
 		$response['message'] = "An error occurred. Please try again";
-
-
 	}
-
-
-
 	echoRespnse(200, $response);
-
 });
 
 // job post
@@ -532,70 +417,29 @@ $app->get('/getAllFranchiesies', 'authenticate', function() use ($app)
 
 $app->get('/getAllJobSeekersRelToFranchiesies(/:id)', 'authenticate', function($id=null) use ($app)
 {
-
-
-
 	$response = array();
-
-
-
 	global $user_id;
-
-
 	$db = new loginHandler();
-	// $employerId=$db->getEmployerId($user_id);
-
-
+	// $employerId=$db->getUserId($user_id);
 	$getAllJobSeekersRelToFranchiesies = $db->getAllJobSeekersRelToFranchiesies($id?$id:$user_id);
-
-
-
 	//p	rint_r $result;
-
-
 	if ($getAllJobSeekersRelToFranchiesies)
 	{
-
-
 		$response["error"] = false;
-
-
-
-
 		$response["jobSeekers"]=array();
-
-
 		// 		$response["indStdDets"]=array();
 	//	print_r($getAllJobPost);
 		foreach ($getAllJobSeekersRelToFranchiesies as $key => $value) {
 				array_push($response["jobSeekers"], $value);
 		}
-
-
 		}
-
-
-
-
 	else
 	{
-
-
 		// 		unknown error occurred
 		$response['error'] = true;
-
-
 		$response['message'] = "An error occurred. Please try again";
-
-
 	}
-
-
-
 	echoRespnse(200, $response);
-
-
-
 }
 
 );
@@ -631,137 +475,53 @@ $app->get('/get_All_Post_For_Candidates', function() use ($app)
 
 $app->get('/getIndPost/:postId', 'authenticate', function($postId) use ($app)
 {
-
-
-
 	$response = array();
-
-
-
 	global $user_id;
-
-
 	$db = new loginHandler();
-
-
-
 	// 	creating new Family Member
 	$getIndJobPost = $db->getIndJobPost($postId);
-
-
-
 	//p	rint_r $result;
-
-
 	if ($getIndJobPost)
 	{
-
-
 		$response["error"] = false;
-
-
-
-
 		$response["getIndJobPost"]=$getIndJobPost[0];
-
-
-
 		}
-
-
-
-
 	else
 	{
-
-
-		// 		unknown error occurred
+				// 		unknown error occurred
 		$response['error'] = true;
-
-
 		$response['message'] = "An error occurred. Please try again";
-
-
 	}
-
-
-
 	echoRespnse(200, $response);
-
-
-
 });
 
 
-$app->get('/getAllPostRelToEmp', 'authenticate', function() use ($app)
+$app->get('/getAllPostRelToEmp(/:id)', 'authenticate', function($id=null) use ($app)
 {
-
-
-
 	$response = array();
-
-
-
 	global $user_id;
-
-
 	$db = new loginHandler();
-	$employerId=$db->getEmployerId($user_id);
 
-
-	// 	creating new Family Member
-	$getAllJobPost = $db->getAllJobPostRelToEmp($employerId);
-
-
-
+	$getAllJobPost = $db->getAllJobPostRelToEmp($id?$id:$user_id);
 	//p	rint_r $result;
-
-
 	if ($getAllJobPost)
 	{
-
-
 		$response["error"] = false;
-
-
-
-
 		$response["jobPosts"]=array();
-
-
 		// 		$response["indStdDets"]=array();
 	//	print_r($getAllJobPost);
 		foreach ($getAllJobPost as $key => $value) {
 				array_push($response["jobPosts"], $value);
 		}
-
-
 		}
-
-
-
-
 	else
 	{
-
-
 		// 		unknown error occurred
 		$response['error'] = true;
-
-
 		$response['message'] = "An error occurred. Please try again";
-
-
 	}
-
-
-
 	echoRespnse(200, $response);
-
-
-
 }
-
 );
 
 
@@ -771,61 +531,36 @@ $app->get('/getAllPostRelToEmp', 'authenticate', function() use ($app)
 
 $app->post('/job_post','authenticate',function() use ($app)
 {
-    	$response = array();
-
-
+    $response = array();
 	$db = new loginHandler();
-
-
 	$request_params = json_decode($app->request()->getBody(), true);
-
-
-	// $employer_name = $request_params['employer_name'];
-
-
-	// $telephone = $request_params['telephone'];
-
+	global $user_id;
+	$api_key=$request_params['api_key'];
+	if (!$db->isValidApiKey($api_key)) {
+		// 			api key is not present in users table
+		$response["error"] = true;
+		$response["message"] = "Access Denied. Invalid Api key";
+		echoRespnse(401, $response);
+		$app->stop();
+	}
+	else {
+		global $user_id;
+		// 			get user primary key id
+		$user_id = $db->getUserId($api_key);
+		// 			echo $user_id;
+	}
     global $user_id;
-
-	$employerId=$db->getEmployerId($user_id);
-
-
-
-    	$res= $db->job_post($employerId,$request_params);
-
-
-
+    $res= $db->job_post($user_id,$request_params);
 	if ($res)
 	{
-
-
 		$response["error"] = false;
-
-
-
-
-
 		$response['message'] = "New Job Post Created successfully";
-
-
 	}
-
-
 	else
 	{
-
-
-		// 		unknown error occurred
 		$response['error'] = true;
-
-
 		$response['message'] = "An error occurred. Please try again";
-
-
 	}
-
-
-
 	echoRespnse(200, $response);
 
 });
@@ -913,7 +648,7 @@ $app->delete('/job_post/:jId','authenticate',function($jId) use ($app)
 	if ($res)
 	{
 
-		$employerId=$db->getEmployerId($user_id);
+		$employerId=$db->getUserId($user_id);
 
 
 		// 	creating new Family Member

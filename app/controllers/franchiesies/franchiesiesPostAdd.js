@@ -160,28 +160,7 @@ angular.module("app").controller("franchiesiesPostAdd", ["$scope", "$log", "apiR
                     $scope.postIdSelected = undefined;
                 })
 
-                //    $scope.postData.fileExtention=$scope.myImage.split("/",2)[1].split(";",1)[0];
-                // $scope.myPromise = apiResource.updateUserfranchiesiesPostAdd({}, $scope.postData, function(data) {
-
-                //   $rootScope.$broadcast('notification', {
-                //     notification: data.message
-                //   });
-                //   if (data.logo!="no change") {
-                //     $rootScope.$broadcast('updateLogo', {
-                //       logo: data.logo
-                //     });
-                //   }
-                //   $scope.isLoading = false;
-                // }, function(data) {
-                //   $rootScope.$broadcast('notification', {
-                //     notification: "Yikes! Something has gone wrong here, please try again"
-                //   });
-                //   $scope.isLoading = false;
-                // });
-
-
-                // $scope.submitted = false;
-
+              
             } else {
 
                 $rootScope.$broadcast('notification', {

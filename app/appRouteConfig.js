@@ -284,13 +284,6 @@ angular.module('app').config(['$logProvider', '$stateProvider', '$urlRouterProvi
             stateStatus: false
 
         });
-        //  $log.debug('successfully changed states');
-        //
-        //  $log.debug('event', event);
-        //  $log.debug('toState', toState);
-        //  $log.debug('toParams', toParams);
-        //  $log.debug('fromState', fromState);
-        //  $log.debug('fromParams', fromParams);
     });
 
     $rootScope.$on('$stateNotFound', function (event, unfoundState, fromState, fromParams) {
@@ -314,95 +307,3 @@ angular.module('app').config(['$logProvider', '$stateProvider', '$urlRouterProvi
 
 
 
-// .state('student-counsel', {
-//             url: '/student-counsel',
-//             controller: 'student-counsel',
-//             templateUrl: 'app/view/student-counsel.html',
-//             resolve: {
-//                 title: function () {
-//                     return "Student Counsel";
-//                 }
-//             }
-//             /*   template: '<wwa-dashboard></wwa-dashboard>' */
-//         })
-//         .state('newDeal', {
-//             url: '/newDeal',
-//             controller: 'addDeal',
-//             templateUrl: 'app/view/newDeal.html',
-//             resolve: {
-//                 title: function () {
-//                     return "Add Deal Management";
-//                 }
-//             }
-//         })
-//         .state('activeDeals', {
-//             url: '/activeDeals/true/:dealTitle',
-//             controller: 'allDeals',
-//             templateUrl: 'app/view/allDealsTemplate.html',
-//             resolve: {
-//                 title: function () {
-//                     return "Active Deal Management";
-//                 },
-
-//                 deals: function ($stateParams, apiResource) {
-//                     return apiResource.get({
-//                         isActive: true,
-//                         dealTitle: $stateParams.dealTitle
-//                     }).$promise;
-//                 }
-
-//             }
-//         })
-//         .state('inactiveDeals', {
-//             url: '/inactiveDeals/false/:dealTitle',
-//             controller: 'allDeals',
-//             templateUrl: 'app/view/allDealsTemplate.html',
-//             resolve: {
-//                 title: function () {
-//                     return "Inactive Deal Management";
-//                 },
-//                 deals: function ($stateParams, apiResource) {
-//                     return apiResource.get({
-//                         isActive: false,
-//                         dealTitle: $stateParams.dealTitle
-//                     }).$promise;
-//                 }
-
-//             }
-//         })
-//         .state('profile', {
-//             url: '/user/profile',
-//             controller: 'profile',
-//             templateUrl: 'app/view/profile.html',
-//             resolve: {
-//                 title: function () {
-//                     return "Profile Management";
-//                 },
-//                 profile: function (apiResource) {
-//                     return apiResource.getUserProfile().$promise;
-//                 }
-
-//             }
-//         })
-//         .state('faq', {
-//             url: '/user/faq',
-//             controller: 'faq',
-//             templateUrl: 'app/view/faq.html',
-//             resolve: {
-//                 title: function () {
-//                     return "FAQ";
-//                 }
-//             }
-
-//         })
-//         .state('customerSupport', {
-//             url: '/user/customerSupport',
-//             controller: 'customerSupport',
-//             templateUrl: 'app/view/customerSupport.html',
-//             resolve: {
-//                 title: function () {
-//                     return "Customer Support";
-//                 }
-//             }
-
-//         })

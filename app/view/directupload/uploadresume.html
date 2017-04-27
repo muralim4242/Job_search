@@ -6,12 +6,12 @@
         <div class="form-group" ng-class="{ 'has-error' : jobPostForm.TELEPHONE.$invalid && (jobPostForm.TELEPHONE.$dirty || submitted)}">
             <label class="col-md-3 col-sm-2 control-label user-form-label">Phone Number</label>
             <div class="col-md-6">
-                <input type="text" class="form-control no-border-radius" name="TELEPHONE" ng-model="postData.TELEPHONE" ng-model-options="{ debounce: 1000 }" ng-required="true" placeholder="Phone Number" pattern="^[2-9]{2}[0-9]{8}$">
+                <input type="text" class="form-control no-border-radius" name="TELEPHONE" ng-model="postData.TELEPHONE" ng-model-options="{ debounce: 1000 }" ng-required="true" placeholder="Phone Number"  ng-minlength="10" ng-maxlength="10">
                 <p ng-show="jobPostForm.TELEPHONE.$error.required && (jobPostForm.TELEPHONE.$dirty || submitted)" class="help-block">Phone Number is required.</p>
-                <p ng-show="jobPostForm.TELEPHONE.$error.pattern && (jobPostForm.TELEPHONE.$dirty || submitted)" class=< /div>
+                <p ng-show="(jobPostForm.TELEPHONE.$error.minlength || jobPostForm.TELEPHONE.$error.maxlength) && (jobPostForm.TELEPHONE.$dirty || submitted)" class="help-block">Please enter valid phone number </p>
             </div>
             <div class="col-md-3">
-                <button class="btn btn-sm btn-success no-border-radius" ng-disabled="jobPostForm.TELEPHONE.$error.required || jobPostForm.TELEPHONE.$error.pattern" type="button" ng-click="is_userAvailable()">Fetch</button>
+                <button class="btn btn-sm btn-success no-border-radius" ng-disabled="jobPostForm.TELEPHONE.$error.required || (jobPostForm.TELEPHONE.$error.minlength || jobPostForm.TELEPHONE.$error.maxlength)" type="button" ng-click="is_userAvailable()">Fetch</button>
                 <button class="btn btn-sm btn-danger no-border-radius" type="button" ng-click="back()">Back</button>
             </div>
         </div>

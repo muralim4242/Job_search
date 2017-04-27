@@ -82,7 +82,8 @@ function MainCtrl($scope, userAccount, apiResource, currentUser, $state, $stateP
                             if (currentUser.setProfile(data.view, data.apiKey)) {
                                 $scope.myPromise = apiResource.addEmployer({
                                     telephone: $scope.userData.TELEPHONE,
-                                    employer_name: $scope.userData.NAME
+                                    employer_name: $scope.userData.NAME,
+                                    api_key:data.apiKey
                                 }, function (response) {
                                     $scope.login(true);
                                 }, function (error) {

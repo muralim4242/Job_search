@@ -45,7 +45,7 @@
                                                 </div>
 
                                             </form>
-                                            <form cg-busy="myPromise" id="register-form" name="registrationForm" ng-submit="$parent.registerUser(registrationForm.$valid)" novalidate style="display: none;">
+                                            <form cg-busy="myPromise" id="register-form" name="registrationForm" ng-submit="$parent.registerUser(registrationForm.$valid,'Employer')" novalidate style="display: none;">
                                                 <!--  <h2 class="form-signin-heading">registration now</h2> -->
                                                 <div class="login-wrap">
                                                     <div class="form-group" ng-class="{ 'has-error' : registrationForm.NAME.$invalid && (registrationForm.NAME.$dirty || submitted)}">

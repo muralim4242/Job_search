@@ -11,7 +11,7 @@ function apiResource($resource, appSetting, currentUser)
 			 'addFranchiesies':{method:'POST',url:appSetting.serverPath +"login/add_Franchiesies"},
 			 'getIndPost':{method:'GET',url:appSetting.serverPath +"login/getIndPost/:pId", headers: { 'Authorization': currentUser.getProfile().token }},
 			 'getAllPost':{method:'GET',url:appSetting.serverPath +"login/getAllPost", headers: { 'Authorization': currentUser.getProfile().token }},
-			  'getAllPostRelToEmp':{method:'GET',url:appSetting.serverPath +"login/getAllPostRelToEmp", headers: { 'Authorization': currentUser.getProfile().token }},
+			  'getAllPostRelToEmp':{method:'GET',url:appSetting.serverPath +"login/getAllPostRelToEmp/:id", headers: { 'Authorization': currentUser.getProfile().token }},
 				'getAllJobSeekersRelToFranchiesies':{method:'GET',url:appSetting.serverPath +"login/getAllJobSeekersRelToFranchiesies/:id", headers: { 'Authorization': currentUser.getProfile().token }},
 				'getAllFranchiesies':{method:'GET',url:appSetting.serverPath +"login/getAllFranchiesies", headers: { 'Authorization': currentUser.getProfile().token }},
 			  'postJob':{method:'POST',url:appSetting.serverPath +"login/job_post", headers: { 'Authorization': currentUser.getProfile().token }},
