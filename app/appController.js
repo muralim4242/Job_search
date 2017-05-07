@@ -63,10 +63,12 @@ function MainCtrl($scope, userAccount, apiResource, currentUser, $state, $stateP
 
 
 
-    $scope.registerUser = function (form,View="") {
+    $scope.registerUser = function (form,View) {
         $scope.submitted = true;
+        if(typeof View === 'undefined') {
+            View="";
+        }
         console.log(View);
-    //    console.log($stateParams);
         if (form) {
             if ($scope.userData.confirmPassword === $scope.userData.PASSWORD) {
                 $scope.myPromise = userAccount.registration.registerUser({
@@ -101,6 +103,7 @@ function MainCtrl($scope, userAccount, apiResource, currentUser, $state, $stateP
                             }, function (response) {
                               $scope.notificationText = "We will revert back soon";
                               $('#notificationModal').modal('show');
+                              
                               //  $scope.login(true);
                             }, function (error) {
                                 $scope.notificationText = error.message;
@@ -108,7 +111,7 @@ function MainCtrl($scope, userAccount, apiResource, currentUser, $state, $stateP
 
                             });
                           }
-                                                    }
+                        }
                         $scope.submitted = false;
                         $scope.message = data.message;
                     },
